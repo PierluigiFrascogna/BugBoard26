@@ -1,2 +1,8 @@
 # drawio backups
 *.drawio.bkp
+
+# latex
+\build
+
+# svg-inkscape (converte le immagini da svg a pdf)
+\svg-inkscape
