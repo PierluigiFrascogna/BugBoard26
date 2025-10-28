@@ -1,0 +1,13 @@
+{
+	"name": "Docs",
+	"dockerComposeFile": "../../compose.yaml",
+	"service": "docs",
+	"runServices": ["docs"],
+	"workspaceFolder": "/BugBoard26/docs",
+	"features": {
+		"ghcr.io/devcontainers/features/git:1": {}
+	},
+	"mounts": [
+        "source=${localWorkspaceFolder},target=/BugBoard26,type=bind,consistency=cached"
+	]
+}
