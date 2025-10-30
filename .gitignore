@@ -2,7 +2,11 @@
 *.drawio.bkp
 
 # latex
-\build
+*aux
+*log
+*out
+*.toc
+*synctex.gz
 
 # svg-inkscape (converte le immagini da svg a pdf)
 \svg-inkscape
