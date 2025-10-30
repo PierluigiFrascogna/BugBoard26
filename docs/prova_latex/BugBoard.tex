@@ -19,6 +19,7 @@
 \svgpath{{images/}}
 \pagestyle{fancy}
 \fancyhf{}  % cancella header/footer di default di Latex
+\renewcommand{\headrulewidth}{0.1pt}
 \fancyhead[L]{{\includesvg[height=1.2cm]{BugBoard26_Logo}}} 
 \fancyhead[R]{Pag. \thepage} 
 
@@ -44,8 +45,6 @@
 \newpage
 \tableofcontents  % INDICE
 
-% Qua andrebbo il glossario
-
 \newpage
 \section{INTRODUZIONE}
 
@@ -59,6 +58,7 @@ BugBoard26 è una piattaforma di \textit{issues handling} che fornisce una soluz
     \item Gestire in modo efficiente tutte le persone coinvolte in un progetto (anche non sviluppatori) tramite una gerarchia di utenze.
 \end{itemize}
 
+% glossario
 
 \newpage
 \section{INGEGNERIA DEI REQUISITI}
