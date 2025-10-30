@@ -3,5 +3,5 @@ name: BugBoard26
 services:
   docs:
     build: 
-      context: docs
-      dockerfile: Dockerfile
+      context: ./docs
+      dockerfile: ./Dockerfile
