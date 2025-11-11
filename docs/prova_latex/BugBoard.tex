@@ -13,6 +13,10 @@
 \usepackage{fancyhdr}
 \usepackage{array}
 \usepackage{hyperref}
+\usepackage{glossaries}
+
+\input{glossario.tex}
+\makeglossaries
 
 \renewcommand{\arraystretch}{1.4}
 \graphicspath{{images/}}
@@ -49,16 +53,14 @@
 \section{INTRODUZIONE}
 
 \subsection{Chi siamo}
-
 Benvenuto su \textbf{BugBoard26}! \\
-BugBoard26 è una piattaforma di \textit{issues handling} che fornisce una soluzione unica per:
+BugBoard26 è una \gls{piattaforma} di \textit{issues handling} che fornisce una soluzione unica per:
 \begin{itemize}
     \item Dividere in modo facile developer in progetti.
-    \item Segnalare e gestire intuitivamente issue di vario tipo.
+    \item Segnalare e gestire intuitivamente \gls{issue} di vario tipo.
     \item Gestire in modo efficiente tutte le persone coinvolte in un progetto (anche non sviluppatori) tramite una gerarchia di utenze.
 \end{itemize}
 
-% glossario
 
 \newpage
 \section{INGEGNERIA DEI REQUISITI}
@@ -73,16 +75,16 @@ In questa sezione ci interesseremo all'individuazione dei casi d'uso. Come si pu
     \label{fig:use_case_diagram}
 \end{figure}
 
-Tutti gli utilizzatori della piattaforma possono essere divisi in tre grandi macrocategorie:
+Tutti gli utilizzatori della \gls{piattaforma} possono essere divisi in tre grandi macrocategorie:
 \begin{itemize}
-    \item \textbf{Viewer}: individuati anche nella figura di uno stakeholder. Sono utilizzatori, non necessariamente del settore, che hanno comunque interesse a visualizzare le issue legate al progetto senza poterle però aggiungere o modificare.
-    \item \textbf{Developer}: rappresentano la stragrande maggioranza di utilizzatori della piattaforma. I developer sono coloro che contribuiscono attivamente all'individuazione e risoluzione delle issue.
+    \item \textbf{Viewer}: individuati anche nella figura di uno stakeholder. Sono utilizzatori, non necessariamente del settore, che hanno comunque interesse a visualizzare le \gls{issue} legate al progetto senza poterle però aggiungere o modificare.
+    \item \textbf{Developer}: rappresentano la stragrande maggioranza di utilizzatori della \gls{piattaforma}. I developer sono coloro che contribuiscono attivamente all'individuazione e risoluzione delle \gls{issue}.
     \item \textbf{Admin}: rappresentano l'estensione di un developer con permessi di creazione e gestione di altre utenze.
 \end{itemize}
 
 \newpage
 \subsection{Individuazione delle personas}
-Ora esamineremo alcune personas che rispecchiano alcuni dei tipi di utilizzatori della nostra piattaforma.
+Ora esamineremo alcune personas che rispecchiano alcuni dei tipi di utilizzatori della nostra \gls{piattaforma}.
 
 % Prima tabella personas
 \begin{table}[H]
@@ -163,7 +165,7 @@ I requisiti non funzionali da noi individuati sono:
     \item \textbf{Utilizzo di linguaggi orientati agli oggetti.}
     \item \textbf{Implementazione di un modello Client-Server.}
     \item \textbf{Elevata manutenibilità.}
-    \item \textbf{Efficienza e affidabilità:} non essendo la piattaforma safety-critical, limitazioni di tempo e memoria occupata sono da considerarsi standard e ragionevoli.
+    \item \textbf{Efficienza e affidabilità:} non essendo la \gls{piattaforma} safety-critical, limitazioni di tempo e memoria occupata sono da considerarsi standard e ragionevoli.
 \end{itemize}
 
 \subsubsection{Requisiti di dominio}
@@ -171,12 +173,12 @@ Non sono stati individuati requisiti di dominio particolarmente differenti da qu
 
 \newpage
 \subsection{Formalizzazione di un requisito}
-Qui di seguito riportiamo la formalizzazione di un requisito quale la visualizzazione di una issue, prima mediante il suo mockup:
+Qui di seguito riportiamo la formalizzazione di un requisito quale la visualizzazione di una \gls{issue}, prima mediante il suo mockup:
 
 \begin{figure}[H]
     \centering
     \includesvg[width=0.9\linewidth]{Visualizza_Issue_Mockup}
-    \caption{Visualizza Issue}
+    \caption{Visualizza \gls{issue}}
     \label{fig:visualizza_issue_mockup}
 \end{figure}
 
@@ -200,19 +202,19 @@ E qui di seguito riportiamol'inerente tabella di Cockburn:
     \begin{tabular}{|m{0.3\linewidth}|p{0.66\linewidth}|}
         \hline
         \rowcolor{violet1}
-        \textbf{USE CASE}                               & \textit{Visualizza issue}                                              \\
+        \textbf{USE CASE}                               & \textit{Visualizza \gls{issue}}                                              \\
         \hline
         \rowcolor{violet2}
-        \textbf{Goal}                                   & Un utente vuole visualizzare una issue, le sue proprietà e i commenti. \\
+        \textbf{Goal}                                   & Un utente vuole visualizzare una \gls{issue}, le sue proprietà e i commenti. \\
         \hline
         \rowcolor{violet2}
         \textbf{Preconditions}                          & L'utente ha un account e si è autenticato.                             \\
         \hline
         \rowcolor{violet2}
-        \textbf{Success end conditions}                 & Il sistema mostra la issue e i suoi commenti.                          \\
+        \textbf{Success end conditions}                 & Il \gls{sistema} mostra la \gls{issue} e i suoi commenti.                          \\
         \hline
         \rowcolor{violet2}
-        \textbf{Failed end conditions}                  & Il sistema mostra una pagina di errore.                                \\
+        \textbf{Failed end conditions}                  & Il \gls{sistema} mostra una pagina di errore.                                \\
         \hline
         \rowcolor{violet2}
         \textbf{Primary actor}                          & Qualsiasi tipo di user.                                                \\
@@ -228,7 +230,7 @@ E qui di seguito riportiamol'inerente tabella di Cockburn:
         \begin{tabularx}{\linewidth}{|X|X|X|}
             \hline
             \rowcolor{orange1}
-            \textbf{Step n.} & \textbf{Utente}       & \textbf{Sistema} \\
+            \textbf{Step n.} & \textbf{Utente}       & \textbf{\gls{sistema}} \\
             \hline
             \rowcolor{orange2}
             1                &                       & Mostra M1        \\
@@ -240,7 +242,7 @@ E qui di seguito riportiamol'inerente tabella di Cockburn:
             3                &                       & Mostra M2        \\
             \hline
             \rowcolor{orange2}
-            4                & Clicca su una issue   &                  \\
+            4                & Clicca su una \gls{issue}   &                  \\
             \hline
             \rowcolor{orange2}
             5                &                       & Mostra M3        \\
@@ -284,5 +286,9 @@ E qui di seguito riportiamol'inerente tabella di Cockburn:
         \hline
     \end{tabular}
 \end{table}
+
+% glossario
+\printglossaries
+
 \end{document}
 
