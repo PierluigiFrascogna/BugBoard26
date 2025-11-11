@@ -7,6 +7,10 @@
 *out
 *.toc
 *synctex.gz
+*.glg
+*.glo
+*.gls
+*.ist
 
 # svg-inkscape (converte le immagini da svg a pdf)
 \svg-inkscape
