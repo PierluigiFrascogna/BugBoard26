@@ -13,10 +13,10 @@
 \usepackage{fancyhdr}
 \usepackage{array}
 \usepackage{hyperref}
-\usepackage{glossaries}
+\usepackage[nonumberlist]{glossaries}
 
-\input{glossario.tex}
 \makeglossaries
+\input{glossario.tex}
 
 \renewcommand{\arraystretch}{1.4}
 \graphicspath{{images/}}
@@ -47,7 +47,8 @@
 \end{titlepage}
 
 \newpage
-\tableofcontents  % INDICE
+\tableofcontents  % Indice
+\printglossaries % Glossario
 
 \newpage
 \section{INTRODUZIONE}
@@ -230,7 +231,7 @@ E qui di seguito riportiamol'inerente tabella di Cockburn:
         \begin{tabularx}{\linewidth}{|X|X|X|}
             \hline
             \rowcolor{orange1}
-            \textbf{Step n.} & \textbf{Utente}       & \textbf{\gls{sistema}} \\
+            \textbf{Step n.} & \textbf{Utente}       & \textbf{Sistema} \\
             \hline
             \rowcolor{orange2}
             1                &                       & Mostra M1        \\
@@ -287,8 +288,7 @@ E qui di seguito riportiamol'inerente tabella di Cockburn:
     \end{tabular}
 \end{table}
 
-% glossario
-\printglossaries
+
 
 \end{document}
 
