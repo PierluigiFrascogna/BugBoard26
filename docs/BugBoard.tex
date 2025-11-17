@@ -6,6 +6,7 @@
 \usepackage[italian]{babel}
 \usepackage{graphicx}
 \usepackage{svg}
+\usepackage{enumitem}
 \usepackage[table]{xcolor}
 \usepackage{tabularx}
 \usepackage{multirow}
@@ -48,7 +49,6 @@
 
 \newpage
 \tableofcontents  % Indice
-\printglossaries % Glossario
 
 \newpage
 \section{INTRODUZIONE}
@@ -62,6 +62,7 @@ BugBoard26 è una \gls{piattaforma} di \textit{issues handling} che fornisce una
     \item Gestire in modo efficiente tutte le persone coinvolte in un progetto (anche non sviluppatori) tramite una gerarchia di utenze.
 \end{itemize}
 
+\printglossaries % Glossario
 
 \newpage
 \section{INGEGNERIA DEI REQUISITI}
@@ -289,6 +290,54 @@ E qui di seguito riportiamol'inerente tabella di Cockburn:
 \end{table}
 
 
+\newpage
+\section{SYSTEM DESIGN}
+
+\subsection{Architettura del sistema}
+L'architettura del sistema adottata per la realizzazione della \gls{piattaforma} è di tipo \textbf{Client-Server}, più specificatamente a microservizi. 
+I microservizi da noi individuati sono:
+\begin{itemize}
+    \item \textbf{Servizio di gestione utenze:} si occupa della gestione delle utenze e dell'autenticazione.
+    \item \textbf{Servizio di gestione issue:} si occupa della gestione delle \gls{issue} e dei relativi commenti.
+\end{itemize}
+
+
+\subsection{Decomposizione del sistema}
+Il sistema è composto dai seguenti componenti principali:
+\begin{enumerate}
+        \item \textbf{Frontend:} interfaccia utente accessibile tramite browser web.
+        \begin{itemize}[label=-]
+            \item Login/Registrazione
+            \item Visualizzazione progetti e issue
+            \item Creazione/modifica progetti e issue
+            \item Gestione profili utente (solo per admin)
+        \end{itemize}
+
+        \item \textbf{API Gateway:} punto di accesso unico per il client web che smista le richieste ai vari microservizi.
+        
+        \item \textbf{Backend:} microservizi che gestiscono le funzionalità principali della \gls{piattaforma}.
+         \begin{itemize}[label=-]
+            \item \textbf{Utenze:} gestione utenti e profili
+            \item \textbf{Gestione issue:} gestione progetti e issue
+        \end{itemize}
+
+        \item \textbf{Database:} sistema di gestione dei dati persistenti.
+        \begin{itemize}[label=-]
+            \item \textbf{Utenze:} memorizzazione dati utenti e profili
+            \item \textbf{Gestione issue:} memorizzazione dati progetti e issue
+        \end{itemize}
+\end{enumerate}
+
+% Inserire immagine che rappresenta l'architettura
+
+\subsection{Scelta delle tecnologie}
+Per la realizzazione della \gls{piattaforma} BugBoard26, abbiamo scelto le seguenti tecnologie:
+\begin{itemize}
+    \item \textbf{Frontend:} \textit{Angular.ts} per la costruzione dell'interfaccia utente, grazie alla sua modularità e facilità di integrazione con backend RESTful.
+    \item \textbf{API Gateway:} \textit{Java con Spring} per il bilanciamento del carico e la gestione delle richieste tra i microservizi.    
+    \item \textbf{Backend:} \textit{Java con Spring} per la creazione dei microservizi, grazie alla sua robustezza.
+    \item \textbf{Database:} \textit{PostgreSQL} per la gestione dei dati relazionali, grazie alla sua affidabilità e scalabilità.
+\end{itemize}
 
 \end{document}
 
