@@ -294,16 +294,22 @@ E qui di seguito riportiamol'inerente tabella di Cockburn:
 \section{SYSTEM DESIGN}
 
 \subsection{Architettura del sistema}
-L'architettura del sistema adottata per la realizzazione della \gls{piattaforma} è di tipo \textbf{Client-Server}, più specificatamente a microservizi. 
-I microservizi da noi individuati sono:
+L'architettura del sistema adottata per la realizzazione della \gls{piattaforma} è di tipo \textbf{Client-Server}, più specificatamente a microservizi. Questa scelta, ideale per applicazioni web, disaccoppia nettamente il Frontend (lato utente) dal Backend (logica e dati su server).
+\\ I microservizi da noi individuati sono:
 \begin{itemize}
     \item \textbf{Servizio di gestione utenze:} si occupa della gestione delle utenze e dell'autenticazione.
     \item \textbf{Servizio di gestione issue:} si occupa della gestione delle \gls{issue} e dei relativi commenti.
 \end{itemize}
+L'organizzazione del Backend in microservizi distinti è stata guidata da tre obiettivi principali:
+\begin{itemize}
+    \item \textbf{Scalabilità Indipendente:} Consente di allocare risorse computazionali in modo mirato. È possibile, ad esempio, scalare orizzontalmente il servizio di gestione delle issue (soggetto a traffico più intenso) senza dover replicare inutilmente il servizio di gestione utenze.
+    \item \textbf{Disaccoppiamento e Manutenibilità:} La suddivisione in moduli riduce la complessità del codice del singolo servizio. Questo favorisce uno sviluppo distribuibile, manutenibile, evolvibile e con test più mirati.
+    \item \textbf{Tolleranza ai guasti:} Un eventuale errore critico in un microservizio non compromette necessariamente la disponibilità dell'intera piattaforma.
+\end{itemize}
 
 
 \subsection{Decomposizione del sistema}
-Il sistema è composto dai seguenti componenti principali:
+Il sistema è composto dai seguenti elementi:
 \begin{enumerate}
         \item \textbf{Frontend:} interfaccia utente accessibile tramite browser web.
         \begin{itemize}[label=-]
@@ -334,8 +340,8 @@ Il sistema è composto dai seguenti componenti principali:
 Per la realizzazione della \gls{piattaforma} BugBoard26, abbiamo scelto le seguenti tecnologie:
 \begin{itemize}
     \item \textbf{Frontend:} \textit{Angular.ts} per la costruzione dell'interfaccia utente, grazie alla sua modularità e facilità di integrazione con backend RESTful.
-    \item \textbf{API Gateway:} \textit{Java con Spring} per il bilanciamento del carico e la gestione delle richieste tra i microservizi.    
-    \item \textbf{Backend:} \textit{Java con Spring} per la creazione dei microservizi, grazie alla sua robustezza.
+    \item \textbf{API Gateway:} \textit{Java Spring} per il bilanciamento del carico e la gestione delle richieste tra i microservizi.    
+    \item \textbf{Backend:} \textit{Java Spring} per la creazione dei microservizi, grazie alla sua robustezza.
     \item \textbf{Database:} \textit{PostgreSQL} per la gestione dei dati relazionali, grazie alla sua affidabilità e scalabilità.
 \end{itemize}
 

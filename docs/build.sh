@@ -32,7 +32,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-# Esegui pdflatex altre due volte per risolvere i riferimenti incrociati e il glossario
+# Esegui pdflatex un altra volta per risolvere i riferimenti incrociati e il glossario
 echo "Seconda esecuzione di pdflatex..."
 pdflatex --shell-escape -interaction=nonstopmode -output-directory="$BUILD_DIR" "$MAIN_FILE".tex
 if [ $? -ne 0 ]; then
