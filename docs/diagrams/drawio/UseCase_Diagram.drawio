@@ -1,6 +1,6 @@
-<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.1.2 Chrome/138.0.7204.243 Electron/37.4.0 Safari/537.36" version="28.1.2">
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/27.0.2 Chrome/134.0.6998.205 Electron/35.3.0 Safari/537.36" version="27.0.2">
   <diagram name="Pagina-1" id="BZGdzGyN86v98UXDiljH">
-    <mxGraphModel dx="1042" dy="696" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="772" dy="489" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -52,22 +52,31 @@
           <mxGeometry x="320" y="270" width="30" height="60" as="geometry" />
         </mxCell>
         <mxCell id="qFLVWpLhrLzppEugZXGh-32" value="Segnalare issue" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="430" y="230" width="80" height="40" as="geometry" />
+          <mxGeometry x="432.5" y="230" width="85" height="40" as="geometry" />
         </mxCell>
         <mxCell id="qFLVWpLhrLzppEugZXGh-33" value="Effettuare login" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="430" y="120" width="80" height="40" as="geometry" />
+          <mxGeometry x="435" y="120" width="80" height="40" as="geometry" />
         </mxCell>
         <mxCell id="qFLVWpLhrLzppEugZXGh-37" value="Visualizzare issue" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="430" y="170" width="80" height="40" as="geometry" />
+          <mxGeometry x="435" y="170" width="80" height="40" as="geometry" />
         </mxCell>
         <mxCell id="qFLVWpLhrLzppEugZXGh-39" value="Commentare issue" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="430" y="280" width="80" height="40" as="geometry" />
+          <mxGeometry x="430" y="280" width="90" height="40" as="geometry" />
         </mxCell>
         <mxCell id="qFLVWpLhrLzppEugZXGh-43" value="Gestisce account" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="430" y="400" width="80" height="40" as="geometry" />
+          <mxGeometry x="430" y="390" width="90" height="40" as="geometry" />
         </mxCell>
         <mxCell id="qFLVWpLhrLzppEugZXGh-47" value="Modificare&amp;nbsp;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;issue&lt;/span&gt;&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="430" y="330" width="80" height="40" as="geometry" />
+          <mxGeometry x="432.5" y="330" width="85" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="I1Ir00LOla1yXUCAbgL5-1" value="Assegnare utenti ai progetti" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="425" y="440" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="I1Ir00LOla1yXUCAbgL5-2" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;startFill=0;" edge="1" parent="1" source="qFLVWpLhrLzppEugZXGh-26" target="I1Ir00LOla1yXUCAbgL5-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="360" y="429" as="sourcePoint" />
+            <mxPoint x="430" y="423" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
