@@ -2,6 +2,46 @@ name: BugBoard26
 
 services:
   docs:
-    build: 
+    build:
       context: ./docs
       dockerfile: ./Dockerfile
+    profiles:
+      - docs
+
+  web:
+    build:
+      context: ./frontend/web
+      dockerfile: ./Dockerfile
+    ports:
+      - "4200:4200"
+    profiles:
+      - web
+      - frontend
+
+  bugboard:
+    build:
+      context: ./backend/bugboard
+      dockerfile: ./Dockerfile
+    ports:
+      - "8080:8080"
+    profiles:
+      - bugboard
+      - backend
+
+  users:
+    build:
+      context: ./backend/users
+      dockerfile: ./Dockerfile
+    profiles:
+      - users
+      - backend
+
+  api-gateway:
+    build:
+      context: ./backend/api-gateway
+      dockerfile: ./Dockerfile
+    ports:
+      - "8000:8000"
+    profiles:
+      - api-gateway
+      - backend

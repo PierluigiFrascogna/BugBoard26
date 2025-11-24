@@ -1,0 +1,15 @@
+{
+    "name": "Web",
+    "dockerComposeFile": "../../compose.yaml",
+    "service": "web",
+    "runServices": [
+        "web"
+    ],
+    "workspaceFolder": "/BugBoard26/frontend/web",
+    "features": {
+        "ghcr.io/devcontainers/features/git:1": {}
+    },
+    "mounts": [
+        "source=${localWorkspaceFolder},target=/BugBoard26,type=bind,consistency=cached"
+    ]
+}
