@@ -19,4 +19,6 @@ COPY . .
 
 EXPOSE 4200
 
+USER node
+
 ENTRYPOINT ["ng", "serve", "-o"]
