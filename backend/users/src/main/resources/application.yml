@@ -1,8 +1,8 @@
 spring:
   application:
-    name: bugboard
+    name: users
   datasource:
-    url: jdbc:postgresql://db.omxudfheszyemlfdrkyo.supabase.co:5432/postgres?sslmode=require
+    url: jdbc:postgresql://db.hwcirxykymtcakpdevzx.supabase.co:5432/postgres?sslmode=require
     username: postgres
     password: ${DB_PASSWORD}
   jpa:
@@ -11,4 +11,4 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
 server:
-  port: 8082
+  port: 8081

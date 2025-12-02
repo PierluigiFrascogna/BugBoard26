@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class Controller {
 
-    @GetMapping("/prova")
+    @GetMapping("/")
     public void home() {
         System.out.println("Home microservizio BUGBOARD");
     }
