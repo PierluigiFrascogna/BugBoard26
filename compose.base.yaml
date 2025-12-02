@@ -12,8 +12,6 @@ services:
     build:
       context: ./frontend/web
       dockerfile: ./Dockerfile
-    ports:
-      - "4200:4200"
     profiles:
       - web
       - frontend
