@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: bugboard
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: db.hwcirxykymtcakpdevzx.supabase.co
+    username: postgres
+    password: ${DB_PASSWORD} 
+
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+
+server:
+  port: 8082
