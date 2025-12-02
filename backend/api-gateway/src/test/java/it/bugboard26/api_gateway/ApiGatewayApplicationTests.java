@@ -1,4 +1,4 @@
-package com.example.api_gateway;
+package it.bugboard26.api_gateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

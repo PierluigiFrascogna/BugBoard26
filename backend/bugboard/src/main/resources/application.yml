@@ -4,7 +4,6 @@ spring:
   datasource:
     url: jdbc:postgresql://db.omxudfheszyemlfdrkyo.supabase.co:5432/postgres?sslmode=require
     username: postgres
-    password: ${DB_PASSWORD}
   jpa:
     properties:
       hibernate:

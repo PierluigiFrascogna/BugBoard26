@@ -1,4 +1,4 @@
-package com.example.api_gateway;
+package it.bugboard26.api_gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

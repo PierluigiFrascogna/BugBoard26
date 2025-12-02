@@ -1,13 +1,13 @@
-package it.bugboard26.users;
+package it.bugboard26.bugboard;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class UsersApplication {
+public class BugboardApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(UsersApplication.class, args);
+		SpringApplication.run(BugboardApplication.class, args);
 	}
 
 }

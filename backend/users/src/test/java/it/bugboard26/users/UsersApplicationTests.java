@@ -1,4 +1,4 @@
-package com.example.users;
+package it.bugboard26.users;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

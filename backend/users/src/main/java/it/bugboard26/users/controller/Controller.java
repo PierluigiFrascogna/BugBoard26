@@ -1,4 +1,4 @@
-package com.example.users.controller;
+package it.bugboard26.users.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
