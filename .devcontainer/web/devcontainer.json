@@ -1,15 +1,24 @@
 {
     "name": "Web",
-    "dockerComposeFile": "../../compose.yaml",
+    "dockerComposeFile": "../../compose.localdev.yaml",
     "service": "web",
-    "runServices": [
-        "web"
-    ],
-    "workspaceFolder": "/BugBoard26/frontend/web",
+    "runServices": ["web"],
+    
     "features": {
         "ghcr.io/devcontainers/features/git:1": {}
     },
-    "mounts": [
-        "source=${localWorkspaceFolder},target=/BugBoard26,type=bind,consistency=cached"
-    ]
+
+    "workspaceFolder": "/BugBoard26/frontend/web",
+
+    "forwardPorts": [4200],
+ 
+	"postCreateCommand": "./scripts/postCreate.sh",
+	"postStartCommand": "./scripts/postStart.sh",
+
+	"portsAttributes": {
+		"4200": {
+			"label": "Angular Dev Server",
+			"onAutoForward": "openBrowser"
+		}
+	}
 }

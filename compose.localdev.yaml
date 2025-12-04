@@ -1,0 +1,15 @@
+volumes:
+  BugBoard26-frontend-web-node-modules:
+  BugBoard26-frontend-web-angular-cache:
+
+services:
+  web:
+    extends:
+      file: "compose.base.yaml"
+      service: web
+    build:
+      target: localdev
+    volumes:
+      - .:/BugBoard26
+      - BugBoard26-frontend-web-node-modules:/BugBoard26/frontend/web/node_modules:rw
+      - BugBoard26-frontend-web-angular-cache:/BugBoard26/frontend/web/.angular:rw
