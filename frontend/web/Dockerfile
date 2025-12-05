@@ -25,7 +25,7 @@ FROM npm_installer AS server
 EXPOSE 4200
 
 # Start the Angular development server
-ENTRYPOINT ["ng", "serve", "-o"]
+ENTRYPOINT ["ng", "serve", "--host", "0.0.0.0", "--port", "4200"]
 
 FROM npm_installer AS localdev
 
