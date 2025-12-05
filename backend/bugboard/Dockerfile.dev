@@ -1,0 +1,12 @@
+# Utilizziamo l'immagine ufficiale Microsoft per Java DevContainers (include JDK 17 o 21, Maven, Gradle)
+FROM mcr.microsoft.com/devcontainers/java:1-17-bullseye
+
+# Impostiamo la directory di lavoro
+WORKDIR /workspace
+
+# Esponiamo la porta (8080 è standard per Spring, ma la mapperemo nel compose)
+EXPOSE 8080
+
+# Comando di default per mantenere il container attivo.
+# In questo modo VS Code può attaccarsi al container e tu puoi lanciare 'mvn spring-boot:run' dal terminale integrato.
+CMD [ "sleep", "infinity" ]
