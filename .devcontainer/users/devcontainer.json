@@ -1,0 +1,22 @@
+{
+    "name": "Users Service",
+    "dockerComposeFile": [
+        "../../compose.base.yaml",
+        "../../compose.localdev.yaml"
+    ],
+    "service": "users",
+    "runServices": [
+        "users"
+    ],
+    "workspaceFolder": "/BugBoard26/backend/users",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "vscjava.vscode-java-pack",
+                "vmware.vscode-spring-boot",
+                "gabrielbb.vscode-lombok"
+            ]
+        }
+    },
+    "remoteUser": "vscode"
+}

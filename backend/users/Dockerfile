@@ -1,30 +1,23 @@
-# --- Stage 1: Build ---
+# --- STAGE 1: Build ---
 FROM maven:3.9-eclipse-temurin-17 AS build
-
-WORKDIR /BugBoard26/backend/users
-
+WORKDIR /app
+# Copiamo solo il pom.xml per scaricare le dipendenze (sfrutta la cache di Docker)
 COPY pom.xml .
+# Scarica le dipendenze (senza copiare tutto il codice sorgente ancora)
+RUN mvn dependency:go-offline
 
-RUN mvn dependency:go-offline -B
-
+# Copiamo il codice sorgente e compiliamo
 COPY src ./src
-
-# Compiliamo il progetto saltando i test (i test si fanno nella CI/CD, non nel build Docker)
 RUN mvn clean package -DskipTests
 
-# --- Stage 2: Runtime ---
+# --- STAGE 2: Run ---
 FROM eclipse-temurin:17-jre-alpine
+WORKDIR /app
+# Copia solo il file JAR generato dallo stage precedente
+COPY --from=build /app/target/*.jar app.jar
 
-RUN apk add --no-cache bash git
-# Creiamo un utente non-root per sicurezza (best practice per Cloud/AWS/Azure)
-RUN addgroup -S devs && adduser -S dev -G devs
-
-USER devs:devs
-
-WORKDIR /BugBoard26/backend/users
-# Spring Boot genera il jar in /target
-COPY --from=build /BugBoard26/backend/users/target/*.jar app.jar
-
+# Espone la porta (8080 di default)
 EXPOSE 8080
 
+# Comando di avvio vero e proprio
 ENTRYPOINT ["java", "-jar", "app.jar"]

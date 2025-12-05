@@ -1,9 +1,12 @@
 volumes:
   BugBoard26-frontend-web-node-modules:
   BugBoard26-frontend-web-angular-cache:
+  BugBoard26-backend-maven-repo:
 
 services:
+  # --- FRONTEND ---
   web:
+    profiles: []  
     extends:
       file: "compose.base.yaml"
       service: web
@@ -13,3 +16,37 @@ services:
       - .:/BugBoard26
       - BugBoard26-frontend-web-node-modules:/BugBoard26/frontend/web/node_modules:rw
       - BugBoard26-frontend-web-angular-cache:/BugBoard26/frontend/web/.angular:rw
+
+# --- BACKEND: USERS ---
+  users:
+    profiles: []
+    build:
+      context: ./backend/users
+      dockerfile: Dockerfile.dev
+    env_file:
+      - ./backend/users/.env
+    volumes:
+      - ./backend/users:/BugBoard26/backend/users
+      - BugBoard26-backend-maven-repo:/root/.m2
+
+  # --- BACKEND: BUGBOARD ---
+  bugboard:
+    profiles: []
+    build:
+      context: ./backend/bugboard
+      dockerfile: Dockerfile.dev
+    env_file:
+      - ./backend/bugboard/.env
+    volumes:
+      - ./backend/bugboard:/BugBoard26/backend/bugboard
+      - BugBoard26-backend-maven-repo:/root/.m2
+
+  # --- API GATEWAY ---
+  api-gateway:
+    profiles: []
+    build:
+      context: ./backend/api-gateway
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./backend/api-gateway:/BugBoard26/backend/api-gateway
+      - BugBoard26-backend-maven-repo:/root/.m2

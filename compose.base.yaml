@@ -17,6 +17,7 @@ services:
       - frontend
 
   bugboard:
+    image: bugboard26-bugboard
     build:
       context: ./backend/bugboard
       dockerfile: ./Dockerfile
@@ -27,6 +28,7 @@ services:
       - backend
 
   users:
+    image: bugboard26-users
     build:
       context: ./backend/users
       dockerfile: ./Dockerfile
@@ -35,6 +37,7 @@ services:
       - backend
 
   api-gateway:
+    image: bugboard26-gateway
     build:
       context: ./backend/api-gateway
       dockerfile: ./Dockerfile

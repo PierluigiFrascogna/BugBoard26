@@ -1,0 +1,7 @@
+FROM mcr.microsoft.com/devcontainers/java:1-17-bullseye
+
+WORKDIR /workspace
+
+EXPOSE 8080
+
+CMD [ "sleep", "infinity" ]
