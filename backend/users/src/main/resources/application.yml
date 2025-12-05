@@ -1,11 +1,12 @@
 spring:
-  application:
-    name: users
   datasource:
-    url: ${DATABASE_URL}
-    username: ${DATABASE_USERNAME}
-    password: ${DATABASE_PASSWORD}
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD} 
+    driver-class-name: org.postgresql.Driver
+
   jpa:
     show-sql: true
+
 server:
   port: 8081
