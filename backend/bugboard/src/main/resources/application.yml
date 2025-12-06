@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: bugboard
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+  jpa:
+    show-sql: true
+server:
+  port: 8082

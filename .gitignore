@@ -14,3 +14,9 @@
 
 # svg-inkscape (converte le immagini da svg a pdf)
 \svg-inkscape
+
+# VSCode
+.vscode/
+
+# JetBrains
+.idea/
