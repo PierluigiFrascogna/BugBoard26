@@ -1,0 +1,27 @@
+<div class="login-container">
+
+  <img class="logo-title bg-readable" src="images/Logotype.svg" />
+
+  <p class="bg-readable subtitle">
+    Benvenuto su BugBoard26! La piattaforma tutto in uno per la gestione di team di sviluppo, progetti e issue.
+  </p>
+
+  <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+    <div class="form-card">
+      <h2>Accedi</h2>
+
+      <input type="email" formControlName="email" placeholder="Email" name="email">
+      <div [ngClass]=" isValidEmail ? 'inactive-warning' : 'active-warning'"> Inserire una email valida </div>
+      <input type="password" formControlName="password" placeholder="Password" name="password"/>
+      <div [ngClass]=" isValidPassword ? 'inactive-warning' : 'active-warning'"> Inserire la password corretta </div>
+      <button type="submit">Login</button>
+    </div>
+  </form>
+
+  <footer> Non hai un account? Contattaci per scoprire le nostre soluzioni e accedere ai nostri servizi.<br>
+    <a href="mailto:BugBoard@fakemail.com?subject=Info%20BugBoard26">info.BugBoard26@fakemail.com</a><br>
+    Trovaci anche su:<br>
+    <a href="https://github.com/tuo-username" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </footer>
+
+</div>
