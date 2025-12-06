@@ -9,6 +9,7 @@
     "build": "ng build --base-href /",
     "build:dev": "ng build --configuration=development --base-href /",
     "build:prod": "ng build --configuration=production --base-href /",
+    "build:prod:verbose": "ng build --configuration=production --base-href / --verbose",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
