@@ -25,7 +25,7 @@ FROM deps AS build
 RUN npm run build:prod:verbose
 
 
-FROM nginx:alpine AS prod
+FROM  docker.io/library/nginx:alpine AS prod
 # Use a lightweight web server to serve the built application
 
 # Copy the built application from the build stage to the Nginx HTML directory
