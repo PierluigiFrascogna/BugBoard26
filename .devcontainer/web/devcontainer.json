@@ -14,6 +14,8 @@
  
 	"postCreateCommand": "./scripts/postCreate.sh",
 	"postStartCommand": "./scripts/postStart.sh",
+    "postAttachCommand": "./scripts/postAttach.sh",
+    "shutdownAction": "stopCompose",
 
 	"portsAttributes": {
 		"4200": {
