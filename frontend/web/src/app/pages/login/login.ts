@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -14,6 +16,8 @@ export class Login {
   isValidEmail: boolean = true;
   isValidPassword: boolean = true;
 
+  constructor(private router: Router) {}
+
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)])
@@ -23,5 +27,7 @@ export class Login {
     this.isValidEmail = this.loginForm.controls['email'].valid;
     this.isValidPassword = this.loginForm.controls['password'].valid;
     console.log(this.loginForm.value);
+
+    this.router.navigate(['/home']);
   }
 }
