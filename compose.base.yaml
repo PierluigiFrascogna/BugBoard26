@@ -15,6 +15,7 @@ services:
     profiles:
       - web
       - frontend
+      - fullstack
 
   bugboard:
     image: bugboard26-bugboard
@@ -26,6 +27,7 @@ services:
     profiles:
       - bugboard
       - backend
+      - fullstack
 
   users:
     image: bugboard26-users
@@ -35,6 +37,7 @@ services:
     profiles:
       - users
       - backend
+      - fullstack
 
   api-gateway:
     image: bugboard26-gateway
@@ -46,3 +49,4 @@ services:
     profiles:
       - api-gateway
       - backend
+      - fullstack
