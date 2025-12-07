@@ -5,6 +5,7 @@ import { Profile } from './profile/profile';
 import { authGuard } from './auth/auth-guard';
 import { noAuthGuard } from './auth/no-auth-guard';
 
+
 export const routes: Routes = [
     
     { path: 'login', component: Login, canActivate: [noAuthGuard] },

@@ -1,36 +1,12 @@
-nav{
-    height: 60px;
-    width: 100%;
-    background-color: black;
-    color: white;
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-}
-
 .main-view{
     display: flex;
     flex-direction: row;
     height: calc(100vh - 60px);
 }
 
-.sidebar{
-    max-width: 10%;
-    min-width: 100px;
-    background-color: black;
-    border-right: 3px solid #FF6971;
-}
-
 .depth-view{
     flex: 1;
     padding: 20px;
     background: transparent;
-}
-
-.open{
-    display: none;
-}
-
-.cloed{
-
+    color: white;
 }
