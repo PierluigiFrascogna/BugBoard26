@@ -1,5 +1,6 @@
 package it.bugboard26.users.controller;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +24,9 @@ public class UserController {
     public void save() {
         System.out.println("Adesso proverò a salvare un utente nel database");
 
-        User user = new User("Marco", "Festa", "marco@bugboard26.it", "hashedpassword", false);
+        String password = BCrypt.hashpw("1234", BCrypt.gensalt());
+
+        User user = new User("Marco", "Festa", "marco@bugboard26.it", password, false);
         userService.save(user);
         
 
