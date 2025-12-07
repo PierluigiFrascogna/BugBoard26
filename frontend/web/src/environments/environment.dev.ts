@@ -1,7 +1,7 @@
 import { Environment } from "./environment";
 
 export const environment: Environment = {
-  urls: {
-    api: 'https://api.bugboard26.com',
-  },
+    urls: {
+        api: 'http://localhost:8000',
+    },
 };
