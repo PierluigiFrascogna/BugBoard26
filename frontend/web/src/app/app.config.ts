@@ -2,10 +2,13 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
+import { ENVIRONMENT_TOKEN } from '../environments/environment';
+import { environment } from '../environments/environment.base';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes)
+    provideRouter(routes),
+    { provide: ENVIRONMENT_TOKEN, useValue: environment }
   ]
 };
