@@ -1,50 +1,58 @@
 package it.bugboard26.users.services;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.SecretJwkBuilder;
+import io.jsonwebtoken.security.Keys;
 import it.bugboard26.users.entities.User;
 import it.bugboard26.users.exceptions.AuthenticationException;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
-import org.mindrot.jbcrypt.BCrypt;
-import lombok.AllArgsConstructor;
+import javax.crypto.SecretKey;
 
-@AllArgsConstructor
+import org.mindrot.jbcrypt.BCrypt;
+
 @Service
 public class AuthService {
 
+    //Attributes 
     private UserService userService;
+    private SecretKey secretKey;
 
+
+    //Constructor
+    public AuthService(UserService userService, @Value("${jwt.key}") String jwtSecret){
+        this.userService = userService;
+        this.secretKey = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
+    }
+
+
+    //Methods
     public String login(String email, String rawPassword) {
         User user = verifyUser(email, rawPassword);
         return generateJwt(user);
     }
 
     private User verifyUser(String email, String rawPassword) {
-        User user = userService.findByEmail(email);
+        User user = userService.findByEmail(email).orElseThrow(() -> new AuthenticationException("Invalid credentials"));
 
         if(!BCrypt.checkpw(rawPassword, user.getPasswordHash())) 
-            throw new AuthenticationException("Password errata");
+            throw new AuthenticationException("Invalid credentials");
 
         return user;
     }
 
     private String generateJwt(User user) {
-
         String jwt = Jwts.builder()
-            .header()
-                .type("JWT")
-            
-            .and()
-                .subject(user.getUuid().toString())
-                .claim("name", user.getName())
-                .claim("surname", user.getSurname())
-                .claim("admin", user.isAdmin())
-                .issuedAt(new Date())
-                .signWith(null)
-
+            .subject(user.getUuid().toString())
+            .claim("name", user.getName())
+            .claim("surname", user.getSurname())
+            .claim("admin", user.isAdmin())
+            .issuedAt(new Date())
+            .expiration(new Date(System.currentTimeMillis() + 300000)) // 5 minuti
+            .signWith(secretKey)
             .compact();
 
         return jwt;

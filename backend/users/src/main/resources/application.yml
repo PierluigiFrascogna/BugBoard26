@@ -8,5 +8,8 @@ spring:
   jpa:
     show-sql: true
 
+jwt:
+  key: ${JWT_SECRET_KEY}
+
 server:
   port: 8081
