@@ -1,9 +1,7 @@
-import { InjectionToken } from "@angular/core";
+import { Environment } from "./environment-model";
 
-export const ENVIRONMENT_TOKEN = new InjectionToken<Environment>('Environment');
-
-export interface Environment {
+export const environment: Environment = {
     urls: {
-        api: string;
-    };
-}
+        api: 'http://localhost:8000',
+    },
+};
