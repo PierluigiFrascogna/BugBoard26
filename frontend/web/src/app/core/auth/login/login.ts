@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthStore } from '../auth-store';
 
 
 @Component({
@@ -13,10 +14,14 @@ import { Router } from '@angular/router';
   styleUrl: './login.css',
 })
 export class Login {
+
+  private router = inject(Router);
+  private auth = inject(AuthStore);
+
   isValidEmail: boolean = true;
   isValidPassword: boolean = true;
 
-  constructor(private router: Router) {}
+  constructor() {}
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -28,6 +33,12 @@ export class Login {
     this.isValidPassword = this.loginForm.controls['password'].valid;
     console.log(this.loginForm.value);
 
-    this.router.navigate(['/home']);
+    
+    this.auth.sudologin();
+    // this.auth.login(
+    //   this.loginForm.value.email || '',
+    //   this.loginForm.value.password || ''
+    // );
+    this.router.navigateByUrl('/'); // TODO: navigate to returnUrl che sta in nell'authguard
   }
 }
