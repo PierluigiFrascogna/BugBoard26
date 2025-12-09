@@ -1,7 +1,5 @@
 package it.bugboard26.users.services;
 
-import java.util.Optional;
-
 import org.springframework.stereotype.Service;
 import lombok.AllArgsConstructor;
 
@@ -17,7 +15,7 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public Optional<User> findByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
+    // public Optional<User> findByEmail(String email) {
+    //     return userRepository.findByEmail(email);
+    // }
 }
