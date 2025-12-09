@@ -1,5 +1,6 @@
 <div class="sidebar" [ngClass]="isSidebarOpen ? 'sidebar--open' : 'sidebar--closed'" >
-    <div class="sidebar__content"></div>
+    <div class="sidebar__content">
+    </div>
     <button class="sidebar__button" (click)="toggleSidebar()">
         {{ isSidebarOpen ? "<" : ">" }}
     </button>

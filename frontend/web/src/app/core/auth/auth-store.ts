@@ -12,9 +12,9 @@ export class AuthStore {
 
   private readonly jwt: WritableSignal<Jwt | null> = signal(null);
   
+  readonly uuid: Signal<string | null> = computed(() => this.jwt()?.payload().sub || null);
   readonly name: Signal<string | null> = computed(() => this.jwt()?.payload().name || null);
   readonly surname: Signal<string | null> = computed(() => this.jwt()?.payload().surname || null);
-  readonly uuid: Signal<string | null> = computed(() => this.jwt()?.payload().sub || null);
   readonly role: Signal<string | null> = computed(() => this.jwt()?.payload().role || null);
 
   readonly isAuthenticated: Signal<boolean> = computed(() => this.jwt() !== null);
