@@ -1,0 +1,35 @@
+.low{
+    width: fit-content;
+    height: fit-content;
+    
+    padding: 5px 5px;
+    
+    background-color: green;
+    color: black;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.medium{
+    width: fit-content;
+    height: fit-content;
+    
+    padding: 5px 5px;
+    
+    background-color: orange;
+    color: black;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.high{
+    width: fit-content;
+    height: fit-content;
+    
+    padding: 5px 5px;
+    
+    background-color: red;
+    color: black;
+    border-radius: 20px;
+    font-weight: bold;
+}

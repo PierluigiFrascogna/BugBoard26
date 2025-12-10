@@ -1,0 +1,47 @@
+.question{
+    width: fit-content;
+    height: fit-content;
+
+    padding: 5px 5px;
+    
+    background-color: lightgray;
+    color: black;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.bug{
+    width: fit-content;
+    height: fit-content;
+
+    padding: 5px 5px;
+    
+    background-color: #FF6347;
+    color: black;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.documentation{
+    width: fit-content;
+    height: fit-content;
+
+    padding: 5px 5px;
+    
+    background-color: #845EC2;
+    color: black;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.feature{
+    width: fit-content;
+    height: fit-content;
+
+    padding: 5px 5px;
+    
+    background-color: #F9F871;
+    color: black;
+    border-radius: 20px;
+    font-weight: bold;
+}

@@ -1,0 +1,35 @@
+.todo{
+    width: fit-content;
+    height: fit-content;
+
+    padding: 5px 5px;
+    
+    background-color: lightgray;
+    color: black;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.pending{
+    width: fit-content;
+    height: fit-content;
+
+    padding: 5px 5px;
+    
+    background-color: orange;
+    color: black;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.done{
+    width: fit-content;
+    height: fit-content;
+
+    padding: 5px 5px;
+    
+    background-color: green;
+    color: black;
+    border-radius: 20px;
+    font-weight: bold;
+}
