@@ -1,6 +1,6 @@
 import { computed, inject, Injectable, signal, Signal, WritableSignal } from '@angular/core';
 import { ProjectApi } from './project-api';
-import { Project } from './project';
+import { Project } from './project-model';
 
 export interface ProjectsState {
   projects: Project[]

@@ -1,8 +1,8 @@
-import { ENVIRONMENT_TOKEN } from '../../../../../environments/environment-model';
-import { inject, Injectable } from '@angular/core';
+import { ENVIRONMENT_TOKEN } from '../../../../../../environments/environment-model';
+import { inject, Injectable, signal } from '@angular/core';
 import { httpResource } from '@angular/common/http';
-import { Project } from './project';
-import { UserStore } from '../../../profile/user/user-store'
+import { Project } from './project-model';
+import { UserStore } from '../../../../profile/user/user-store'
 
 
 @Injectable({
