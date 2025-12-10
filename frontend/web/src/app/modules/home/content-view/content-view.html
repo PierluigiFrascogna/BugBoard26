@@ -1,0 +1,18 @@
+<div class="container"> 
+    @if (project()===null){
+        <p class="no-selected-project-label">seleziona un progetto per iniziare</p>
+    }@else {
+        @defer{
+            <div class="project-title">{{ project()!.name }}</div>
+            @for (issue of issues(); track $index) {
+                <app-view-element [issue]="issue"></app-view-element>  
+            }@empty {
+                <p class="no-issues-label">non ci sono issues, complimenti, ben fatto, ottimo lavoro ;)</p>
+            }
+        }@loading {
+            <p class="loading-label">caricamento in corso</p>
+        }@error{
+            <p class="error-label">si è verificato un errore impreviso nel caricamento del progetto</p>
+        }
+    }
+<div>
