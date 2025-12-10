@@ -1,0 +1,30 @@
+.button{
+    height: fit-content;
+    width: 100%;
+
+    padding-right: 10px;
+
+    display: flex;
+    flex-direction: column;
+
+    background-color: black;
+    border: 1px solid #845EC2;
+    border-left: none;
+}
+
+.button__project-name{
+    text-align: left;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+}
+
+.button__project-creation-date{
+    text-align: left;
+    font-size: 0.5rem;
+    color: grey;
+}
+
+.button:hover{
+    box-shadow: inset 0 0 10px #845EC2;
+}
