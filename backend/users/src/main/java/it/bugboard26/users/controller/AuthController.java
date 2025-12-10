@@ -1,5 +1,7 @@
 package it.bugboard26.users.controller;
 
+import java.util.UUID;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,7 +36,7 @@ public class AuthController {
     }
     
     @PostMapping("/register")
-    public ResponseEntity<String> register(
+    public ResponseEntity<UUID> register(
     @RequestHeader("Authorization") String authHeader, 
     @RequestBody RegisterRequest registerDTO) {
 
@@ -49,7 +51,7 @@ public class AuthController {
             throw new ForbiddenException("Access denied");
         
         User newUser = authService.register(registerDTO);
-        return ResponseEntity.ok(newUser.getUuid().toString());
+        return ResponseEntity.ok(newUser.getUuid());
     }
 
     
