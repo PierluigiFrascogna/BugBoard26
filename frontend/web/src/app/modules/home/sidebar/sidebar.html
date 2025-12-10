@@ -1,7 +1,14 @@
 <div class="sidebar" [ngClass]="isSidebarOpen ? 'sidebar--open' : 'sidebar--closed'" >
     <div class="sidebar__content">
+        @for (project of projectsStore; track $index){
+            <app-sidebar-element [project]="project"></app-sidebar-element>
+        }@empty {
+            <p>non ci sono progetti</p>
+        }
     </div>
-    <button class="sidebar__button" (click)="toggleSidebar()">
-        {{ isSidebarOpen ? "<" : ">" }}
-    </button>
+    <div class="sidebar__border">
+        <button class="sidebar__border__button" (click)="toggleSidebar()" [ngClass]="isSidebarOpen ? 'sidebar__border__button--open' : 'sidebar__border__button--closed'">
+            {{ isSidebarOpen ? '<' : '>' }}
+        </button>
+    </div>
 </div>

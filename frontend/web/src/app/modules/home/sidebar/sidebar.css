@@ -31,16 +31,33 @@
     overflow: hidden;
 }
 
-.sidebar__button{
+.sidebar__border{
+    width: 0px;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+
+}
+
+.sidebar__border__button{
     max-width: fit-content;
     height: 130px; ;
     
     position: relative;
-    left: 13px;
+    left: -10px;
     
     background-color: #845EC2;
     border-radius: 10px;
     color: black;
     cursor: pointer;
     transition: margin-left 0.3s ease;
+}
+
+.sidebar__border__button--open{
+    margin-left: 0px;
+}
+
+.sidebar__border__button--closed{
+    margin-left: 10px;
 }
