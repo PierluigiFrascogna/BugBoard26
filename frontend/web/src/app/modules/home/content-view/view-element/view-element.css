@@ -1,0 +1,40 @@
+.element{
+    width: 1200px;
+    height: fit-content;
+
+    margin-left: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+}
+
+.element__header{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.element__header__labels{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+}
+
+.element__header__subheader{
+    width: 100%;
+}
+
+.title-label{
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.author-label{
+    font-size: 1rem;
+    color: whitesmoke;
+}

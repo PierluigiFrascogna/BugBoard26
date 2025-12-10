@@ -1,0 +1,14 @@
+<div class="element">
+    <div class="element__header">
+        <span class="title-label">{{ issue.title }}</span> 
+        <div class="element__header__labels">
+            <app-type-label [type]="issue.type"></app-type-label>
+            <app-priority-label [priority]="issue.priority"></app-priority-label>
+            <app-state-label [state]="issue.state"></app-state-label>
+        </div>
+        <div class="element__header__subheader">
+            <div class="author-label">{{ issue.author }}</div>
+        </div>
+    </div>
+    <div class="issue-description">{{ issue.description }}</div>
+</div>
