@@ -35,7 +35,7 @@ public class AuthService {
             registerDTO.getSurname(),
             registerDTO.getEmail(),
             hashedPassword,
-            false 
+            registerDTO.isAdmin()
         );
 
         userService.save(newUser);

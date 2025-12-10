@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import it.bugboard26.users.dtos.LoginRequest;
 import it.bugboard26.users.dtos.RegisterRequest;
-import it.bugboard26.users.dtos.UserResponse;
 import it.bugboard26.users.entities.User;
 import it.bugboard26.users.exceptions.ForbiddenException;
 import it.bugboard26.users.services.AuthService;
@@ -35,7 +34,7 @@ public class AuthController {
     }
     
     @PostMapping("/register")
-    public ResponseEntity<UserResponse> register(
+    public ResponseEntity<String> register(
     @RequestHeader("Authorization") String authHeader, 
     @RequestBody RegisterRequest registerDTO) {
 
@@ -50,8 +49,7 @@ public class AuthController {
             throw new ForbiddenException("Access denied");
         
         User newUser = authService.register(registerDTO);
-        UserResponse userResponse = new UserResponse(newUser);
-        return ResponseEntity.ok(userResponse);
+        return ResponseEntity.ok(newUser.getUuid().toString());
     }
 
     
