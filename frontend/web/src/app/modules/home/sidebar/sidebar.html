@@ -1,6 +1,6 @@
 <div class="sidebar" [ngClass]="isSidebarOpen ? 'sidebar--open' : 'sidebar--closed'" >
     <div class="sidebar__content">
-        @for (project of projectsStore; track $index){
+        @for (project of projects(); track $index){
             <app-sidebar-element [project]="project"></app-sidebar-element>
         }@empty {
             <p>non ci sono progetti</p>

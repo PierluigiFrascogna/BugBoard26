@@ -4,7 +4,7 @@
     height: calc(100vh - 60px);
 }
 
-.depth-view{
+.project-view{
     flex: 1;
     padding: 20px;
     background: transparent;

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { ProjectStore } from './sidebar-element/project/project-store';
 import { Project } from './sidebar-element/project/project-model';
@@ -12,22 +12,9 @@ import { SidebarElement } from './sidebar-element/sidebar-element';
 })
 export class Sidebar {
   
-  //private projectsStore = inject(ProjectStore);
-  readonly projectsStore = [
-    {
-      uuid: "abcde",
-      name: "Backend",
-      creation_date: new Date(),
-    } as Project,
-
-    {
-      uuid: "fghi",
-      name: "Frontend dsdaassdasdasd",
-      creation_date: new Date(),
-    }as Project
-
-  ]
   isSidebarOpen: boolean = true; 
+  private readonly projectsStore = inject(ProjectStore);
+  readonly projects = computed<Project[]>(() => this.projectsStore.projects());
 
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;

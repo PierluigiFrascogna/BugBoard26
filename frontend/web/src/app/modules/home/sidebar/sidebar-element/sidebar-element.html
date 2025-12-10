@@ -1,4 +1,4 @@
-<button class= "button">
+<button class= "button" (click)="selectProject()" [ngClass]="isSelected() ? 'button--selected' : '' ">
     <div class="button__project-name">{{ project.name }}</div>
     <div class="button__project-creation-date">Est.{{ project.creation_date | date:'yyyy/MM/dd' }}</div>
 </button>
