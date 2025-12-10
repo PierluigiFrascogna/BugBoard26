@@ -26,7 +26,7 @@ export class ProjectStore {
 
       {
         uuid: "fghi",
-        name: "Frontend dsdaassdasdasd",
+        name: "Frontend",
         creation_date: new Date(),
       }as Project
     ]as Project[],
