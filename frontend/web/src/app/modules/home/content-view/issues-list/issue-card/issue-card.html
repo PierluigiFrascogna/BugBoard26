@@ -1,0 +1,16 @@
+<div class="component">
+    <div class="component__header">
+        <span class="component__header__title" (click)="selectIssue()">{{ issue.title }}</span> 
+        <div class="component__header__labels">
+            <app-type-label [type]="issue.type"></app-type-label>
+            <app-priority-label [priority]="issue.priority"></app-priority-label>
+            <app-state-label [state]="issue.state"></app-state-label>
+        </div>
+        <div class="component__header__subheader">
+            <div class="component__subheader_author">{{ issue.author }}</div>
+        </div>
+    </div>
+    <div class="component__content">
+        <div class="issue-description">{{ issue.description }}</div>
+    </div>
+</div>
