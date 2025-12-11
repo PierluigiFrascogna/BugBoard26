@@ -1,7 +1,6 @@
 import { computed, inject, Injectable, signal, Signal, WritableSignal } from '@angular/core';
 import { ProjectApi } from './project-api';
 import { Project } from './project-model';
-import { core } from '@angular/compiler';
 
 export interface ProjectsState {
   projects: Project[]
@@ -21,13 +20,13 @@ export class ProjectStore {
       {
         uuid: "abcde",
         name: "Backend",
-        creation_date: new Date(),
+        creationDate: new Date(),
       } as Project,
 
       {
         uuid: "fghi",
         name: "Frontend",
-        creation_date: new Date(),
+        creationDate: new Date(),
       }as Project
     ]as Project[],
     loading: this.api.projectsResource.isLoading(),
@@ -40,6 +39,7 @@ export class ProjectStore {
 
   private readonly _selectedProject = signal<Project | null>(null);
   readonly selectedProject = computed(() => this._selectedProject());
+  readonly name= computed(() => this._selectedProject()===null ? '' : this._selectedProject()?.name);
 
   selectProject(project: Project) {
     this._selectedProject.set(project);

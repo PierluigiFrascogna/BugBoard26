@@ -11,7 +11,6 @@ import { UserStore } from '../../../../profile/user/user-store'
 export class ProjectApi {
   
   private readonly env = inject(ENVIRONMENT_TOKEN);
-  private readonly user = inject(UserStore);
 
   private readonly API_URL = this.env.urls.api;
   private readonly PROJECT_URL = "/projects"
