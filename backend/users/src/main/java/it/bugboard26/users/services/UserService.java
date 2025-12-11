@@ -4,11 +4,13 @@ package it.bugboard26.users.services;
 import java.util.Optional;
 
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
 import lombok.AllArgsConstructor;
 
 import it.bugboard26.users.entities.User;
-import it.bugboard26.users.exceptions.AuthenticationException;
 import it.bugboard26.users.repositories.UserRepository;
 
 @AllArgsConstructor
@@ -24,11 +26,15 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
+    public boolean existsByEmail(String email) {
+        return userRepository.existsByEmail(email);
+    }
+
     public User verifyUser(String email, String rawPassword) {
-        User user = userRepository.findByEmail(email).orElseThrow(() -> new AuthenticationException("Invalid credentials"));
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials"));
 
         if(!BCrypt.checkpw(rawPassword, user.getPasswordHash())) 
-            throw new AuthenticationException("Invalid credentials");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials");
 
         return user;
     }

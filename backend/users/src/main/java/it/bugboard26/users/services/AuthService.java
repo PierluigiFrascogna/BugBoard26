@@ -1,11 +1,12 @@
 package it.bugboard26.users.services;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import it.bugboard26.users.dtos.LoginRequest;
-import it.bugboard26.users.dtos.RegisterRequest;
+import it.bugboard26.users.dtos.RegistrationRequest;
 import it.bugboard26.users.entities.User;
-import it.bugboard26.users.exceptions.InvalidEmailException;
 import lombok.AllArgsConstructor;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -18,24 +19,23 @@ public class AuthService {
     private JwtService jwtService;
 
     //Methods
-    public String verifyAndGenerateToken(LoginRequest loginDTO) {
-        User user = userService.verifyUser(loginDTO.getEmail(), loginDTO.getPassword());
+    public String verifyAndGenerateToken(LoginRequest frontendRequest) {
+        User user = userService.verifyUser(frontendRequest.getEmail(), frontendRequest.getPassword());
         return jwtService.generateJwt(user);
     }
 
-    public User register(RegisterRequest registerDTO) {
-        if(userService.findByEmail(registerDTO.getEmail()).isPresent()) {
-            throw new InvalidEmailException("Email already in use");
-        }
+    public User register(RegistrationRequest frontendRequest) {
+        if(userService.existsByEmail(frontendRequest.getEmail())) 
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Email already in use");
 
-        String hashedPassword = BCrypt.hashpw(registerDTO.getPassword(), BCrypt.gensalt());
+        String hashedPassword = BCrypt.hashpw(frontendRequest.getPassword(), BCrypt.gensalt());
 
         User newUser = new User(
-            registerDTO.getName(),
-            registerDTO.getSurname(),
-            registerDTO.getEmail(),
+            frontendRequest.getName(),
+            frontendRequest.getSurname(),
+            frontendRequest.getEmail(),
             hashedPassword,
-            registerDTO.isAdmin()
+            frontendRequest.isAdmin()
         );
 
         userService.save(newUser);

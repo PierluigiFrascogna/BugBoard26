@@ -10,12 +10,10 @@ import it.bugboard26.bugboard.dtos.RegistrationRequest;
 import it.bugboard26.bugboard.dtos.UserServiceRequest;
 import it.bugboard26.bugboard.entities.User;
 import it.bugboard26.bugboard.enums.Role;
-import it.bugboard26.bugboard.exceptions.ForbiddenException;
 import it.bugboard26.bugboard.repositories.AuthRepository;
 
 import org.springframework.http.ResponseEntity; 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 
 import java.util.UUID;
 
@@ -73,20 +71,23 @@ public class AuthService {
             );
 
             // 5. Controllo Status Code
-            if (response.getStatusCode() != HttpStatus.OK) {
-                throw new ForbiddenException("Failed to register user: Status " + response.getStatusCode());
-            }
+            if (response.getStatusCode() != HttpStatus.OK) 
+                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to register user: Status " + response.getStatusCode());
+            
 
             UUID uuid = response.getBody();
             return uuid;
         } 
         catch (HttpClientErrorException.Forbidden e) {
-            // Gestione errori generici
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Access denied");
         }
 
         catch (HttpClientErrorException.Conflict e) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Email already in use");
+        }
+
+        catch (HttpClientErrorException.BadRequest e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid registration data");
         }
 
         catch (HttpStatusCodeException e) {
