@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewElement } from './view-element';
+import { IssesList } from './issues-list';
 
-describe('ViewElement', () => {
-  let component: ViewElement;
-  let fixture: ComponentFixture<ViewElement>;
+describe('IssesList', () => {
+  let component: IssesList;
+  let fixture: ComponentFixture<IssesList>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ViewElement]
+      imports: [IssesList]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ViewElement);
+    fixture = TestBed.createComponent(IssesList);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

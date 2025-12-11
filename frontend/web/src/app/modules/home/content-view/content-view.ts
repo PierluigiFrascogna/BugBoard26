@@ -1,12 +1,12 @@
 import { Component, computed, inject } from '@angular/core';
+import { IssesList } from "./issues-list/issues-list";
 import { ProjectStore } from '../sidebar/sidebar-element/project/project-store';
-import { Project } from '../sidebar/sidebar-element/project/project-model';
-import { IssueStore } from './view-element/issue/issue-store';
-import { ViewElement } from "./view-element/view-element";
+import { IssueStore } from './issues-list/issue-card/issue/issue-store';
+import { IssueView } from "./issue-view/issue-view";
 
 @Component({
   selector: 'app-content-view',
-  imports: [ViewElement],
+  imports: [IssesList, IssueView],
   templateUrl: './content-view.html',
   styleUrl: './content-view.css',
 })
@@ -14,7 +14,5 @@ export class ContentView {
   private readonly projectStore = inject(ProjectStore);
   private readonly issueStore = inject(IssueStore);
 
-  readonly project = computed(() => this.projectStore.selectedProject());
-  readonly issues = computed(() => this.issueStore.projectIssues())
-
+  readonly title = computed(() => this.projectStore.name() + this.issueStore.title() );
 }

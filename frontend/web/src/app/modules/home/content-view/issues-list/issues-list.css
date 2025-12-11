@@ -1,21 +1,28 @@
-.element{
+.component{
     width: 100%;
     height: 100%;
     
     padding-left: 20px; 
 }
 
-.element__header{
+.component--hidden{
+    display: none; 
+}
+
+.component__header{
     width: fit-content;
     height: fit-content;
 
     margin-top: 20px;
     margin-bottom: 20px;
-    padding: 10px;
 
     background-color: rgb(0, 0, 0, 0.7);
     font-weight: 900;
     font-size: 40px;
     border-radius: 10px;
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.7);
+}
+
+.component__header__title--visible{
+    padding: 10px;
 }
