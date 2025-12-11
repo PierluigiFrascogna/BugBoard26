@@ -1,8 +1,8 @@
 import { inject, Injectable } from '@angular/core';
-import { ENVIRONMENT_TOKEN } from '../../../../../../environments/environment-model';
 import { httpResource } from '@angular/common/http';
-import { ProjectStore } from '../../../sidebar/sidebar-element/project/project-store';
 import { Issue } from './issue';
+import { ENVIRONMENT_TOKEN } from '../../../../../../../environments/environment-model';
+import { ProjectStore } from '../../../../sidebar/sidebar-element/project/project-store';
 
 @Injectable({
   providedIn: 'root',

@@ -1,4 +1,4 @@
-import { computed, inject, Injectable } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { IssueApi } from './issue-api';
 import { Issue } from './issue';
 
@@ -23,7 +23,7 @@ export class IssueStore {
         type: "bug",
         priority: "high",
         state: "pending", 
-        image: null,
+        image: "",
         author: "user1"
       }as Issue,
 
@@ -34,7 +34,7 @@ export class IssueStore {
         type: "feature",
         priority: 'medium',
         state: 'todo', 
-        image: null,
+        image: "",
         author: "user2"
       }as Issue,
 
@@ -45,7 +45,7 @@ export class IssueStore {
         type: 'documentation',
         priority: "low",
         state: "pending", 
-        image: null,
+        image: "",
         author: "user3"
       }as Issue,
 
@@ -58,7 +58,15 @@ export class IssueStore {
   readonly loading = computed(() => this.state().loading); 
   readonly error = computed(() => this.state().error);
   
+  private readonly _selectedIssue = signal<Issue | null>(null);
+  readonly selectedIssue = computed(() => this._selectedIssue());
+  readonly title = computed(() => {return this._selectedIssue()!==null ? "."+ this.selectedIssue()?.title : ''} );
 
+  selectIssue(issue: Issue){
+    this._selectedIssue.set(issue);
+  }
 
-  
+  deselectIssue(){
+    this._selectedIssue.set(null);
+  }
 }

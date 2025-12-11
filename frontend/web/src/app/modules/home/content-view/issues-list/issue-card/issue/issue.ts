@@ -5,7 +5,7 @@ export interface Issue {
     type: "question" | "bug" | "documentation" | "feature";
     priority: "low" | "medium" | "high"; 
     state: "todo" | "pending" | "done";
-    image: string | null; //TODO: discutere su cosa mandare al frontend e se conviene avere image?: string;
+    image: string;
     author: string;
 }
  
