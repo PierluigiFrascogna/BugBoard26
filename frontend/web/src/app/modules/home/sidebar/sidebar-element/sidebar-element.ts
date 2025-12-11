@@ -17,11 +17,11 @@ export class SidebarElement {
   private readonly projectStore = inject(ProjectStore);
   isSelected = computed(() => {
     const selectedProject = this.projectStore.selectedProject();
-    return selectedProject ? selectedProject === this.project : false;
+    return selectedProject === this.project;
   });
 
   selectProject(){
-    this.projectStore.selectProject(this.project)
+    this.projectStore.selectProject(this.project);
   }
 
 

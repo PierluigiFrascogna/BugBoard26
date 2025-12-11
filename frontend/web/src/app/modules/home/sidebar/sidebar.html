@@ -1,4 +1,4 @@
-<div class="sidebar" [ngClass]="isSidebarOpen ? 'sidebar--open' : 'sidebar--closed'" >
+<div class="sidebar" [ngClass]="isOpen() ? 'sidebar--open' : 'sidebar--closed'" >
     <div class="sidebar__content">
         @for (project of projects(); track $index){
             <app-sidebar-element [project]="project"></app-sidebar-element>
@@ -7,8 +7,8 @@
         }
     </div>
     <div class="sidebar__border">
-        <button class="sidebar__border__button" (click)="toggleSidebar()" [ngClass]="isSidebarOpen ? 'sidebar__border__button--open' : 'sidebar__border__button--closed'">
-            {{ isSidebarOpen ? '<' : '>' }}
+        <button class="sidebar__border__button" (click)="toggleSidebar()" [ngClass]="isOpen() ? 'sidebar__border__button--open' : 'sidebar__border__button--closed'">
+            {{ isOpen() ? '<' : '>' }}
         </button>
     </div>
 </div>

@@ -16,7 +16,7 @@ export class ProjectStore {
 
   private api = inject(ProjectApi);
 
-  private readonly state = computed<ProjectsState>(() => ({
+  private readonly _state = computed<ProjectsState>(() => ({
     projects: this.api.projectsResource.hasValue() ? this.api.projectsResource.value() : [
       {
         uuid: "abcde",
@@ -34,9 +34,9 @@ export class ProjectStore {
     error: this.api.projectsResource.error()
   })); 
 
-  readonly projects = computed(() => this.state().projects);
-  readonly loading = computed(() => this.state().loading); 
-  readonly error = computed(() => this.state().error);
+  readonly projects = computed(() => this._state().projects);
+  readonly loading = computed(() => this._state().loading); 
+  readonly error = computed(() => this._state().error);
 
   private readonly _selectedProject = signal<Project | null>(null);
   readonly selectedProject = computed(() => this._selectedProject());
