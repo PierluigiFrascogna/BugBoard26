@@ -29,7 +29,7 @@ public class JwtService {
             .claim("surname", user.getSurname())
             .claim("admin", user.isAdmin())
             .issuedAt(new Date())
-            .expiration(new Date(System.currentTimeMillis() + 3600000)) // 1 ora
+            //.expiration(new Date(System.currentTimeMillis() + 3600000)) // 1 ora
             .signWith(secretKey)
             .compact();
 

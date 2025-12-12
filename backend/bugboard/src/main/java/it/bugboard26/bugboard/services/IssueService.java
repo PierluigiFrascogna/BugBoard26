@@ -1,0 +1,20 @@
+package it.bugboard26.bugboard.services;
+
+import java.util.List;
+import java.util.UUID;
+
+import org.springframework.stereotype.Service;
+
+import it.bugboard26.bugboard.entities.Issue;
+import it.bugboard26.bugboard.repositories.IssueRepository;
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+@Service
+public class IssueService {
+    private IssueRepository issueRepository;
+
+    public List<Issue> getByProjectUuid(UUID projectUuid) {
+        return issueRepository.findByProjectUuid(projectUuid);
+    }
+}

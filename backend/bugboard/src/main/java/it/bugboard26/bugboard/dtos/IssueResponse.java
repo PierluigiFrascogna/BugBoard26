@@ -1,0 +1,40 @@
+package it.bugboard26.bugboard.dtos;
+
+import java.time.LocalDate;
+import java.util.UUID;
+
+import it.bugboard26.bugboard.entities.Issue;
+import it.bugboard26.bugboard.enums.IssueState;
+import it.bugboard26.bugboard.enums.IssueType;
+import it.bugboard26.bugboard.enums.Priority;
+
+import lombok.Getter;
+
+@Getter
+public class IssueResponse {
+    private UUID uuid;
+    private String title;
+    private String description;
+    private LocalDate createdAt;
+    private IssueType type;
+    private Priority priority;
+    private IssueState state;
+    private String imageUrl;
+    private UserResponse author;
+
+
+    public IssueResponse mapToResponse(Issue issue) {
+        IssueResponse response = new IssueResponse();
+        response.uuid = issue.getUuid();
+        response.title = issue.getTitle();
+        response.description = issue.getDescription();
+        response.createdAt = issue.getCreatedAt();
+        response.type = issue.getType();
+        response.priority = issue.getPriority();
+        response.state = issue.getState();
+        response.imageUrl = issue.getImageUrl();
+        response.author = new UserResponse().mapToResponse(issue.getAuthor());
+        return response;
+    }
+
+}
