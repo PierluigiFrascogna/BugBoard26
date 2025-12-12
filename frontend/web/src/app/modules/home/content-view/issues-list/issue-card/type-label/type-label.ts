@@ -8,5 +8,5 @@ import { NgClass } from '@angular/common';
   styleUrl: './type-label.css',
 })
 export class TypeLabel {
-  @Input() type!: "question" | "bug" | "documentation" | "feature";
+  @Input() type!: "question" | "bug" | "documentation" | "feature" | undefined;
 }

@@ -8,5 +8,5 @@ import { Component, Input } from '@angular/core';
   styleUrl: './state-label.css',
 })
 export class StateLabel {
-  @Input() state!: "todo" | "pending" | "done";
+  @Input() state!: "todo" | "pending" | "done" | undefined;
 }

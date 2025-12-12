@@ -1,0 +1,17 @@
+<div class="component">
+    <div class="component__header">
+        <div class="component__header__author">{{ issue()?.author }}</div>
+        <div class="component__header__labels">
+            <app-type-label [type]="issue()?.type"></app-type-label>
+            <app-priority-label [priority]="issue()?.priority"></app-priority-label>
+            <app-state-label [state]="issue()?.state"></app-state-label>
+        </div>
+    </div>
+    <div class="component__body">
+        <div class="component_body_description">{{ issue()?.description }}</div>
+    </div>
+    <div class="component__footer">
+
+    </div>
+</div>
+

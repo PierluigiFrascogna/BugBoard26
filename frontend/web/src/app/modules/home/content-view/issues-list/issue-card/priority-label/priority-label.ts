@@ -8,5 +8,5 @@ import { NgClass } from '@angular/common';
   styleUrl: './priority-label.css',
 })
 export class PriorityLabel {
-  @Input() priority!: "low" | "medium" | "high";
+  @Input() priority!: "low" | "medium" | "high" | undefined;
 }
