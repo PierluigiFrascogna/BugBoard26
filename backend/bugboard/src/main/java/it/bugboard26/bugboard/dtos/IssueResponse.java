@@ -23,7 +23,7 @@ public class IssueResponse {
     private UserResponse author;
 
 
-    public IssueResponse mapToResponse(Issue issue) {
+    public static IssueResponse map(Issue issue) {
         IssueResponse response = new IssueResponse();
         response.uuid = issue.getUuid();
         response.title = issue.getTitle();
@@ -33,7 +33,7 @@ public class IssueResponse {
         response.priority = issue.getPriority();
         response.state = issue.getState();
         response.imageUrl = issue.getImageUrl();
-        response.author = new UserResponse().mapToResponse(issue.getAuthor());
+        response.author = UserResponse.map(issue.getAuthor());
         return response;
     }
 

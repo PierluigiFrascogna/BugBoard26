@@ -14,9 +14,11 @@ public class ProjectResponse {
     private String name;
     private LocalDate createdAt;
 
-    public ProjectResponse(Project project) {
-        this.uuid = project.getUuid();
-        this.name = project.getName();
-        this.createdAt = project.getCreatedAt();
+    public static ProjectResponse map(Project project) {
+        ProjectResponse response = new ProjectResponse();
+        response.uuid = project.getUuid();
+        response.name = project.getName();
+        response.createdAt = project.getCreatedAt();
+        return response;
     }
 }

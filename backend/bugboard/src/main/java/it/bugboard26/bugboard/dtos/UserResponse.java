@@ -11,7 +11,7 @@ public class UserResponse {
     private UUID uuid;
     private Role role;
 
-    public UserResponse mapToResponse(User user) {
+    public static UserResponse map(User user) {
         UserResponse response = new UserResponse();
         response.uuid = user.getUuid();
         response.role = user.getRole();
