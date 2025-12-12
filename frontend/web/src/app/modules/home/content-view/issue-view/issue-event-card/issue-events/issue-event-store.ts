@@ -1,6 +1,8 @@
 import { computed, inject, Injectable } from '@angular/core';
 import { IssueEventApi } from './issue-event-api';
 import { IssueEvent } from './issue-event';
+import { Change } from './change-event/change-card/change/change';
+import { Comment } from './comment-event/comment-card/comment/comment';
 
 export interface IssueEventsState {
   issueEvents: IssueEvent[];
@@ -21,35 +23,36 @@ export class IssueEventStore {
         createdAt: new Date(), 
         type: "COMMENT",
         authorUuid: "user 1",
-      } as IssueEvent,
+        text: "blablablba"
+      } as Comment,
 
       {
         uuid: "comment 2",
         createdAt: new Date(), 
         type: "COMMENT",
         authorUuid: "user 2",
-      } as IssueEvent,
+      } as Comment,
 
       {
         uuid: "change 1",
         createdAt: new Date(), 
         type: "CHANGE",
         authorUuid: "user 1",
-      } as IssueEvent,
+      } as Change,
 
       {
         uuid: "change 2",
         createdAt: new Date(), 
         type: "CHANGE",
         authorUuid: "user 2",
-      } as IssueEvent,
+      } as Change,
 
       {
         uuid: "comment 3",
         createdAt: new Date(), 
         type: "COMMENT",
         authorUuid: "user 3",
-      } as IssueEvent,
+      } as Comment,
 
     ] as IssueEvent[],
     loading: this.api.issueEventsResource.isLoading(),

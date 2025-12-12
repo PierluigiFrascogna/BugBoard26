@@ -1,1 +1,10 @@
-<p>issue-event-card works!</p>
+<div class="component">
+    @switch(issueEvent.type){
+        @case ("COMMENT") {
+            <app-comment-card [comment]="issueEvent"></app-comment-card>
+        }
+        @case ("CHANGE"){
+            <app-change-card [change]="issueEvent"></app-change-card>
+        }
+    }
+</div>

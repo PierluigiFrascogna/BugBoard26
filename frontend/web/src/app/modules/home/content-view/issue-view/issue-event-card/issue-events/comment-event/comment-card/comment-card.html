@@ -1,0 +1,9 @@
+<div class="component">
+    <div class="component__header">
+        <div class="component__header__author">{{ comment.authorUuid }}</div>
+        <div class="component__header__created-at">{{ comment.createdAt | date: 'dd/MM/yyyy' }}</div>
+    </div>
+    <div class="component__body">
+        <div class="component__body__text">{{ comment.text }}</div>
+    </div>
+</div>
