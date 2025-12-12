@@ -1,4 +1,4 @@
-package it.bugboard26.bugboard.controller;
+package it.bugboard26.bugboard.api;
 
 import java.util.UUID;
 
@@ -16,7 +16,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RequestMapping("/auth")
 @RestController
-public class AuthController {
+public class AuthApi {
 
     AuthService authService;
 
