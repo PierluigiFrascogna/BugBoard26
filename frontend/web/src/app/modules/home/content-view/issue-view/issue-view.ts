@@ -6,6 +6,7 @@ import { IssueEventCard } from "./issue-event-card/issue-event-card";
 import { IssueEvent } from './issue-event-card/issue-events/issue-event';
 import { NgClass } from '@angular/common';
 import { IssueCardFull } from "./issue-card-full/issue-card-full";
+import { TIssueEvent } from './issue-event-card/issue-events/issue-event-model';
 
 @Component({
   selector: 'app-issue-view',
@@ -20,8 +21,7 @@ export class IssueView {
   private readonly issueEventStore = inject(IssueEventStore);
 
   readonly title: Signal<string> = computed(() => this.projectStore.name()+this.issueStore.title());
-  readonly issue = computed(() => this.issueStore.selectedIssue());
-  readonly issueEvents: Signal<IssueEvent[]> = computed(() => this.issueEventStore.issueEvents());
+  readonly issueEvents: Signal<TIssueEvent[]> = computed(() => this.issueEventStore.issueEvents());
   readonly isVisible: Signal<boolean> = computed(() => this.issueStore.selectedIssue()!==null);
 
   deselectIssue(){

@@ -1,1 +1,15 @@
-<p>change-card works!</p>
+<div class="component">
+    <div class="component__message">
+        @switch (change.changeType) {
+            @case ("TITLE") {
+                <app-title-change-card [titleChange]="change" ></app-title-change-card>
+            }@case ("DESCRIPTION") {
+                <app-description-change-card [descriptionChange]="change"></app-description-change-card>
+            }@case ("STATE") {
+                <app-state-change-card [stateChange]="change" ></app-state-change-card>
+            }@case ("PRIORITY") {
+                <app-priority-change-card [priorityChange]="change" ></app-priority-change-card>
+            }
+        }
+    </div>
+</div>

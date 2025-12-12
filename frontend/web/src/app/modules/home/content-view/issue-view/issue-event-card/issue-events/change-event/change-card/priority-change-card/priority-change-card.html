@@ -1,0 +1,16 @@
+<div class="component">
+    <div class="component__body">
+        <div class="component__body__change-description">
+            @if(priorityChange.old===undefined){
+                {{ priorityChange.authorUuid }} ha impostato la priorità {{ priorityChange.new }}.
+            }@else if (priorityChange.new===undefined) {
+                {{ priorityChange.authorUuid }} ha rimosso la priorità.
+            }@else{
+                {{ priorityChange.authorUuid }} ha cambiato la priorità da {{ priorityChange.old }} a {{ priorityChange.new }}.
+            }
+        </div>
+        <div class="component__body__created-at">
+            {{ priorityChange.createdAt }}
+        </div>
+    </div>
+</div>

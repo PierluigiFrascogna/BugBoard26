@@ -3,9 +3,12 @@ import { IssueEventApi } from './issue-event-api';
 import { IssueEvent } from './issue-event';
 import { Change } from './change-event/change-card/change/change';
 import { Comment } from './comment-event/comment-card/comment/comment';
+import { TitleChange } from './change-event/change-card/change/title-change';
+import { DescriptionChange } from './change-event/change-card/change/description-change';
+import { TIssueEvent } from './issue-event-model';
 
 export interface IssueEventsState {
-  issueEvents: IssueEvent[];
+  issueEvents: TIssueEvent[];
   loading: boolean;
   error: Error | undefined;
 }
@@ -38,14 +41,20 @@ export class IssueEventStore {
         createdAt: new Date(), 
         type: "CHANGE",
         authorUuid: "user 1",
-      } as Change,
+        changeType: "TITLE",
+        old: "issue1",
+        new: "issue1mlmlmlml"
+      } as TitleChange,
 
       {
         uuid: "change 2",
         createdAt: new Date(), 
         type: "CHANGE",
         authorUuid: "user 2",
-      } as Change,
+        changeType: "DESCRIPTION",
+        old: "mlmlmlmlml",
+        new: "brbrbrbrbrbr"
+      } as DescriptionChange,
 
       {
         uuid: "comment 3",
@@ -54,7 +63,7 @@ export class IssueEventStore {
         authorUuid: "user 3",
       } as Comment,
 
-    ] as IssueEvent[],
+    ] as TIssueEvent[],
     loading: this.api.issueEventsResource.isLoading(),
     error: this.api.issueEventsResource.error()
   })); 

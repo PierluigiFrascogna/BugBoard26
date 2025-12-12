@@ -3,7 +3,7 @@ export interface Issue {
     title: string; 
     description: string; 
     type: "question" | "bug" | "documentation" | "feature";
-    priority: "low" | "medium" | "high"; 
+    priority: "low" | "medium" | "high" | undefined; 
     state: "todo" | "pending" | "done";
     image: string;
     author: string;
