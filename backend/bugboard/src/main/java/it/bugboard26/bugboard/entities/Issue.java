@@ -1,6 +1,7 @@
 package it.bugboard26.bugboard.entities;
 
 import java.time.LocalDate;
+import java.util.Set;
 import java.util.UUID;
 
 import org.hibernate.annotations.JdbcTypeCode;
@@ -19,6 +20,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -69,5 +71,8 @@ public class Issue {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_uuid")
     private Project project;
+
+    @OneToMany(mappedBy = "issue", fetch = FetchType.LAZY)
+    private Set<IssueEvent> events;
 
 }
