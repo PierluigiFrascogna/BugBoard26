@@ -1,4 +1,4 @@
-package it.bugboard26.bugboard.services;
+package it.bugboard26.bugboard.modules.issues;
 
 import java.util.List;
 import java.util.UUID;
@@ -6,7 +6,6 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import it.bugboard26.bugboard.entities.Issue;
-import it.bugboard26.bugboard.repositories.IssueRepository;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

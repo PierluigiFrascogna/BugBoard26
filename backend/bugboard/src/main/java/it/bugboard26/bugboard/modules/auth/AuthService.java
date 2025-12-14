@@ -1,4 +1,4 @@
-package it.bugboard26.bugboard.services;
+package it.bugboard26.bugboard.modules.auth;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
@@ -6,11 +6,10 @@ import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
-import it.bugboard26.bugboard.dtos.RegistrationRequest;
-import it.bugboard26.bugboard.dtos.UserServiceRequest;
 import it.bugboard26.bugboard.entities.User;
 import it.bugboard26.bugboard.enums.Role;
-import it.bugboard26.bugboard.repositories.AuthRepository;
+import it.bugboard26.bugboard.modules.auth.dtos.RegistrationRequest;
+import it.bugboard26.bugboard.modules.auth.dtos.UserServiceRequest;
 
 import org.springframework.http.ResponseEntity; 
 import org.springframework.http.HttpStatus;
@@ -38,6 +37,8 @@ public class AuthService {
     }
 
     //Methods
+
+    // TODO: Refactor this method
     public UUID registerUserViaMicroservice(String authToken, RegistrationRequest frontendRequest) {
     
         // 1. Preparazione del Body

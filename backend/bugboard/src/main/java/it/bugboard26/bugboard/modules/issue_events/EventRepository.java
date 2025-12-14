@@ -1,4 +1,4 @@
-package it.bugboard26.bugboard.repositories;
+package it.bugboard26.bugboard.modules.issue_events;
 
 import java.util.List;
 import java.util.UUID;

@@ -1,4 +1,4 @@
-package it.bugboard26.bugboard.services;
+package it.bugboard26.bugboard.modules.projects;
 
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package it.bugboard26.bugboard.repositories;
+package it.bugboard26.bugboard.modules.auth;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

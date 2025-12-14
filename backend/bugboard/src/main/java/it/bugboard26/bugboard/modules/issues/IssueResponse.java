@@ -1,4 +1,4 @@
-package it.bugboard26.bugboard.dtos;
+package it.bugboard26.bugboard.modules.issues;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -7,7 +7,7 @@ import it.bugboard26.bugboard.entities.Issue;
 import it.bugboard26.bugboard.enums.IssueState;
 import it.bugboard26.bugboard.enums.IssueType;
 import it.bugboard26.bugboard.enums.Priority;
-
+import it.bugboard26.bugboard.modules.auth.dtos.UserResponse;
 import lombok.Getter;
 
 @Getter

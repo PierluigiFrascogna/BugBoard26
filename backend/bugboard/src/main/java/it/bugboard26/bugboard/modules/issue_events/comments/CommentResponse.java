@@ -1,6 +1,8 @@
-package it.bugboard26.bugboard.dtos;
+package it.bugboard26.bugboard.modules.issue_events.comments;
 
 import it.bugboard26.bugboard.entities.Comment;
+import it.bugboard26.bugboard.modules.auth.dtos.UserResponse;
+import it.bugboard26.bugboard.modules.issue_events.IssueEventResponse;
 import lombok.Getter;
 
 @Getter

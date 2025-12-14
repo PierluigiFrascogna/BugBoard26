@@ -1,4 +1,4 @@
-package it.bugboard26.bugboard.services;
+package it.bugboard26.bugboard.modules.auth;
 
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;

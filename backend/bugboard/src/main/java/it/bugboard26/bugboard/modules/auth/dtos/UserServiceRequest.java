@@ -1,4 +1,4 @@
-package it.bugboard26.bugboard.dtos;
+package it.bugboard26.bugboard.modules.auth.dtos;
 
 import lombok.Getter;
 import lombok.Setter;

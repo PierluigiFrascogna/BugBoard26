@@ -1,4 +1,4 @@
-package it.bugboard26.bugboard.api;
+package it.bugboard26.bugboard.modules.auth;
 
 import java.util.UUID;
 
@@ -8,9 +8,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.bugboard26.bugboard.dtos.RegistrationRequest;
 import it.bugboard26.bugboard.entities.User;
-import it.bugboard26.bugboard.services.AuthService;
+import it.bugboard26.bugboard.modules.auth.dtos.RegistrationRequest;
 import lombok.AllArgsConstructor;
     
 @AllArgsConstructor

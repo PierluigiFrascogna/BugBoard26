@@ -7,9 +7,15 @@ spring:
     password: ${DB_PASSWORD}
   jpa:
     show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
 
 server:
   port: 8082
 
+jwt:
+ key: ${JWT_SECRET_KEY}
+
 users-service:
-    url: http://users:8081
+    url: http://localhost:8081

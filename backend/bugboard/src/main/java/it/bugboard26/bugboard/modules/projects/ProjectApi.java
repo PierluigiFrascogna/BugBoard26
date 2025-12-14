@@ -1,4 +1,4 @@
-package it.bugboard26.bugboard.api;
+package it.bugboard26.bugboard.modules.projects;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
@@ -6,18 +6,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import it.bugboard26.bugboard.dtos.IssueEventResponse;
-import it.bugboard26.bugboard.dtos.IssueResponse;
-import it.bugboard26.bugboard.dtos.ProjectResponse;
 import it.bugboard26.bugboard.entities.Issue;
 import it.bugboard26.bugboard.entities.IssueEvent;
 import it.bugboard26.bugboard.entities.Project;
-import it.bugboard26.bugboard.services.EventService;
-import it.bugboard26.bugboard.services.HeaderRequestService;
-import it.bugboard26.bugboard.services.IssueService;
-import it.bugboard26.bugboard.services.JwtService;
-import it.bugboard26.bugboard.services.ProjectService;
-
+import it.bugboard26.bugboard.modules.auth.JwtService;
+import it.bugboard26.bugboard.modules.issue_events.EventService;
+import it.bugboard26.bugboard.modules.issue_events.IssueEventResponse;
+import it.bugboard26.bugboard.modules.issues.IssueResponse;
+import it.bugboard26.bugboard.modules.issues.IssueService;
 import lombok.AllArgsConstructor;
 
 import java.util.ArrayList;
