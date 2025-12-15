@@ -1,0 +1,23 @@
+package it.bugboard26.users.dtos;
+
+import java.util.UUID;
+
+import it.bugboard26.users.entities.User;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter @Setter @ToString
+public class UserResponse {
+    private UUID uuid;
+    private String name;
+    private String surname;
+
+    public static UserResponse map(User user){
+        UserResponse response = new UserResponse();
+        response.uuid = user.getUuid();
+        response.name = user.getName();
+        response.surname = user.getSurname();
+        return response;
+    }
+}

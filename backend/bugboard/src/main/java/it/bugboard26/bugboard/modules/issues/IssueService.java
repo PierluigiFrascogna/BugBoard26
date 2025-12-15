@@ -13,7 +13,7 @@ import lombok.AllArgsConstructor;
 public class IssueService {
     private IssueRepository issueRepository;
 
-    public List<Issue> getByProjectUuid(UUID projectUuid) {
+    public List<Issue> getAllByProjectUuid(UUID projectUuid) {
         return issueRepository.findByProjectUuid(projectUuid);
     }
 }

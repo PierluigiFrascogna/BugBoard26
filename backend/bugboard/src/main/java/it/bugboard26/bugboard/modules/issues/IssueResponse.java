@@ -7,7 +7,7 @@ import it.bugboard26.bugboard.entities.Issue;
 import it.bugboard26.bugboard.enums.IssueState;
 import it.bugboard26.bugboard.enums.IssueType;
 import it.bugboard26.bugboard.enums.Priority;
-import it.bugboard26.bugboard.modules.auth.dtos.UserResponse;
+import it.bugboard26.bugboard.users_micro_service.UserResponse;
 import lombok.Getter;
 
 @Getter
@@ -23,7 +23,7 @@ public class IssueResponse {
     private UserResponse author;
 
 
-    public static IssueResponse map(Issue issue) {
+    public static IssueResponse map(Issue issue, UserResponse author) {
         IssueResponse response = new IssueResponse();
         response.uuid = issue.getUuid();
         response.title = issue.getTitle();
@@ -33,7 +33,7 @@ public class IssueResponse {
         response.priority = issue.getPriority();
         response.state = issue.getState();
         response.imageUrl = issue.getImageUrl();
-        response.author = UserResponse.map(issue.getAuthor());
+        response.author = author;
         return response;
     }
 

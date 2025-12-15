@@ -14,10 +14,15 @@ import it.bugboard26.bugboard.modules.issue_events.EventService;
 import it.bugboard26.bugboard.modules.issue_events.IssueEventResponse;
 import it.bugboard26.bugboard.modules.issues.IssueResponse;
 import it.bugboard26.bugboard.modules.issues.IssueService;
+import it.bugboard26.bugboard.users_micro_service.UserResponse;
+import it.bugboard26.bugboard.users_micro_service.UsersMicroService;
 import lombok.AllArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -25,6 +30,7 @@ import java.util.UUID;
 public class ProjectApi {
     HeaderRequestService headerService;
     JwtService jwtService;
+    UsersMicroService usersMicroService;
     ProjectService projectService;
     IssueService issueService;
     EventService eventService;
@@ -50,11 +56,19 @@ public class ProjectApi {
         if (!headerService.hasAuthorizationHeader()) 
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing or invalid Authorization header");
         
-        List<Issue> issues = issueService.getByProjectUuid(uuid_project);
+        List<Issue> issues = issueService.getAllByProjectUuid(uuid_project);
+        
+        Set<UUID> userIds = new HashSet<>();
+        for (Issue issue : issues) 
+            userIds.add(issue.getAuthor().getUuid());   
+        
+        Map<UUID, UserResponse> authors = usersMicroService.getUsersByIds(userIds);
 
         List<IssueResponse> response = new ArrayList<>();
-        for (Issue issue : issues)
-            response.add(IssueResponse.map(issue));
+        for (Issue issue : issues){
+            UserResponse author = authors.get(issue.getAuthor().getUuid());
+            response.add(IssueResponse.map(issue, author));
+        }
             
         return response;
     }
@@ -66,7 +80,6 @@ public class ProjectApi {
         List<IssueEventResponse> response = new ArrayList<>();
         for (IssueEvent event : events)
             response.add(IssueEventResponse.map(event));
-
         
         return response;
     }
