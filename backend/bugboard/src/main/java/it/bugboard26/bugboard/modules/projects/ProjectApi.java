@@ -58,11 +58,11 @@ public class ProjectApi {
         
         List<Issue> issues = issueService.getAllByProjectUuid(uuid_project);
         
-        Set<UUID> userIds = new HashSet<>();
+        Set<UUID> authorIds = new HashSet<>();
         for (Issue issue : issues) 
-            userIds.add(issue.getAuthor().getUuid());   
+            authorIds.add(issue.getAuthor().getUuid());   
         
-        Map<UUID, UserResponse> authors = usersMicroService.getUsersByIds(userIds);
+        Map<UUID, UserResponse> authors = usersMicroService.getUsersByIds(authorIds);
 
         List<IssueResponse> response = new ArrayList<>();
         for (Issue issue : issues){
@@ -77,9 +77,17 @@ public class ProjectApi {
     public List<IssueEventResponse> getEventsByIssue(@PathVariable UUID uuid_project, @PathVariable UUID uuid_issue) {
         List<IssueEvent> events = eventService.getByIssueUuid(uuid_issue);
 
+        Set<UUID> authorIds = new HashSet<>();
+        for (IssueEvent event : events) 
+            authorIds.add(event.getAuthor().getUuid());
+
+        Map<UUID, UserResponse> authors = usersMicroService.getUsersByIds(authorIds);
+
         List<IssueEventResponse> response = new ArrayList<>();
-        for (IssueEvent event : events)
-            response.add(IssueEventResponse.map(event));
+        for (IssueEvent event : events){
+            UserResponse author = authors.get(event.getAuthor().getUuid());
+            response.add(IssueEventResponse.map(event, author));
+        }
         
         return response;
     }

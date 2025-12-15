@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-
+// TODO: handle errors in case Users Micro-Service is down
 @Service
 public class UsersMicroService {
     private String usersServiceUrl;
