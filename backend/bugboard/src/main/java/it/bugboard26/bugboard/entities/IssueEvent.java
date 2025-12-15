@@ -27,21 +27,21 @@ import lombok.Getter;
 public abstract class IssueEvent {
     @Id
     @Column(name = "uuid")
-    private UUID uuid;
+    protected UUID uuid;
     
     @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    protected LocalDateTime createdAt;
 
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
     @JdbcTypeCode(SqlTypes.NAMED_ENUM)
-    private IssueEventType type;
+    protected IssueEventType type;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "issue_uuid")
-    private Issue issue;
+    protected Issue issue;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_uuid")
-    private User author;
+    protected User author;
 }

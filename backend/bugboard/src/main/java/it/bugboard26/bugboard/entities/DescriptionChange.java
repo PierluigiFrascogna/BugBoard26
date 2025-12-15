@@ -1,6 +1,5 @@
 package it.bugboard26.bugboard.entities;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
@@ -9,9 +8,13 @@ import lombok.Getter;
 
 @Getter
 @PrimaryKeyJoinColumn(name = "uuid")
-@Table(name = "comments")
+@Table(name = "description_changes")
 @Entity
-public class Comment extends IssueEvent {
-    @Column(name = "text")
-    private String text;
+public class DescriptionChange extends Change {
+    @Column(name = "old")
+    private String oldDescription;
+
+    @Column(name = "new")
+    private String newDescription;
+    
 }
