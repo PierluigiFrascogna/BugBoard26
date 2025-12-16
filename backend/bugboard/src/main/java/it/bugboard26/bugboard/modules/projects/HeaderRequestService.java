@@ -1,7 +1,6 @@
 package it.bugboard26.bugboard.modules.projects;
 
 import org.springframework.stereotype.Service;
-
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 
@@ -19,9 +18,9 @@ public class HeaderRequestService {
             return true;
     }
 
-    public String getToken() {
+    public String extractToken() {
         String header = request.getHeader("Authorization");            
-        return header.substring(7); // Rimuove "Bearer " dall'inizio della stringa 
+        return header.substring(7); // Rimuove "Bearer " dall'inizio della stringa         
     }
 
 }

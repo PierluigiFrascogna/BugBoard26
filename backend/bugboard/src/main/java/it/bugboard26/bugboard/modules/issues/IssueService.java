@@ -16,4 +16,8 @@ public class IssueService {
     public List<Issue> getAllByProjectUuid(UUID projectUuid) {
         return issueRepository.findByProjectUuid(projectUuid);
     }
+
+    public Issue save(Issue issue) {
+        return issueRepository.save(issue);
+    }
 }

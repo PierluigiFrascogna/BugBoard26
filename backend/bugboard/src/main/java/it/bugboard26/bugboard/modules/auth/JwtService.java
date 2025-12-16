@@ -9,9 +9,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-
+import it.bugboard26.bugboard.enums.Role;
 
 @Service
 public class JwtService {
@@ -23,21 +24,34 @@ public class JwtService {
         this.secretKey = Keys.hmacShaKeyFor(jwtSecretKey.getBytes(StandardCharsets.UTF_8));
     }
 
-    //Methods
-    public UUID getUUID(String jwtToken) {
-        Claims claims = this.parsePayload(jwtToken);
-        String userUuidString = claims.getSubject();
-        return UUID.fromString(userUuidString);
+    //Methods for extracting info from OUR jwt token
+    public UUID getUUID(Jws<Claims> token) {
+        return UUID.fromString(token.getPayload().getSubject());
     }
 
-    private Claims parsePayload(String jwtToken) {
+    public String getName(Jws<Claims> token) {
+        return token.getPayload().get("name", String.class);
+    }
+
+    public String getSurname(Jws<Claims> token) {
+        return token.getPayload().get("surname", String.class);
+    } 
+
+    public Role getRole(Jws<Claims> token) {
+        return token.getPayload().get("role", Role.class);
+    }
+
+
+    // Methods for generic jwt token
+    public Claims getPayload(Jws<Claims> token) {
+        return token.getPayload();
+    }
+
+    public Jws<Claims> parseToken(String rawToken) {
         return Jwts.parser()
-        .verifyWith(secretKey)
-        .build()
-        .parseSignedClaims(jwtToken)
-        .getPayload();
+                .verifyWith(secretKey)
+                .build()
+                .parseSignedClaims(rawToken);
     }
-
-  
 
 }

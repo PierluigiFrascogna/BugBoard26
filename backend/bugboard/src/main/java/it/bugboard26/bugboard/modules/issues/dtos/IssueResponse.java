@@ -1,4 +1,4 @@
-package it.bugboard26.bugboard.modules.issues;
+package it.bugboard26.bugboard.modules.issues.dtos;
 
 import java.time.LocalDate;
 import java.util.UUID;
