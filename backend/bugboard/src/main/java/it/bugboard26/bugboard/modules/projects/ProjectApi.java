@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import it.bugboard26.bugboard.entities.Comment;
 import it.bugboard26.bugboard.entities.Issue;
 import it.bugboard26.bugboard.entities.IssueEvent;
 import it.bugboard26.bugboard.entities.Project;
@@ -19,6 +20,8 @@ import it.bugboard26.bugboard.enums.Role;
 import it.bugboard26.bugboard.modules.auth.JwtService;
 import it.bugboard26.bugboard.modules.issue_events.EventService;
 import it.bugboard26.bugboard.modules.issue_events.IssueEventResponse;
+import it.bugboard26.bugboard.modules.issue_events.comments.CommentRequest;
+import it.bugboard26.bugboard.modules.issue_events.comments.CommentResponse;
 import it.bugboard26.bugboard.modules.issues.IssueService;
 import it.bugboard26.bugboard.modules.issues.dtos.IssueRequest;
 import it.bugboard26.bugboard.modules.issues.dtos.IssueResponse;
@@ -105,7 +108,6 @@ public class ProjectApi {
         return response;
     }
 
-
     @PostMapping("/projects/{uuid_project}")
     public ResponseEntity<IssueResponse> postNewIssue(@PathVariable UUID uuid_project, @RequestBody IssueRequest issueRequest) {
         if (!headerRequest.hasAuthorizationHeader()) 
@@ -116,15 +118,45 @@ public class ProjectApi {
         if(jwtService.getRole(token) == Role.VIEWER)
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Insufficient permissions");
 
-
         User author = userService.getByUuid(jwtService.getUUID(token));
-        Project project = projectService.getByUuid(uuid_project);
-        Issue newIssue = IssueRequest.mapToEntity(issueRequest, author, project);
-        Issue savedIssue = issueService.save(newIssue);
-
-        UserResponse authorResponse = new UserResponse(jwtService.getUUID(token), jwtService.getName(token), jwtService.getSurname(token));
-        IssueResponse issueResponse = IssueResponse.map(savedIssue, authorResponse);
+        Issue newIssue = issueService.createIssue(issueRequest, uuid_project, author);
+        UserResponse authorResponse = new UserResponse(
+            jwtService.getUUID(token), 
+            jwtService.getName(token),
+            jwtService.getSurname(token)
+        );
+        IssueResponse issueResponse = IssueResponse.map(newIssue, authorResponse);
         return new ResponseEntity<>(issueResponse, HttpStatus.CREATED);
     }
+
+    @PostMapping("/projects/{uuid_project}/{uuid_issue}")
+    public ResponseEntity<CommentResponse> postNewComment(@PathVariable UUID uuid_project, @PathVariable UUID uuid_issue, @RequestBody CommentRequest commentRequest) {
+        if (!headerRequest.hasAuthorizationHeader()) 
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing or invalid Authorization header");
+
+        Jws<Claims> token = jwtService.parseToken(headerRequest.extractToken());
+
+        if(jwtService.getRole(token) == Role.VIEWER)
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Insufficient permissions");
+
+        Issue issue = issueService.getByUuid(uuid_issue);
+        User author = userService.getByUuid(jwtService.getUUID(token));
+        Comment newComment = eventService.saveComment(commentRequest, issue, author);
+        UserResponse authorResponse = new UserResponse(
+            jwtService.getUUID(token), 
+            jwtService.getName(token),
+            jwtService.getSurname(token)
+        );
+        CommentResponse commentResponse = CommentResponse.map(newComment, authorResponse);
+        return new ResponseEntity<>(commentResponse, HttpStatus.CREATED);
+    }
+
+
+    //TODO: aggiungere endpoint per creare dei changes (cambiamento titolo, descrizione, etc...)
+
+    //TODO: aggiungere endpoint per creare progetti (solo admin)
+
+
+    
     
 }

@@ -9,7 +9,7 @@ import lombok.Getter;
 public class CommentResponse extends IssueEventResponse {
     private String text;
 
-    public static IssueEventResponse map(Comment comment, UserResponse author) {
+    public static CommentResponse map(Comment comment, UserResponse author) {
         CommentResponse response = new CommentResponse();
         response.createdAt = comment.getCreatedAt();
         response.type = comment.getType();
