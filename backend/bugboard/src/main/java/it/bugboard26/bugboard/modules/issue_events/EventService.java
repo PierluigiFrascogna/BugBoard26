@@ -29,7 +29,6 @@ public class EventService {
 
     public Comment saveComment(CommentRequest commentRequest, Issue issue, User author) {
         Comment newComment = CommentRequest.mapToEntity(commentRequest, issue, author);
-        commentRepository.save(newComment);
         return eventRepository.save(newComment);
     }
     
