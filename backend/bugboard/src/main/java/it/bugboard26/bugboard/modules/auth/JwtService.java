@@ -12,7 +12,6 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import it.bugboard26.bugboard.enums.Role;
 
 @Service
 public class JwtService {
@@ -35,12 +34,7 @@ public class JwtService {
 
     public String getSurname(Jws<Claims> token) {
         return token.getPayload().get("surname", String.class);
-    } 
-
-    public Role getRole(Jws<Claims> token) {
-        return token.getPayload().get("role", Role.class);
     }
-
 
     // Methods for generic jwt token
     public Claims getPayload(Jws<Claims> token) {

@@ -115,11 +115,11 @@ public class ProjectApi {
 
         Jws<Claims> token = jwtService.parseToken(headerRequest.extractToken());
 
-        if(jwtService.getRole(token) == Role.VIEWER)
+        User user = userService.getByUuid(jwtService.getUUID(token));
+        if (user.getRole() == Role.VIEWER) 
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Insufficient permissions");
 
-        User author = userService.getByUuid(jwtService.getUUID(token));
-        Issue newIssue = issueService.createIssue(issueRequest, uuid_project, author);
+        Issue newIssue = issueService.createIssue(issueRequest, uuid_project, user);
         UserResponse authorResponse = new UserResponse(
             jwtService.getUUID(token), 
             jwtService.getName(token),
@@ -136,12 +136,12 @@ public class ProjectApi {
 
         Jws<Claims> token = jwtService.parseToken(headerRequest.extractToken());
 
-        if(jwtService.getRole(token) == Role.VIEWER)
+        User user = userService.getByUuid(jwtService.getUUID(token));
+        if(user.getRole() == Role.VIEWER)
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Insufficient permissions");
 
         Issue issue = issueService.getByUuid(uuid_issue);
-        User author = userService.getByUuid(jwtService.getUUID(token));
-        Comment newComment = eventService.saveComment(commentRequest, issue, author);
+        Comment newComment = eventService.saveComment(commentRequest, issue, user);
         UserResponse authorResponse = new UserResponse(
             jwtService.getUUID(token), 
             jwtService.getName(token),

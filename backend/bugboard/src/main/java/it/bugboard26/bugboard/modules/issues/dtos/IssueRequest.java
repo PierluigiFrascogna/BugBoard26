@@ -17,7 +17,6 @@ public class IssueRequest {
     private String description;
     private IssueType type;
     private Priority priority;
-    private IssueState state;
     private String imageUrl;
 
 
@@ -28,7 +27,7 @@ public class IssueRequest {
         issue.setCreatedAt(LocalDate.now());
         issue.setType(issueRequest.type);
         issue.setPriority(issueRequest.priority);
-        issue.setState(issueRequest.state);
+        issue.setState(IssueState.TODO);
         issue.setImageUrl(issueRequest.imageUrl);
         issue.setAuthor(author);
         issue.setProject(project);
