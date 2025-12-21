@@ -1,4 +1,4 @@
-package it.bugboard26.bugboard.modules.issue_events.changes;
+package it.bugboard26.bugboard.modules.issue_events.changes.dtos.response;
 
 import it.bugboard26.bugboard.entities.Change;
 import it.bugboard26.bugboard.entities.DescriptionChange;
@@ -8,8 +8,10 @@ import it.bugboard26.bugboard.entities.TitleChange;
 import it.bugboard26.bugboard.enums.ChangeType;
 import it.bugboard26.bugboard.modules.issue_events.IssueEventResponse;
 import it.bugboard26.bugboard.users_micro_service.UserResponse;
+
 import lombok.Getter;
 
+// TODO: implement factory pattern for ChangeResponse subclasses
 @Getter
 public abstract class ChangeResponse extends IssueEventResponse {
     protected ChangeType changeType;

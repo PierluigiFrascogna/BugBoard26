@@ -1,5 +1,6 @@
 package it.bugboard26.bugboard.modules.projects;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,5 +23,12 @@ public class ProjectService {
 
     public List<Project> getByUserUuid(UUID userUuid) {
         return projectRepository.findByUsersUuid(userUuid);
+    }
+
+    public Project createProject(String projectName) {
+        Project project = new Project();
+        project.setName(projectName);
+        project.setCreatedAt(LocalDate.now());
+        return projectRepository.save(project);
     }
 }

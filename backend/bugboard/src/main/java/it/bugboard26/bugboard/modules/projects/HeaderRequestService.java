@@ -10,7 +10,7 @@ public class HeaderRequestService {
 
     private HttpServletRequest request;
 
-    public boolean hasAuthorizationHeader() {
+    public boolean hasAuthorization() {
         String header = request.getHeader("Authorization");
         if(header == null || header.isBlank() || !header.toLowerCase().startsWith("bearer ")) 
             return false;

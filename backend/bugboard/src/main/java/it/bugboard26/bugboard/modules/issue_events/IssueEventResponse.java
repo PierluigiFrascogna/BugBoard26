@@ -6,7 +6,7 @@ import it.bugboard26.bugboard.entities.Change;
 import it.bugboard26.bugboard.entities.Comment;
 import it.bugboard26.bugboard.entities.IssueEvent;
 import it.bugboard26.bugboard.enums.IssueEventType;
-import it.bugboard26.bugboard.modules.issue_events.changes.ChangeResponse;
+import it.bugboard26.bugboard.modules.issue_events.changes.dtos.response.ChangeResponse;
 import it.bugboard26.bugboard.modules.issue_events.comments.CommentResponse;
 import it.bugboard26.bugboard.users_micro_service.UserResponse;
 import lombok.Getter;
@@ -24,7 +24,7 @@ public abstract class IssueEventResponse{
                 return CommentResponse.map((Comment) event, author);
         
             case CHANGE:
-                return ChangeResponse.map((Change) event, author);    // TODO: implement Change Response mapping
+                return ChangeResponse.map((Change) event, author);
 
             default:
                 return null;

@@ -20,20 +20,24 @@ public class IssueService {
     private IssueRepository issueRepository;
     private ProjectRepository projectRepository;
     
-    public Issue createIssue(IssueRequest request, UUID projectUuid, User author) {
-        Project project = projectRepository.findById(projectUuid)
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Project not found"));
-
-        Issue newIssue = IssueRequest.mapToEntity(request, author, project);
-        return issueRepository.save(newIssue);
-}
-
     public Issue getByUuid(UUID issueUuid) {
         return issueRepository.findById(issueUuid).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Issue not found"));
     }
 
     public List<Issue> getAllByProjectUuid(UUID projectUuid) {
         return issueRepository.findByProjectUuid(projectUuid);
+    }
+    
+    public Issue createIssue(IssueRequest request, UUID projectUuid, User author) {
+        Project project = projectRepository.findById(projectUuid)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Project not found"));
+    
+        Issue newIssue = IssueRequest.mapToEntity(request, author, project);
+        return issueRepository.save(newIssue);
+    }
+
+    public Issue save(Issue issue) {
+        return issueRepository.save(issue);
     }
 
 }

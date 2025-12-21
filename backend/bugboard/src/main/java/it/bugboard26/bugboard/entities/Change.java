@@ -5,6 +5,7 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 import it.bugboard26.bugboard.enums.ChangeType;
+import it.bugboard26.bugboard.enums.IssueEventType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -24,5 +25,12 @@ public abstract class Change extends IssueEvent {
     @Enumerated(EnumType.STRING)
     @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     @Column(name = "type")
-    private ChangeType changeType;
+    protected ChangeType changeType;
+
+    public Change() {
+        this.type = IssueEventType.CHANGE;
+    }
+
+    public abstract Issue apply(Issue issue);
+
 }

@@ -9,8 +9,10 @@ import io.jsonwebtoken.Jws;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import it.bugboard26.bugboard.entities.Change;
 import it.bugboard26.bugboard.entities.Comment;
 import it.bugboard26.bugboard.entities.Issue;
 import it.bugboard26.bugboard.entities.IssueEvent;
@@ -20,6 +22,8 @@ import it.bugboard26.bugboard.enums.Role;
 import it.bugboard26.bugboard.modules.auth.JwtService;
 import it.bugboard26.bugboard.modules.issue_events.EventService;
 import it.bugboard26.bugboard.modules.issue_events.IssueEventResponse;
+import it.bugboard26.bugboard.modules.issue_events.changes.dtos.request.ChangeRequest;
+import it.bugboard26.bugboard.modules.issue_events.changes.dtos.response.ChangeResponse;
 import it.bugboard26.bugboard.modules.issue_events.comments.CommentRequest;
 import it.bugboard26.bugboard.modules.issue_events.comments.CommentResponse;
 import it.bugboard26.bugboard.modules.issues.IssueService;
@@ -54,7 +58,7 @@ public class ProjectApi {
 
     @GetMapping("/projects")
     public List<ProjectResponse> getProjectsByUser() {
-        if (!headerRequest.hasAuthorizationHeader()) 
+        if (!headerRequest.hasAuthorization()) 
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing or invalid Authorization header");
 
         Jws<Claims> token = jwtService.parseToken(headerRequest.extractToken());
@@ -69,7 +73,7 @@ public class ProjectApi {
 
     @GetMapping("/projects/{uuid_project}") 
     public List<IssueResponse> getIssuesByProject(@PathVariable UUID uuid_project) {
-        if (!headerRequest.hasAuthorizationHeader()) 
+        if (!headerRequest.hasAuthorization()) 
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing or invalid Authorization header");
         
         List<Issue> issues = issueService.getAllByProjectUuid(uuid_project);
@@ -110,51 +114,77 @@ public class ProjectApi {
 
     @PostMapping("/projects/{uuid_project}")
     public ResponseEntity<IssueResponse> postNewIssue(@PathVariable UUID uuid_project, @RequestBody IssueRequest issueRequest) {
-        if (!headerRequest.hasAuthorizationHeader()) 
+        if (!headerRequest.hasAuthorization()) 
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing or invalid Authorization header");
 
         Jws<Claims> token = jwtService.parseToken(headerRequest.extractToken());
-
         User user = userService.getByUuid(jwtService.getUUID(token));
+
         if (user.getRole() == Role.VIEWER) 
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Insufficient permissions");
 
         Issue newIssue = issueService.createIssue(issueRequest, uuid_project, user);
-        UserResponse authorResponse = new UserResponse(
-            jwtService.getUUID(token), 
-            jwtService.getName(token),
-            jwtService.getSurname(token)
-        );
-        IssueResponse issueResponse = IssueResponse.map(newIssue, authorResponse);
+        UserResponse author = new UserResponse(token);
+        IssueResponse issueResponse = IssueResponse.map(newIssue, author);
         return new ResponseEntity<>(issueResponse, HttpStatus.CREATED);
     }
 
     @PostMapping("/projects/{uuid_project}/{uuid_issue}")
-    public ResponseEntity<CommentResponse> postNewComment(@PathVariable UUID uuid_project, @PathVariable UUID uuid_issue, @RequestBody CommentRequest commentRequest) {
-        if (!headerRequest.hasAuthorizationHeader()) 
+    public ResponseEntity<CommentResponse> postNewComment(@PathVariable UUID uuid_issue, @RequestBody CommentRequest commentRequest) {
+        if (!headerRequest.hasAuthorization()) 
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing or invalid Authorization header");
 
         Jws<Claims> token = jwtService.parseToken(headerRequest.extractToken());
+        UUID uuid_user = UUID.fromString(token.getPayload().getSubject());
+        User user = userService.getByUuid(uuid_user);
 
-        User user = userService.getByUuid(jwtService.getUUID(token));
         if(user.getRole() == Role.VIEWER)
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Insufficient permissions");
 
         Issue issue = issueService.getByUuid(uuid_issue);
         Comment newComment = eventService.saveComment(commentRequest, issue, user);
-        UserResponse authorResponse = new UserResponse(
-            jwtService.getUUID(token), 
-            jwtService.getName(token),
-            jwtService.getSurname(token)
-        );
-        CommentResponse commentResponse = CommentResponse.map(newComment, authorResponse);
+        UserResponse author = new UserResponse(token);
+        CommentResponse commentResponse = CommentResponse.map(newComment, author);
         return new ResponseEntity<>(commentResponse, HttpStatus.CREATED);
     }
 
+    @PatchMapping("/projects/{uuid_project}/{uuid_issue}")
+    public ResponseEntity<ChangeResponse> updateIssue(@PathVariable UUID uuid_issue, @RequestBody ChangeRequest changeRequest) {
+        if (!headerRequest.hasAuthorization()) 
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing or invalid Authorization header");
 
-    //TODO: aggiungere endpoint per creare dei changes (cambiamento titolo, descrizione, etc...)
+        Jws<Claims> token = jwtService.parseToken(headerRequest.extractToken());
+        UUID uuid_user = UUID.fromString(token.getPayload().getSubject());
+        User user = userService.getByUuid(uuid_user);
 
-    //TODO: aggiungere endpoint per creare progetti (solo admin)
+        if(user.getRole() == Role.VIEWER)
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Insufficient permissions");
+
+        Issue issue = issueService.getByUuid(uuid_issue);
+        Change change = eventService.saveChange(changeRequest, issue, user);
+
+        UserResponse author = new UserResponse(token);
+        ChangeResponse responseChange = ChangeResponse.map(change, author);
+        return new ResponseEntity<>(responseChange, HttpStatus.OK);
+    }
+    
+    @PostMapping("/projects")
+    public ResponseEntity<ProjectResponse> createNewProject(@RequestBody Map<String, String> body) {
+        if (!headerRequest.hasAuthorization()) 
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing or invalid Authorization header");
+
+        Jws<Claims> token = jwtService.parseToken(headerRequest.extractToken());
+        User user = userService.getByUuid(jwtService.getUUID(token));
+
+        if(user.getRole() != Role.ADMIN)
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Insufficient permissions");
+
+        String projectName = body.get("name");
+        Project newProject = projectService.createProject(projectName);
+        ProjectResponse projectResponse = ProjectResponse.map(newProject);
+        return new ResponseEntity<>(projectResponse, HttpStatus.CREATED);
+    }
+    
 
 
     

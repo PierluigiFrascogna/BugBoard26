@@ -1,4 +1,4 @@
-package it.bugboard26.bugboard.modules.issue_events.changes;
+package it.bugboard26.bugboard.modules.issue_events.changes.dtos.response;
 
 import it.bugboard26.bugboard.entities.PriorityChange;
 import it.bugboard26.bugboard.enums.Priority;
