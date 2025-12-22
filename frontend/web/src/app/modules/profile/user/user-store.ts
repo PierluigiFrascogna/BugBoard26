@@ -13,6 +13,8 @@ export class UserStore {
   readonly uuid: Signal<string | null> = computed(() => this.auth.uuid());
   readonly name: Signal<string | null>  = computed(() => this.auth.name());
   readonly surname: Signal<string | null>  = computed(() => this.auth.surname());
+  readonly email: Signal<string | null> = computed(() => this.auth.email())
+  readonly password: Signal<string | null> = computed(() => this.auth.password())
   readonly role: Signal<string | null> = computed(() => this.auth.role());
 
   private readonly isValid: Signal<boolean> = computed(() => {
@@ -20,6 +22,8 @@ export class UserStore {
       this.uuid(),
       this.name(),
       this.surname(),
+      this.email(),
+      this.password(),
       this.role()
     ].every((e) => e !== null);
   });
@@ -33,6 +37,8 @@ export class UserStore {
       uuid: this.uuid()!,
       name: this.name()!,
       surname: this.surname()!,
+      email: this.email()!,
+      password: this.password()!,
       role: this.role()!
     }
   });

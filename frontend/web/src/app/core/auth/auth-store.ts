@@ -15,6 +15,8 @@ export class AuthStore {
   readonly uuid: Signal<string | null> = computed(() => this.jwt()?.payload().sub || null);
   readonly name: Signal<string | null> = computed(() => this.jwt()?.payload().name || null);
   readonly surname: Signal<string | null> = computed(() => this.jwt()?.payload().surname || null);
+  readonly email: Signal<string | null> = computed(() => this.jwt()?.payload().email || null);
+  readonly password: Signal<string | null> = computed(() => this.jwt()?.payload().password || null);
   readonly role: Signal<string | null> = computed(() => this.jwt()?.payload().role || null);
 
   readonly isAuthenticated: Signal<boolean> = computed(() => this.jwt() !== null);
