@@ -1,0 +1,39 @@
+.profile-view{
+    width: fit-content;
+    height: fit-content;
+
+    padding: 10px;
+
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+}
+
+.profile-view__header{
+    color: whitesmoke;
+}
+
+.field input{
+    background-color: black;
+    color: whitesmoke;
+    border-radius: 10px;
+}
+
+.field input:focus{
+    outline: none;
+    box-shadow: 0 0 10px #FF6971;
+}
+
+.footer__button{
+
+    border-radius: 10px;
+    background-color: black;
+    color: whitesmoke;
+    cursor: pointer;
+}
+
+.footer__button--hidden{
+    visibility: hidden;
+    pointer-events: none;
+    cursor: default;
+}
