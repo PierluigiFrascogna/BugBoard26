@@ -7,10 +7,11 @@ import { IssueEvent } from './issue-event-card/issue-events/issue-event';
 import { NgClass } from '@angular/common';
 import { IssueCardFull } from "./issue-card-full/issue-card-full";
 import { TIssueEvent } from './issue-event-card/issue-events/issue-event-model';
+import { AddIssueEventCard } from "./add-issue-event-card/add-issue-event-card";
 
 @Component({
   selector: 'app-issue-view',
-  imports: [IssueEventCard, NgClass, IssueCardFull],
+  imports: [IssueEventCard, NgClass, IssueCardFull, AddIssueEventCard],
   templateUrl: './issue-view.html',
   styleUrl: './issue-view.css',
 })
