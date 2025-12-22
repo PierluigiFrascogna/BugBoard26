@@ -1,0 +1,10 @@
+<div class="component">
+    <div class="component__header">
+        <button class="button" (click)="showAddCommentCard()">commenta</button>
+        <button class="button" (click)="showAddChangeCard()">modifica issue</button>
+    </div>
+    <div class="component__body">
+        <app-add-comment-card [currentVisibleCard]="visibleCard"></app-add-comment-card>
+        <app-add-change-card [currentVisibleCard]="visibleCard"></app-add-change-card>
+    </div>
+</div>

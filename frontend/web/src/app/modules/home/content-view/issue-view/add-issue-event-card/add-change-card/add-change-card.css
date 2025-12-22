@@ -1,0 +1,10 @@
+.component{
+    width: 100%;
+    height: fit-content;
+
+    padding: 10px;
+}
+
+.component--hidden{
+    display: none;
+}
