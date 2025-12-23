@@ -11,13 +11,17 @@ export class AuthStore {
   private readonly authApi = inject(AuthApi);
 
   private readonly jwt: WritableSignal<Jwt | null> = signal(null);
-  
+
+  readonly JWT: Signal<Jwt | null> = computed(() => this.jwt());
+
+  // TODO: spostare tutte queste informazioni nello user-store
   readonly uuid: Signal<string | null> = computed(() => this.jwt()?.payload().sub || null);
   readonly name: Signal<string | null> = computed(() => this.jwt()?.payload().name || null);
   readonly surname: Signal<string | null> = computed(() => this.jwt()?.payload().surname || null);
   readonly email: Signal<string | null> = computed(() => this.jwt()?.payload().email || null);
   readonly password: Signal<string | null> = computed(() => this.jwt()?.payload().password || null);
   readonly role: Signal<string | null> = computed(() => this.jwt()?.payload().role || null);
+  // fino a qui
 
   readonly isAuthenticated: Signal<boolean> = computed(() => this.jwt() !== null);
 
