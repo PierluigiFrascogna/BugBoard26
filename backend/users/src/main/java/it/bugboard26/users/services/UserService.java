@@ -3,7 +3,6 @@ package it.bugboard26.users.services;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -22,12 +21,16 @@ import it.bugboard26.users.repositories.UserRepository;
 public class UserService {
     private final UserRepository userRepository;
 
-    public void save(User user) {
-        userRepository.save(user);
+    public User save(User user) {
+        return userRepository.save(user);
     }
 
-    public Optional<User> findByEmail(String email) {
-        return userRepository.findByEmail(email);
+    public User findByUuid(UUID uuid) {
+        return userRepository.findById(uuid).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+    }
+
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
     }
 
     public boolean existsByEmail(String email) {
@@ -35,8 +38,7 @@ public class UserService {
     }
 
     public User verifyUser(String email, String rawPassword) {
-        User user = userRepository.findByEmail(email).orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials"));
-
+        User user = this.findByEmail(email);
         if(!BCrypt.checkpw(rawPassword, user.getPasswordHash())) 
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials");
 

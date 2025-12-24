@@ -8,6 +8,8 @@ import javax.crypto.SecretKey;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import it.bugboard26.users.entities.User;
@@ -37,16 +39,14 @@ public class JwtService {
     }
 
     public boolean validateAdmin(String token) {
-        try {
-            return Jwts.parser()
-                .verifyWith(secretKey)
-                .build()
-                .parseSignedClaims(token)
-                .getPayload()
-                .get("admin", Boolean.class);
-        } catch (Exception e) {
-            return false;
-        }
+        return parseToken(token).getPayload().get("admin", Boolean.class);
+    }
+
+    public Jws<Claims> parseToken(String token) {
+        return Jwts.parser()
+            .verifyWith(secretKey)
+            .build()
+            .parseSignedClaims(token);
     }
 
 }
