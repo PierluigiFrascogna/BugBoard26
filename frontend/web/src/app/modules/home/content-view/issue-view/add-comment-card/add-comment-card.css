@@ -1,18 +1,13 @@
 .component{
+    width: 100%;
     height: fit-content;
     
     flex: 1;
+    padding: 10px;
 
     background-color: rgba(0, 0, 0, 0.7);
     border-radius: 10px;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
-}
-
-.component__header{
-    padding: 10px;
-    
-    display: flex;
-    flex-direction: row;
 }
 
 .component__body{
@@ -24,9 +19,22 @@
     flex-direction: row;
 }
 
-.button{
-    
+.component__footer{
+    display: flex;
+    flex-direction: row;
+
+    margin-left: auto;
+}
+
+.comment-input{
+    border-radius: 10px;
     background-color: black;
     color: whitesmoke;
-    border-radius: 10px;
 }
+
+.comment-button{
+    border-radius: 10px;
+    background-color: black;
+    color: whitesmoke;
+}
+

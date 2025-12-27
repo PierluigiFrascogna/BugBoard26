@@ -48,7 +48,8 @@ export class ProfileView {
 
     this.user = { ...this.user, ...payload };
     this.isEditing.set(false);
-    console.log(`you would have sent the following changes: `,payload)
+    console.log(`you would have sent the following changes: `,{...payload})
+    //TODO: aggiungere l'effettiva logica per l'inivio della chiamata API
   }
 
   getChangedValues(){
