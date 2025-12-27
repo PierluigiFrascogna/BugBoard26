@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NgClass } from '@angular/common';
+import { IssueType } from '../issue/issue';
 
 @Component({
   selector: 'app-type-label',
@@ -8,5 +9,5 @@ import { NgClass } from '@angular/common';
   styleUrl: './type-label.css',
 })
 export class TypeLabel {
-  @Input() type!: "question" | "bug" | "documentation" | "feature" | undefined;
+  @Input() type!: IssueType | undefined;
 }

@@ -1,5 +1,6 @@
 import { NgClass } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { IssueState } from '../issue/issue';
 
 @Component({
   selector: 'app-state-label',
@@ -8,5 +9,5 @@ import { Component, Input } from '@angular/core';
   styleUrl: './state-label.css',
 })
 export class StateLabel {
-  @Input() state!: "todo" | "pending" | "done" | undefined;
+  @Input() state!: IssueState | undefined;
 }
