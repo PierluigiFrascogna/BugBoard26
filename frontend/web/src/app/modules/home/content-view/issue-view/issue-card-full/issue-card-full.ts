@@ -1,14 +1,15 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { ReactiveFormsModule, FormControl, FormGroup, Validators, ɵInternalFormsSharedModule } from '@angular/forms';
+import { ReactiveFormsModule, FormControl, FormGroup, Validators,} from '@angular/forms';
 import { IssueStore } from '../../issues-list/issue-card/issue/issue-store';
 import { TypeLabel } from "../../issues-list/issue-card/type-label/type-label";
 import { PriorityLabel } from "../../issues-list/issue-card/priority-label/priority-label";
 import { StateLabel } from "../../issues-list/issue-card/state-label/state-label";
 import { NgClass } from "@angular/common";
+import { IssuePriority, IssueState } from '../../issues-list/issue-card/issue/issue';
 
 @Component({
   selector: 'app-issue-card-full',
-  imports: [TypeLabel, PriorityLabel, StateLabel, ɵInternalFormsSharedModule, NgClass, ReactiveFormsModule],
+  imports: [TypeLabel, PriorityLabel, StateLabel, NgClass, ReactiveFormsModule],
   templateUrl: './issue-card-full.html',
   styleUrl: './issue-card-full.css',
 })
@@ -20,8 +21,8 @@ export class IssueCardFull {
   issueForm = new FormGroup({
     title: new FormControl('', [Validators.minLength(2)]),
     description: new FormControl('', [Validators.minLength(2)]),
-    state: new FormControl(),
-    priority: new FormControl()
+    state: new FormControl('', [Validators.minLength(6)]),
+    priority: new FormControl('', [Validators.minLength(6)])
   })
   
   deactivateEditMode() {
@@ -29,12 +30,18 @@ export class IssueCardFull {
   }
   
   activateEditMode() {
-    this.issueForm.reset({
-      title: this.issue()?.title,
-      description: this.issue()?.description,
-      state: this.issue()?.state,
-      priority: (this.issue()?.priority===undefined) ? "nessuna" : this.issue()?.priority,
+    const issue = this.issue();
+
+    if (!issue) return;
+
+    this.issueForm.setValue({
+      title: issue.title,
+      description: issue.description,
+      state: issue.state,
+      priority: issue.priority ?? null
     });
+
+    this.issueForm.markAsPristine();
     this.isEditing.set(true);
   }
   

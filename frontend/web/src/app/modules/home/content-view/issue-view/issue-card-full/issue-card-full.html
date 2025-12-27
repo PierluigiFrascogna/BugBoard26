@@ -9,17 +9,17 @@
                 <app-type-label [type]="issue()?.type"></app-type-label>
                 @if (!isEditing()) {<app-priority-label [priority]="issue()?.priority"></app-priority-label>}
                 @else{<select formControlName="priority" class="input">
-                        <option value="low">low</option>
-                        <option value="medium">medium</option>
-                        <option value="high">high</option>
-                        <option value="undefined">nessuna</option>
+                        <option [ngValue]="'low'">low</option>
+                        <option [ngValue]="'medium'">medium</option>
+                        <option [ngValue]="'high'">high</option>
+                        <option [ngValue]="null">nessuna</option>
                     </select>
                 }
                 @if (!isEditing()) {<app-state-label [state]="issue()?.state"></app-state-label>}
                 @else {<select formControlName="state" class="input">
-                        <option value="todo">todo</option>
-                        <option value="pending">pending</option>
-                        <option value="done">done</option>
+                        <option [ngValue]="'todo'">todo</option>
+                        <option [ngValue]="'pending'">pending</option>
+                        <option [ngValue]="'done'">done</option>
                     </select>
                 }
             </div>
@@ -37,4 +37,3 @@
         </div>
     </form>
 </div>
-
