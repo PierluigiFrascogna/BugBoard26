@@ -1,3 +1,9 @@
+.input{
+    background-color: black;
+    color: whitesmoke;
+    outline: none;
+}
+
 .component{
     height: fit-content;
 
@@ -26,4 +32,24 @@
     align-items: center;
     gap: 10px;
     margin-left: auto;
+}
+
+.component__body{
+    margin-bottom: 10px;
+}
+
+.footer__button{
+    width: fit-content;
+    height: fit-content;
+
+    border-radius: 10px;
+    background-color: black;
+    color: whitesmoke;
+    cursor: pointer;
+}
+
+.footer__button--hidden{
+    visibility: hidden;
+    pointer-events: none;
+    cursor: default;
 }

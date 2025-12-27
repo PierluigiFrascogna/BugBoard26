@@ -1,17 +1,40 @@
 <div class="component">
-    <div class="component__header">
-        <div class="component__header__author">{{ issue()?.author }}</div>
-        <div class="component__header__labels">
-            <app-type-label [type]="issue()?.type"></app-type-label>
-            <app-priority-label [priority]="issue()?.priority"></app-priority-label>
-            <app-state-label [state]="issue()?.state"></app-state-label>
+    <form id="issueForm" [formGroup]="issueForm" (submit)="sendChanges()">
+        <div class="component__header">
+            <div class="component__header__author">
+                @if(!isEditing()){{{ issue()?.author }}}
+                @else{<input type="text" formControlName="title" class="input">}    
+            </div>
+            <div class="component__header__labels">
+                <app-type-label [type]="issue()?.type"></app-type-label>
+                @if (!isEditing()) {<app-priority-label [priority]="issue()?.priority"></app-priority-label>}
+                @else{<select formControlName="priority" class="input">
+                        <option value="low">low</option>
+                        <option value="medium">medium</option>
+                        <option value="high">high</option>
+                        <option value="undefined">nessuna</option>
+                    </select>
+                }
+                @if (!isEditing()) {<app-state-label [state]="issue()?.state"></app-state-label>}
+                @else {<select formControlName="state" class="input">
+                        <option value="todo">todo</option>
+                        <option value="pending">pending</option>
+                        <option value="done">done</option>
+                    </select>
+                }
+            </div>
         </div>
-    </div>
-    <div class="component__body">
-        <div class="component_body_description">{{ issue()?.description }}</div>
-    </div>
-    <div class="component__footer">
-
-    </div>
+        <div class="component__body">
+            <div class="component_body_description">
+                @if (!isEditing()) {{{ issue()?.description }}}
+                @else {<input type="text" formControlName="description" class="input">}
+            </div>
+        </div>
+        <div class="component__footer"> 
+            <button class="footer__button" [ngClass]="isEditing() ? '' : 'footer__button--hidden'" (click)="deactivateEditMode()">Annulla</button>
+            <button class="footer__button" [ngClass]="!isEditing() ? '' : 'footer__button--hidden'" (click)="activateEditMode()">Modifica</button>
+            <button type="submit" class="footer__button" [ngClass]="isEditing() ? '' : 'footer__button--hidden'">Conferma</button>
+        </div>
+    </form>
 </div>
 
