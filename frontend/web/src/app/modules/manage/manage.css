@@ -1,0 +1,25 @@
+.manage-page{
+    height: 100%;
+    width: 100%;
+}
+
+.manage-page__body{
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.body__new-user-area{
+    width: 50%;
+
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.body__user-list-area{
+    width: 50%;
+}
+
+
