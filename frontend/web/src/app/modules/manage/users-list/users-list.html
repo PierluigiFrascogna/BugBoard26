@@ -1,0 +1,10 @@
+<div class="user-list-component">
+    <div class="component__header">
+        gestisci le utenze della piattaforma
+    </div>
+    <div class="component__body">
+        @for (user of users; track $index) {
+            <app-user-card [user]="user"></app-user-card>
+        }
+    </div>
+</div>
