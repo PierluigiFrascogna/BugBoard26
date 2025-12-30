@@ -1,5 +1,5 @@
 .sidebar{
-    width: 200px;
+    width: 12vw;
     height: 100%;
 
     display: flex;
@@ -13,11 +13,11 @@
 }
 
 .sidebar--open{
-    width: 200px;
+    width: 12vw;
 }
 
 .sidebar--closed{
-    width: 0px;
+    width: 0vw;
 }
 
 .sidebar__content{
@@ -32,7 +32,7 @@
 }
 
 .sidebar__border{
-    width: 0px;
+    width: 0vw;
     height: 100%;
 
     display: flex;
