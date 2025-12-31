@@ -11,4 +11,9 @@ import { ContentView } from "./content-view/content-view";
   styleUrl: './home.css',
 })
 export class Home {
+  isSidebarOpen=true;
+
+  onSidebarToggle(open:boolean){
+    this.isSidebarOpen=open;
+  }
 }

@@ -1,15 +1,33 @@
-.home{
-    width: 100vw;
+:host{
+    display: block;
     height: 100vh;
+    overflow: hidden;
+}
 
-    display: flex;
-    flex-direction: column;
+.home{
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100%;
 }
 
 .main-view{
-    height: 100vh;
-    width: 100vw;
+    --sidebar-width: 200px;
+
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+
+    display: grid;
+    grid-template-columns: var(--sidebar-width) 1fr;
     
-    display: flex;
-    flex-direction: row;
+    transition: grid-template-columns 0.3 ease;
+}
+
+.main-view.closed{
+    --sidebar-width: 0px;
+}
+
+app-sidebar, app-content-view{
+    height: 100%;
+    min-height: 0%;
 }

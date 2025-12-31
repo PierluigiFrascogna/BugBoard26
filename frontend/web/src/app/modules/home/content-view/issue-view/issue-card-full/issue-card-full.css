@@ -1,14 +1,14 @@
-.input{
-    background-color: black;
-    color: whitesmoke;
-    outline: none;
+:host{
+    display: block;
+    height: fit-content;
+    min-height: 0;
 }
 
 .component{
+    width: 100%;
     height: fit-content;
 
     padding: 10px;
-    flex: 1;
 
     background-color: rgba(0, 0, 0, 0.7);
     border-radius: 10px;
@@ -52,4 +52,10 @@
     visibility: hidden;
     pointer-events: none;
     cursor: default;
+}
+
+.input{
+    background-color: black;
+    color: whitesmoke;
+    outline: none;
 }

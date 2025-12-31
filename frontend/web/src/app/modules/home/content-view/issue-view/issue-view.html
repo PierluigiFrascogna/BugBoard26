@@ -3,17 +3,13 @@
         <div class="component__header__title" (click)="deselectIssue()"> {{ title() }}</div>    
     </div>
     <div class="component__body">
-        <div class="component__body__issue">
-            <app-issue-card-full></app-issue-card-full>
-        </div>
+        <app-issue-card-full></app-issue-card-full>
         <div class="component__body__issue-events">
             @for (issueEvent of issueEvents(); track $index) {
                 <app-issue-event-card [issueEvent]="issueEvent"></app-issue-event-card>
             }
         </div>
-        <div class="component__body__add-comment">
-            <app-add-comment-card></app-add-comment-card>
-        </div>
+        <app-add-comment-card></app-add-comment-card>
     </div>
 </div>
 

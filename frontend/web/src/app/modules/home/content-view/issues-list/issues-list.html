@@ -1,8 +1,8 @@
-<div class="component" [ngClass]="isVisible() ? '' : 'component--hidden' ">
+<div class="issues-list-component" [ngClass]="isVisible() ? '' : 'issues-list-component--hidden' ">
     <div class="component__header">
-        <div class="component__header__title" [ngClass]=" isTitleVisible() ? 'component__header__title--visible' : 'component__header__title--component__header__title--hidden' "> {{ title() }}</div>    
+        <div class="header__title" [ngClass]=" isTitleVisible() ? 'header__title--visible' : 'header__title--hidden' "> {{ title() }}</div>    
     </div>
-    <div class="component__content">
+    <div class="component__body">
         @for (issue of issues(); track $index) {
             <app-issue-card [issue]="issue"></app-issue-card>  
         }@empty {

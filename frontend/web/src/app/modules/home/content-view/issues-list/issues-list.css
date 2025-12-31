@@ -1,21 +1,22 @@
-.component{
-    width: 100%;
+:host{
+    display: block;
     height: 100%;
-    
-    padding-left: 20px; 
+    min-height: 0;
 }
 
-.component--hidden{
+.issues-list-component{
+    height: 100%;
+    min-height: 0;
+}
+
+.issues-list-component--hidden{
     display: none; 
 }
 
 .component__header{
     width: fit-content;
     height: fit-content;
-
-    margin-top: 20px;
-    margin-bottom: 20px;
-
+    
     background-color: rgb(0, 0, 0, 0.7);
     font-weight: 900;
     font-size: 40px;
@@ -23,6 +24,27 @@
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.7);
 }
 
-.component__header__title--visible{
+.header__title--visible{
     padding: 10px;
+}
+
+.header__title--hidden{
+    display: none;
+}
+
+.component__body{
+    height: 100%;
+    min-height: 0;
+
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    
+    gap: 10px;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow-x: hidden;
+    overflow-y: auto;
 }
