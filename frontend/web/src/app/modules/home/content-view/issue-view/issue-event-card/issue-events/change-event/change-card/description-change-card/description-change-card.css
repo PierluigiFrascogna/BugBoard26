@@ -1,0 +1,41 @@
+.description-change-card-component{
+    width: 100%;
+    height: fit-content;
+
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    gap: 10px;
+}
+
+.component__body{
+    width: fit-content;
+    height: fit-content;
+
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+
+.change-logo{
+    width: fit-content;
+    height: 100%;
+
+    background: linear-gradient(90deg, #845EC2, #FF6971, #F9F871);
+    border-radius: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: black;
+
+    font-weight: bold;
+    align-content: center;
+    justify-content: center;
+}
+
+.body__change-description{
+    width: 100%;
+    height: fit-content;
+}
+
+.body__change-date{
+    width: 100%;
+    height: fit-content;
+}
