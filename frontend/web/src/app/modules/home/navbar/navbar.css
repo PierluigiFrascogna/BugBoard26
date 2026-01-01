@@ -2,9 +2,8 @@
     height: 60px;
     width: 100vw;
 
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    display: grid;
+    grid-template-columns: auto auto 1fr auto;
 
     border-bottom: 3px solid #845EC2;
     background-color: rgb(0, 0, 0, 0.7);
@@ -21,6 +20,7 @@
     color: black;
     border-radius: 10px;
     text-decoration: none;
+    font-weight: bold;
 }
 
 .navbar__button:hover{
