@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { User } from '../../../profile/user/user';
+import { RoleLabel } from "./role-label/role-label";
 
 @Component({
   selector: 'app-user-card',
-  imports: [],
+  imports: [RoleLabel],
   templateUrl: './user-card.html',
   styleUrl: './user-card.css',
 })

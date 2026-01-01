@@ -1,0 +1,35 @@
+.component__header{
+    width: 100%;
+    height: fit-content;
+
+    padding: 10px;
+    margin-bottom: 30px;
+
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: whitesmoke;
+
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+}
+
+.users-list-component{
+    width: 30vw;
+    height: 70vh;
+
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+
+.component__body{
+    width: 100%;
+    height: fit-content;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+}

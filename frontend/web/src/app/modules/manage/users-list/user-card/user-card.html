@@ -1,12 +1,16 @@
 <div class="user-card-component">
     <div class="component__body">
-        <span class="body__anagrafic_info">
-            {{ user.name }} {{ user.surname }}
-        </span>
-        <span class="body__role-info"> {{ user.role }}</span>
-        <div class="body__mailing-info"> {{ user.email }}</div>
-    </div>
-    <div class="component__footer">
-        <button class="footer__delete-user-button">Elimina utente</button>
+        <div class="body__left">
+            <app-role-label [role]="user.role"></app-role-label>
+            <div></div>
+            <div class="left__anagrafic-info">
+                {{ user.name }} {{ user.surname }}
+            </div>
+            <div class="left__mailing-info"> {{ user.email }}</div>
+        </div>
+        <div></div>
+        <div class="body__right">
+            <button class="right__button">Elimina utente</button>
+        </div>
     </div>
 </div>
