@@ -31,6 +31,7 @@
             </div>
         </div>
         <div class="component__footer"> 
+            <div></div>
             <button class="footer__button" [ngClass]="isEditing() ? '' : 'footer__button--hidden'" (click)="deactivateEditMode()">Annulla</button>
             <button class="footer__button" [ngClass]="!isEditing() ? '' : 'footer__button--hidden'" (click)="activateEditMode()">Modifica</button>
             <button type="submit" class="footer__button" [ngClass]="isEditing() ? '' : 'footer__button--hidden'">Conferma</button>

@@ -1,22 +1,69 @@
+.profile-view__header{
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: whitesmoke;
+
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+
+    margin-bottom: 30px;
+}
+
 .profile-view{
-    width: fit-content;
-    height: fit-content;
+    width: 30vw;
+    height: 50vh;
 
     padding: 10px;
 
     background-color: rgba(0, 0, 0, 0.7);
     border-radius: 10px;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+
+    display: grid;
+    grid-template-rows: 1fr auto;
 }
 
-.profile-view__header{
-    color: whitesmoke;
+.profile-view__body{
+    width: 100%;
+    height: 100%;
 }
 
-.field input{
+.body__form{
+    width: 100%;
+    height: 100%;
+
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.form__field{
+    width: 100%;
+    height: fit-content;
+
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    justify-content: center;
+    align-content: center;
+}
+
+.form__field label{
+    font-size: 1.5rem;
+    align-content: center ;
+}
+
+.form__field span{
+    align-content: center;
+}
+
+.form__field input{
     background-color: black;
-    color: whitesmoke;
+    border: 2px solid #FF6971;
     border-radius: 10px;
+    padding: 10px;
+    font-size: 1rem;
+    color: whitesmoke;
 }
 
 .field input:focus{
@@ -24,12 +71,31 @@
     box-shadow: 0 0 10px #FF6971;
 }
 
-.footer__button{
+.profile-view__footer{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
 
+    justify-items: center;
+}
+
+.footer__button{
+    width: fit-content;
+    height: fit-content;
+
+    padding: 10px;
+    border: none;
     border-radius: 10px;
-    background-color: black;
-    color: whitesmoke;
+    background: linear-gradient(90deg, #845EC2, #FF6971, #F9F871);
+    font-size: 1rem;
     cursor: pointer;
+    color: black;
+    font-weight: bold;
+    transition: font-size 0.2s ease;
+}
+
+.footer__button:hover{
+    font-size: 1.1rem;
+    box-shadow: 0 0 10px #FF6971;
 }
 
 .footer__button--hidden{

@@ -1,30 +1,31 @@
+<div class="profile-view__header">
+    Il tuo profilo utente
+</div>
+
 <div class="profile-view">
-    <div class="profile-view__header">
-        Il tuo profilo utente
-    </div>
     <div class="profile-view__body">
-        <form id="profileForm" [formGroup]="profileForm" (submit)="sendChanges()">
-            <div class="field">
+        <form id="profileForm" class="body__form" [formGroup]="profileForm" (submit)="sendChanges()">
+            <div class="form__field">
                 <label for="name">Nome: </label>
                 @if (!isEditing()){<span>{{ user.name }}</span>}
                 @else {<input type="text" formControlName="name">}
             </div>
-            <div class="field">
+            <div class="form__field">
                 <label for="surname">Cognome: </label>
                 @if (!isEditing()){<span>{{ user.surname }}</span>}
                 @else {<input type="text" formControlName="surname">}
             </div>
-            <div class="field">
+            <div class="form__field">
                 <label for="email">Email: </label>
                 @if (!isEditing()){<span>{{ user.email }}</span>}
                 @else {<input type="email" formControlName="email">}
             </div>
-            <div class="field">
+            <div class="form__field">
                 <label for="password">Password: </label>
                 @if (!isEditing()){<span>{{ user.password }}</span>}
                 @else {<input type="password" formControlName="password">}
             </div>
-            <div class="field">
+            <div class="form__field">
                 <label for="role">Ruolo: </label>
                 <span>{{ user.role }}</span>
             </div>

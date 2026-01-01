@@ -38,6 +38,14 @@
     margin-bottom: 10px;
 }
 
+.component__footer{
+    width: 100%;
+    height: fit-content;
+
+    display: grid;
+    grid-template-columns: 1fr auto auto auto;
+}
+
 .footer__button{
     width: fit-content;
     height: fit-content;
