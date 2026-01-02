@@ -16,14 +16,15 @@ import it.bugboard26.users.entities.User;
 
 @Service
 public class JwtService {
-
+    // Attribute
     private SecretKey secretKey;
 
+    // Constructor
     public JwtService(@Value("${jwt.key}") String jwtSecretKey) {
         this.secretKey = Keys.hmacShaKeyFor(jwtSecretKey.getBytes(StandardCharsets.UTF_8));
     }
 
-
+    // Methods
     public String generateJwt(User user) {
         String jwt = Jwts.builder()
             .subject(user.getUuid().toString())
@@ -36,10 +37,6 @@ public class JwtService {
             .compact();
 
         return jwt;
-    }
-
-    public boolean validateAdmin(String token) {
-        return parseToken(token).getPayload().get("admin", Boolean.class);
     }
 
     public Jws<Claims> parseToken(String token) {

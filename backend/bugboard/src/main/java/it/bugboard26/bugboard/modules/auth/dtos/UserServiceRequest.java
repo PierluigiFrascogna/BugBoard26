@@ -1,5 +1,6 @@
 package it.bugboard26.bugboard.modules.auth.dtos;
 
+import it.bugboard26.bugboard.enums.Role;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,4 +12,12 @@ public class UserServiceRequest {
     private String email;
     private String password;
     private boolean isAdmin; 
+
+    public UserServiceRequest(RegistrationRequest frontendRequest) {
+        this.name = frontendRequest.getName();
+        this.surname = frontendRequest.getSurname();
+        this.email = frontendRequest.getEmail();
+        this.password = frontendRequest.getPassword();
+        this.isAdmin = (frontendRequest.getRole() == Role.ADMIN) ? true : false; 
+    }
 }

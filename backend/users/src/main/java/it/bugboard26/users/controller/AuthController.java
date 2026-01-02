@@ -38,21 +38,9 @@ public class AuthController {
     }
     
     @PostMapping("/register")
-    public ResponseEntity<UUID> register(
-    @RequestHeader("Authorization") String authHeader, 
-    @RequestBody RegistrationRequest registerDTO) {
-
-        if(authHeader == null || !StringUtils.startsWithIgnoreCase(authHeader, "Bearer ")) 
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Access denied");
-
-        String token = authHeader.substring(7); // Rimuove "Bearer"
-        boolean isAdmin = jwtService.validateAdmin(token);
-
-        if(!isAdmin) 
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Access denied");
-        
+    public UUID register(@RequestBody RegistrationRequest registerDTO) {        
         User newUser = authService.register(registerDTO);
-        return ResponseEntity.ok(newUser.getUuid());
+        return newUser.getUuid();
     }
 
     
