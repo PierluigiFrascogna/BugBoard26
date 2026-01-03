@@ -1,10 +1,11 @@
 <div class="component">
     <div class="component__body">
         <form id="commentForm" [formGroup]="commentForm" (submit)="saveComment()">
-            <input class="comment-input" formControlName="comment" placeholder="Aggiungi un commento...">
+            <h2>Aggiungi un commento</h2>
+            <textarea class="comment-input" formControlName="comment" placeholder="Scrivi qui il tuo commento..."></textarea>
         </form>
     </div>
-    <div class="comment__footer">
+    <div class="component__footer">
         <button class="comment-button" type="submit" form="commentForm">Commenta</button>
     </div>
 </div>

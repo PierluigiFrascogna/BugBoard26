@@ -1,35 +1,35 @@
-:host{
+:host {
     display: block;
     height: 100%;
     min-height: 0;
 }
 
-.issues-list-component{
+.issues-list-component {
     height: 100%;
     min-height: 0;
 }
 
-.issues-list-component--hidden{
-    display: none; 
+.issues-list-component--hidden {
+    display: none;
 }
 
-.component__header{
+.component__header {
     width: 100%;
     height: fit-content;
-    
+
     display: grid;
     grid-template-columns: auto 1fr auto;
     justify-content: center;
     align-items: center;
 }
 
-.component__header--hidden{
+.component__header--hidden {
     display: none;
 }
 
-.header__title{
+.header__title {
     padding: 10px;
-    
+
     background-color: rgb(0, 0, 0, 0.7);
     font-weight: 900;
     font-size: 40px;
@@ -37,7 +37,7 @@
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.7);
 }
 
-.component__body{
+.component__body {
     height: 100%;
     min-height: 0;
 
@@ -45,25 +45,25 @@
     grid-template-rows: 1fr auto;
 }
 
-.body__issues{
+.body__issues {
     width: 100%;
     height: fit-content;
-    
+
     padding: 20px;
     gap: 10px;
-    
+
     display: flex;
     flex-direction: column;
-    
+
     overflow-x: hidden;
     overflow-y: auto;
 }
 
-.body__issues--hidden{
+.body__issues--hidden {
     display: none;
 }
 
-.body__new-issue{
+.body__new-issue {
     width: 100%;
     height: fit-content;
 
@@ -71,11 +71,11 @@
     grid-template-columns: 1fr auto 1fr;
 }
 
-.body__new-issue--hidden{
+.body__new-issue--hidden {
     display: none;
 }
 
-.header__new-issue-button{
+.header__new-issue-button {
     width: fit-content;
     height: fit-content;
 
@@ -90,11 +90,11 @@
     transition: font-size 0.2s ease;
 }
 
-.header__new-issue-button--hidden{
+.header__new-issue-button--hidden {
     display: none;
 }
 
-.header__new-issue-button:hover{
+.header__new-issue-button:hover {
     font-size: 1.1rem;
     box-shadow: 0 0 10px #FF6971;
 }

@@ -38,6 +38,17 @@
     margin-bottom: 10px;
 }
 
+.component__body__description textarea{
+    width: 100%;
+    height: 100px;
+    background-color: black;
+    color: whitesmoke;
+    border-radius: 5px;
+    padding: 5px;
+    outline: none;
+    resize: none;
+}
+
 .component__footer{
     width: 100%;
     height: fit-content;
@@ -50,10 +61,24 @@
     width: fit-content;
     height: fit-content;
 
+    border: none;
     border-radius: 10px;
-    background-color: black;
+    padding: 10px;
+    background-color: dimgrey;  
     color: whitesmoke;
     cursor: pointer;
+}
+
+.footer__button:hover{
+    background-color: rgb(80, 80, 80);
+}
+
+.footer__button__confirm{
+    background-color: seagreen;
+}
+
+.footer__button__confirm:hover{
+    background-color: darkgreen
 }
 
 .footer__button--hidden{
@@ -63,7 +88,10 @@
 }
 
 .input{
+    padding: 5px;
+    border-radius: 5px;
     background-color: black;
     color: whitesmoke;
     outline: none;
 }
+
