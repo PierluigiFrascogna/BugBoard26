@@ -6,26 +6,34 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.server.ResponseStatusException;
+
+import it.bugboard26.bugboard.modules.auth.dtos.RegistrationRequest;
+import it.bugboard26.bugboard.modules.auth.dtos.UserServiceRequest;
 
 // TODO: handle errors in case Users Micro-Service is down
 @Service
 public class UsersMicroService {
-    private String usersServiceUrl;
+    //Attributes
+    private String userServiceURL;
     private RestTemplate restTemplate;
 
+    //Constructor
     public UsersMicroService(@Value("${users-service.url}") String usersServiceUrl, RestTemplate restTemplate) {
-        this.usersServiceUrl = usersServiceUrl;
+        this.userServiceURL = usersServiceUrl;
         this.restTemplate = restTemplate;
     }
 
+    //Methods
     public Map<UUID, UserResponse> getUsersByIds(Set<UUID> userIds) {
-        String url = usersServiceUrl + "/users/batch";
-        HttpEntity<Set<UUID>> requestEntity = new HttpEntity<>(userIds);
-        ResponseEntity<UserResponse[]> users = restTemplate.postForEntity(url, requestEntity, UserResponse[].class);
+        String url = userServiceURL + "/users/batch";
+        ResponseEntity<UserResponse[]> users = restTemplate.postForEntity(url, userIds, UserResponse[].class);
 
         Map<UUID, UserResponse> userMap = new HashMap<>();
         if (users.getStatusCode().is2xxSuccessful() && users != null) {
@@ -34,6 +42,32 @@ public class UsersMicroService {
         }
 
         return userMap;
+    }
+
+    public UUID registerUser(RegistrationRequest frontendRequest) {
+        UserServiceRequest backendRequest = new UserServiceRequest(frontendRequest);
+        String registrationURL = userServiceURL + "/auth/register";
+        try {
+            ResponseEntity<UUID> response = restTemplate.postForEntity(
+                registrationURL,
+                backendRequest,
+                UUID.class
+            );
+            
+            UUID uuid = response.getBody();
+            return uuid;
+        }
+        catch (HttpClientErrorException.Conflict e) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Email already in use");
+        }
+
+        catch (HttpClientErrorException.BadRequest e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid registration data");
+        }
+
+        catch (HttpStatusCodeException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal error: " + e.getMessage());
+        }
     }
 
     

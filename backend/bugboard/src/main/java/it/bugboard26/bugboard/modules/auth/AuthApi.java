@@ -9,37 +9,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
 import it.bugboard26.bugboard.entities.User;
 import it.bugboard26.bugboard.enums.Role;
 import it.bugboard26.bugboard.modules.auth.dtos.RegistrationRequest;
-import it.bugboard26.bugboard.modules.projects.HeaderRequestService;
-import it.bugboard26.bugboard.modules.users.UserService;
+import it.bugboard26.bugboard.users_micro_service.UsersMicroService;
 import lombok.AllArgsConstructor;
     
 @AllArgsConstructor
 @RequestMapping("/auth")
 @RestController
 public class AuthApi {
-    private HeaderRequestService headerRequest;
-    private JwtService jwtService;
-    private UserService userService;
     private AuthService authService;
+    private UsersMicroService usersMicroService;
     
     @PostMapping("/register")
     public void register(@RequestBody RegistrationRequest registrationRequest) {
-        if (!headerRequest.hasAuthorization()) 
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing or invalid Authorization header");
-
-        Jws<Claims> token = jwtService.parseToken(headerRequest.extractToken());
-        UUID uuid_userLogged = jwtService.getUUID(token);
-        User userLogged = userService.getByUuid(uuid_userLogged);
-
+        User userLogged = authService.getAuthenticatedUser();
         if (userLogged.getRole() != Role.ADMIN) 
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Only ADMIN users can register new users");
 
-        UUID uuid_newUser = authService.registerUserViaMicroservice(registrationRequest);
+        UUID uuid_newUser = usersMicroService.registerUser(registrationRequest);
         User newUser = new User(uuid_newUser, registrationRequest.getRole());
         authService.registerUser(newUser);
     }
