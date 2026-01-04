@@ -1,0 +1,43 @@
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
+
+services:
+  web:
+    extends:
+      file: compose.base.yaml
+      service: web
+    build:
+      target: prod
+    ports:
+      - "4200:80"
+    develop:
+      watch:
+        - action: rebuild
+          path: ./frontend/web
+    networks:
+      - frontend
+  
+  bugboard:
+    extends:
+      file: compose.base.yaml
+      service: bugboard
+    develop:
+      watch:
+        - action: rebuild
+          path: ./backend/bugboard
+    networks:
+      - backend
+ 
+  users:
+    extends:
+      file: compose.base.yaml
+      service: users
+    develop:
+      watch:
+        - action: rebuild
+          path: ./backend/users
+    networks:
+      - backend
