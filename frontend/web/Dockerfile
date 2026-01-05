@@ -31,6 +31,9 @@ FROM docker.io/library/nginx:alpine AS prod
 # Copy the built application from the build stage to the Nginx HTML directory
 COPY --from=build /BugBoard26/frontend/web/dist/BugBoard26/browser /usr/share/nginx/html
 
+# Copy custom Nginx configuration
+COPY /BugBoard26/frontend/web/nginx/default.conf /etc/nginx/conf.d/default.conf
+
 # Expose port 80
 EXPOSE 80
 
