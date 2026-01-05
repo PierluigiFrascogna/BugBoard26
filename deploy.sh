@@ -21,7 +21,7 @@ compose() {
 git fetch --all --prune
 git reset --hard origin/main
 
-podman down --remove-orphans -v || true
+compose down --remove-orphans -v || true
 compose pull
 compose up -d --remove-orphans --replace
 
