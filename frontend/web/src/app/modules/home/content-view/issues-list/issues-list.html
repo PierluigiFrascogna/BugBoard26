@@ -2,7 +2,9 @@
     <div class="component__header">
         <div class="header__title"> {{ title() }}</div> 
         <div></div>
-        <div class="header__new-issue-button" (click)="openNewIssueCard()" [ngClass]="isNewIssueCardOpen() ? 'header__new-issue-button--hidden' : ''">Aggiungi issue</div>   
+        @if (!isViewer()) {
+            <div class="header__new-issue-button" (click)="openNewIssueCard()" [ngClass]="isNewIssueCardOpen() ? 'header__new-issue-button--hidden' : ''">Aggiungi issue</div>
+        }
     </div>
     <div class="component__body">
         <app-issues-filters></app-issues-filters>

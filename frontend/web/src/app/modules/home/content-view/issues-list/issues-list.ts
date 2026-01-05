@@ -5,6 +5,7 @@ import { IssueCard } from "./issue-card/issue-card";
 import { NgClass } from '@angular/common';
 import { AddIssueCard } from "./add-issue-card/add-issue-card";
 import { IssuesFilters } from "./issues-filters/issues-filters";
+import { AuthStore } from '../../../../core/auth/auth-store';
 
 @Component({
   selector: 'app-issues-list',
@@ -15,6 +16,7 @@ import { IssuesFilters } from "./issues-filters/issues-filters";
 export class IssesList {
   private readonly issueStore = inject(IssueStore); 
   private readonly projectStore = inject(ProjectStore);
+  private readonly authStore = inject(AuthStore);
   
   readonly isNewIssueCardOpen = signal<boolean>(false);
   
@@ -23,6 +25,8 @@ export class IssesList {
 
   readonly isTitleVisible = computed(() => this.title() !== '' );
   readonly isVisible = computed(() => this.issueStore.selectedIssue()===null);
+
+  readonly isViewer = computed(() => true);
   
   openNewIssueCard() {
     this.isNewIssueCardOpen.set(true);
