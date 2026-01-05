@@ -1,7 +1,7 @@
 <div class="issues-filters-component">
     <div class="component__header">Filtra per:</div>
     <div class="component__body">
-        <form class="body__filtersForm" [formGroup]="filtersForm" (click)="sendFilters()">
+        <form class="body__filtersForm" [formGroup]="filtersForm" (submit)="sendFilters()">
             <div class="form__filter">
                 <label for="type">Tipo:</label>
                 <select formControlName="type" name="type"> 
@@ -32,6 +32,6 @@
     <div class="component__footer">
         <button class="footer__button" (click)="resetFilters()">Ripristina</button>
         <div></div>
-        <button class="footer__button" form="filtersForm" type="submit" [disabled]="!this.filtersForm.valid">Filtra</button>
+        <button class="footer__button" form="filtersForm" type="submit">Filtra</button>
     </div>
 </div>

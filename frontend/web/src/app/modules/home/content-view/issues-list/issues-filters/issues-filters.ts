@@ -13,9 +13,9 @@ export class IssuesFilters {
   private readonly issueStore = inject(IssueStore);
 
   readonly filtersForm = new FormGroup({
-    type : new FormControl<TIssueType | null>(null, Validators.required),
-    priority : new FormControl<TIssuePriority | null>(null, Validators.required),
-    state : new FormControl<TIssueState | null>(null, Validators.required)
+    type : new FormControl<TIssueType>("bug", Validators.required),
+    priority : new FormControl<TIssuePriority>("high", Validators.required),
+    state : new FormControl<TIssueState>("done", Validators.required)
   })
   
   
@@ -24,6 +24,7 @@ export class IssuesFilters {
   }
 
   sendFilters(){
+    console.log(this.filtersForm.valid)
     if(this.filtersForm.valid){
       console.log(this.filtersForm.getRawValue());
       this.issueStore.setSelectedFilters(this.filtersForm.getRawValue());

@@ -9,5 +9,5 @@ import { TIssueState } from '../issue/issue';
   styleUrl: './state-label.css',
 })
 export class StateLabel {
-  @Input() state!: TIssueState;
+  @Input() state!: TIssueState | undefined;
 }

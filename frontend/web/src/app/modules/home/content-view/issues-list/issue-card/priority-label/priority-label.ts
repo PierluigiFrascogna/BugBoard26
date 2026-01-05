@@ -9,5 +9,5 @@ import { TIssuePriority, TIssueType } from '../issue/issue';
   styleUrl: './priority-label.css',
 })
 export class PriorityLabel {
-  @Input() priority!: TIssuePriority;
+  @Input() priority!: TIssuePriority | undefined;
 }

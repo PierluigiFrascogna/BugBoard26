@@ -5,8 +5,7 @@
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;
     gap: 10px;
-    
-    margin-top: 10px;
+
     padding: 10px;
     background-color: rgba(0, 0, 0, 0.7);
     border-radius: 10px;
@@ -74,4 +73,9 @@
     cursor: pointer;
     color: black;
     font-weight: bold;
+}
+
+.footer__button:hover{
+    font-size: 1.1rem;
+    box-shadow: 0 0 10px #FF6971;
 }

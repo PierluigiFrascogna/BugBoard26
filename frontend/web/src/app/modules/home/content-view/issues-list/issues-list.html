@@ -7,8 +7,8 @@
         }
     </div>
     <div class="component__body">
-        <app-issues-filters></app-issues-filters>
         <div class="body__issues" [ngClass]="isNewIssueCardOpen() ? 'body__issues--hidden' : ''">
+            <app-issues-filters></app-issues-filters>
             @for (issue of issues(); track $index) {
                 <app-issue-card [issue]="issue"></app-issue-card>  
             }@empty {
