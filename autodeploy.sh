@@ -4,22 +4,16 @@ set -euo pipefail
 
 BRANCH="${1:-main}"
 INTERVAL="${2:-30}"
-COMPOSE_FILE="${3:-compose.prod.yaml}"
+BASE_FILE="${3:-compose.base.yaml}"
+PROD_FILE="${4:-compose.prod.yaml}"
+PROFILE="${5:-fullstack}"
 
 cd "$(dirname "$0")"
 
-# scegli il comando compose disponibile
-if command -v podman-compose >/dev/null 2>&1; then
-  COMPOSE=(podman-compose -f "$COMPOSE_FILE")
-elif podman compose version >/dev/null 2>&1; then
-  COMPOSE=(podman compose -f "$COMPOSE_FILE")
-else
-  echo "Errore: non trovo né podman-compose né 'podman compose'. Installa podman-compose."
+if ! podman compose version >/dev/null 2>&1; then
+  echo "Errore: 'podman compose' non disponibile sul server."
   exit 1
 fi
-
-git fetch origin "$BRANCH" >/dev/null 2>&1 || true
-git checkout "$BRANCH" >/dev/null 2>&1 || true
 
 LAST=""
 
@@ -29,11 +23,17 @@ while true; do
 
   if [ -n "$REMOTE" ] && [ "$REMOTE" != "$LAST" ]; then
     echo "[autodeploy] new commit $REMOTE"
+
+    git checkout "$BRANCH" >/dev/null 2>&1 || true
     git reset --hard "origin/$BRANCH"
     git clean -fd
 
-    # rebuild + redeploy
-    "${COMPOSE[@]}" up -d --build
+    # rebuild + redeploy (base + prod) + profilo
+    podman compose \
+      -f "$BASE_FILE" \
+      -f "$PROD_FILE" \
+      --profile "$PROFILE" \
+      up -d --build
 
     # pulizia immagini inutilizzate (opzionale)
     podman image prune -f || true
