@@ -12,6 +12,12 @@ FROM base AS deps
 # Copy package.json and package-lock.json first to leverage Docker cache
 COPY package*.json .
 
+RUN npm config set fetch-retries 5 \
+    && npm config set fetch-retry-factor 2 \
+    && npm config set fetch-retry-mintimeout 20000 \
+    && npm config set fetch-retry-maxtimeout 120000 \
+    && npm config set fetch-timeout 300000
+
 # Install project dependencies
 RUN npm install --verbose
 
