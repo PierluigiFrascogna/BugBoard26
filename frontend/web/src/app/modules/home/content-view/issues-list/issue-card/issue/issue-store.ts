@@ -1,8 +1,8 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { IssueApi } from './issue-api';
-import { Issue } from './issue';
+import { Issue, TIssuePriority, TIssueState, TIssueType } from './issue';
 
-export interface IssueState {
+export interface IIssueState {
   projectIssues: Issue[];
   loading: boolean;
   error: Error | undefined;
@@ -14,7 +14,15 @@ export interface IssueState {
 export class IssueStore {
   private readonly api  = inject(IssueApi);
   
-  private readonly _state = computed<IssueState>(() => ({
+  private readonly _selectedFilters = signal<IFilters>({
+    type: null,
+    priority: null,
+    state: null
+  });
+  readonly selectedFilters = computed(() => this._selectedFilters());
+
+  
+  private readonly _state = computed<IIssueState>(() => ({
     projectIssues: this.api.issuesResource.hasValue() ? this.api.issuesResource.value() :[
       {
         uuid: "issue1",
@@ -69,4 +77,22 @@ export class IssueStore {
   deselectIssue(){
     this._selectedIssue.set(null);
   }
+
+  setSelectedFilters(filter: IFilters){
+    this._selectedFilters.set({
+      type: filter.type,
+      priority: filter.priority,
+      state: filter.state,
+    })
+    console.log("signal _selectedFilters: ", this._selectedFilters());
+    console.log("signal selectedFilters: ", this.selectedFilters());
+
+  }
+
 }
+
+export interface IFilters {
+  type: TIssueType | null;
+  priority: TIssuePriority | null;
+  state: TIssueState | null;
+};

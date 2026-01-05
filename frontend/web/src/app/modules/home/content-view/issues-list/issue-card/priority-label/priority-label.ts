@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NgClass } from '@angular/common';
-import { IssuePriority, IssueType } from '../issue/issue';
+import { TIssuePriority, TIssueType } from '../issue/issue';
 
 @Component({
   selector: 'app-priority-label',
@@ -9,5 +9,5 @@ import { IssuePriority, IssueType } from '../issue/issue';
   styleUrl: './priority-label.css',
 })
 export class PriorityLabel {
-  @Input() priority!: IssuePriority;
+  @Input() priority!: TIssuePriority;
 }

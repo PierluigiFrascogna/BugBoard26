@@ -10,7 +10,9 @@
                 <app-issue-event-card [issueEvent]="issueEvent"></app-issue-event-card>
             }
         </div>
-        <app-add-comment-card></app-add-comment-card>
+        @if(!isViewer()){
+            <app-add-comment-card></app-add-comment-card>
+        }
     </div>
 </div>
 

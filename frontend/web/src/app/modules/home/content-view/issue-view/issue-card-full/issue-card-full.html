@@ -2,15 +2,15 @@
     <form id="issueForm" [formGroup]="issueForm" (submit)="sendChanges()">
         <div class="component__header">
             <div class="component__header__author">
-                @if(!isEditing()){{{ issue()?.author }}}
+                @if(!isEditing()){{{ issue()!.author }}}
                 @else{
                     <label>Modifica titolo: </label> 
                     <input type="text" formControlName="title" class="input">
                 }    
             </div>
             <div class="component__header__labels">
-                <app-type-label [type]="issue()?.type"></app-type-label>
-                @if (!isEditing()) {<app-priority-label [priority]="issue()?.priority"></app-priority-label>}
+                <app-type-label [type]="issue()!.type"></app-type-label>
+                @if (!isEditing()) {<app-priority-label [priority]="issue()!.priority"></app-priority-label>}
                 @else{<select formControlName="priority" class="input">
                         <option [ngValue]="'low'">low</option>
                         <option [ngValue]="'medium'">medium</option>
@@ -18,7 +18,7 @@
                         <option [ngValue]="null">nessuna</option>
                     </select>
                 }
-                @if (!isEditing()) {<app-state-label [state]="issue()?.state"></app-state-label>}
+                @if (!isEditing()) {<app-state-label [state]="issue()!.state"></app-state-label>}
                 @else {<select formControlName="state" class="input">
                         <option [ngValue]="'todo'">todo</option>
                         <option [ngValue]="'pending'">pending</option>
@@ -29,7 +29,7 @@
         </div>
         <div class="component__body">
             <div class="component__body__description">
-                @if (!isEditing()) {{{ issue()?.description }}}
+                @if (!isEditing()) {{{ issue()!.description }}}
                 @else {
                     <p>Modifica descrizione: </p>
                     <textarea formControlName="description"></textarea>
@@ -38,9 +38,11 @@
         </div>
         <div class="component__footer"> 
             <div></div>
-            <button class="footer__button" [ngClass]="isEditing() ? '' : 'footer__button--hidden'" (click)="deactivateEditMode()">Annulla</button>
-            <button class="footer__button" [ngClass]="!isEditing() ? '' : 'footer__button--hidden'" (click)="activateEditMode()">Modifica</button>
-            <button type="submit" class="footer__button footer__button__confirm" [ngClass]="isEditing() ? '' : 'footer__button--hidden'">Conferma</button>
+                @if (!isViewer()) {
+                    <button class="footer__button" [ngClass]="isEditing() ? '' : 'footer__button--hidden'" (click)="deactivateEditMode()">Annulla</button>
+                    <button class="footer__button" [ngClass]="!isEditing() ? '' : 'footer__button--hidden'" (click)="activateEditMode()">Modifica</button>
+                    <button type="submit" class="footer__button footer__button__confirm" [ngClass]="isEditing() ? '' : 'footer__button--hidden'">Conferma</button>
+                }
         </div>
     </form>
 </div>

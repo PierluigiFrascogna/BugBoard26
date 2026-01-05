@@ -2,14 +2,14 @@ export interface Issue {
     uuid: string; 
     title: string; 
     description: string; 
-    type: IssueType;
-    priority:  IssuePriority;
-    state: IssueState;
+    type: TIssueType;
+    priority:  TIssuePriority;
+    state: TIssueState;
     image: string;
     author: string;
 }
 
-export type IssueType = "question" | "bug" | "documentation" | "feature";
-export type IssuePriority = 'low' | 'medium' | 'high' | undefined; 
-export type IssueState = 'todo' | 'pending' | 'done'; 
+export type TIssueType = "question" | "bug" | "documentation" | "feature";
+export type TIssuePriority = 'low' | 'medium' | 'high'; 
+export type TIssueState = 'todo' | 'pending' | 'done'; 
  

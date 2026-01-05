@@ -1,11 +1,11 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, Signal, signal } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup, Validators,} from '@angular/forms';
 import { IssueStore } from '../../issues-list/issue-card/issue/issue-store';
 import { TypeLabel } from "../../issues-list/issue-card/type-label/type-label";
 import { PriorityLabel } from "../../issues-list/issue-card/priority-label/priority-label";
 import { StateLabel } from "../../issues-list/issue-card/state-label/state-label";
 import { NgClass } from "@angular/common";
-import { IssuePriority, IssueState } from '../../issues-list/issue-card/issue/issue';
+import { AuthStore } from '../../../../../core/auth/auth-store';
 
 @Component({
   selector: 'app-issue-card-full',
@@ -14,7 +14,9 @@ import { IssuePriority, IssueState } from '../../issues-list/issue-card/issue/is
   styleUrl: './issue-card-full.css',
 })
 export class IssueCardFull {
+  private readonly authStore = inject(AuthStore);
   private readonly issueStore = inject(IssueStore);
+  readonly isViewer: Signal<boolean> = computed(() => this.authStore.role()==="viewer");
   readonly issue = computed(() => this.issueStore.selectedIssue());
   
   isEditing = signal<boolean>(false);
