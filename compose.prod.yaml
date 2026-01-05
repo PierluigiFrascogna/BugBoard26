@@ -14,6 +14,8 @@ services:
   
   bugboard:
     image: ghcr.io/pierluigifrascogna/bugboard26/bugboard:latest
+    env_file:
+      - ./backend/bugboard/.env
     ports:
       - "8082:8080"
     networks:
@@ -21,6 +23,8 @@ services:
  
   users:
     image: ghcr.io/pierluigifrascogna/bugboard26/users:latest
+    env_file:
+      - ./backend/users/.env
     ports:
       - "8081:8080"
     networks:
