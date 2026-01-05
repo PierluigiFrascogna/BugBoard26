@@ -34,7 +34,7 @@ deploy() {
     -f "$BASE_FILE" \
     -f "$PROD_FILE" \
     --profile "$PROFILE" \
-    up -d --build --replace
+    up -d --build
 
   # cleanup immagini inutilizzate
   podman image prune -f || true
