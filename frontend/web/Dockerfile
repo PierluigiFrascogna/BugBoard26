@@ -1,7 +1,7 @@
 FROM node:22 AS base
 
 # Install Angular CLI version 21 globally
-RUN npm install -g @angular/cli@21 --verbose
+RUN npm install -g @angular/cli@21
 
 # Set the working directory
 WORKDIR /BugBoard26/frontend/web
@@ -13,7 +13,7 @@ FROM base AS deps
 COPY package*.json .
 
 # Install project dependencies
-RUN npm install --verbose
+RUN npm install
 
 # Copy the local working directory to the container working directory
 COPY . .
