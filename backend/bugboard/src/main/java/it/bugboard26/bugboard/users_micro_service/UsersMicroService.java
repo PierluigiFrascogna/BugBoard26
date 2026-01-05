@@ -14,6 +14,7 @@ import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
+import it.bugboard26.bugboard.modules.auth.dtos.LoginRequest;
 import it.bugboard26.bugboard.modules.auth.dtos.RegistrationRequest;
 import it.bugboard26.bugboard.modules.auth.dtos.UserServiceRequest;
 
@@ -54,8 +55,8 @@ public class UsersMicroService {
                 UUID.class
             );
             
-            UUID uuid = response.getBody();
-            return uuid;
+            UUID uuid_newUser = response.getBody();
+            return uuid_newUser;
         }
         catch (HttpClientErrorException.Conflict e) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Email already in use");
@@ -65,6 +66,26 @@ public class UsersMicroService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid registration data");
         }
 
+        catch (HttpStatusCodeException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal error: " + e.getMessage());
+        }
+    }
+
+    public UserResponse loginUser(LoginRequest loginRequest) {
+        String loginURL = userServiceURL + "/auth/login";
+        try {
+            ResponseEntity<UserResponse> response = restTemplate.postForEntity(
+                loginURL,
+                loginRequest,
+                UserResponse.class
+            );
+            
+            UserResponse userResponse = response.getBody();
+            return userResponse;
+        } 
+        catch (HttpClientErrorException.Unauthorized e) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid email or password");
+        } 
         catch (HttpStatusCodeException e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal error: " + e.getMessage());
         }

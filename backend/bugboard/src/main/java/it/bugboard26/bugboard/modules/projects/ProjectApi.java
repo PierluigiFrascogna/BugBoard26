@@ -62,7 +62,8 @@ public class ProjectApi {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing or invalid Authorization header");
 
         Jws<Claims> token = jwtService.parseToken(headerRequest.extractToken());
-        List<Project> projects = projectService.getByUserUuid(jwtService.getUUID(token));
+        UUID uuid_user = UUID.fromString(token.getPayload().getSubject());
+        List<Project> projects = projectService.getByUserUuid(uuid_user);
         
         List<ProjectResponse> response = new ArrayList<>();
         for (Project project : projects) 
@@ -95,8 +96,11 @@ public class ProjectApi {
 
     @GetMapping("/projects/{uuid_project}/{uuid_issue}")
     public List<IssueEventResponse> getEventsByIssue(@PathVariable UUID uuid_project, @PathVariable UUID uuid_issue) {
-        List<IssueEvent> events = eventService.getByIssueUuid(uuid_issue);
+         if (!headerRequest.hasAuthorization()) 
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing or invalid Authorization header");
 
+        List<IssueEvent> events = eventService.getByIssueUuid(uuid_issue);
+        
         Set<UUID> authorIds = new HashSet<>();
         for (IssueEvent event : events) 
             authorIds.add(event.getAuthor().getUuid());
@@ -118,7 +122,8 @@ public class ProjectApi {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing or invalid Authorization header");
 
         Jws<Claims> token = jwtService.parseToken(headerRequest.extractToken());
-        User user = userService.getByUuid(jwtService.getUUID(token));
+        UUID uuid_user = UUID.fromString(token.getPayload().getSubject());
+        User user = userService.getByUuid(uuid_user);
 
         if (user.getRole() == Role.VIEWER) 
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Insufficient permissions");
@@ -174,7 +179,8 @@ public class ProjectApi {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing or invalid Authorization header");
 
         Jws<Claims> token = jwtService.parseToken(headerRequest.extractToken());
-        User user = userService.getByUuid(jwtService.getUUID(token));
+        UUID uuid_user = UUID.fromString(token.getPayload().getSubject());
+        User user = userService.getByUuid(uuid_user);
 
         if(user.getRole() != Role.ADMIN)
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Insufficient permissions");

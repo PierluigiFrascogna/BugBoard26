@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -30,19 +29,11 @@ public class UserService {
     }
 
     public User findByEmail(String email) {
-        return userRepository.findByEmail(email).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+        return userRepository.findByEmail(email).orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not found"));
     }
 
     public boolean existsByEmail(String email) {
         return userRepository.existsByEmail(email);
-    }
-
-    public User verifyUser(String email, String rawPassword) {
-        User user = this.findByEmail(email);
-        if(!BCrypt.checkpw(rawPassword, user.getPasswordHash())) 
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials");
-
-        return user;
     }
 
     public UserResponse[] findAllByIds(Set<UUID> user_ids) {
