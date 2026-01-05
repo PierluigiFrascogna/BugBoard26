@@ -7,7 +7,15 @@ cd "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 git fetch --all --prune
 git reset --hard origin/main
 
-podman compose -f compose.base.yaml -f compose.prod.yaml pull
-podman compose -f compose.base.yaml -f compose.prod.yaml up -d --remove-orphans
+podman compose \
+    -f compose.base.yaml \
+    -f compose.prod.yaml \
+    --profile fullstack \
+    pull
+podman compose \
+    -f compose.base.yaml \
+    -f compose.prod.yaml \
+    --profile fullstack \
+    up -d --remove-orphans
 
 podman image prune -f >/dev/null 2>&1 || true
