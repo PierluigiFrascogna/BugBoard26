@@ -1,0 +1,56 @@
+name: Build and Publish images to GHCR
+
+on:
+  push:
+    branches: ["main"]
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_BASE: ${{ github.repository }}
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build & Push WEB
+        uses: docker/build-push-action@v6
+        with:
+          context: ./frontend/web
+          target: prod
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_BASE }}/web:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_BASE }}/web:sha-${{ github.sha }}
+
+      - name: Build & Push USERS
+        uses: docker/build-push-action@v6
+        with:
+          context: ./backend/users
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_BASE }}/users:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_BASE }}/users:sha-${{ github.sha }}
+
+      - name: Build & Push BUGBOARD
+        uses: docker/build-push-action@v6
+        with:
+          context: ./backend/bugboard
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_BASE }}/bugboard:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_BASE }}/bugboard:sha-${{ github.sha }}
