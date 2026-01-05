@@ -23,6 +23,6 @@ git reset --hard origin/main
 
 compose down --remove-orphans -v || true
 compose pull
-compose up -d --remove-orphans --replace
+compose up -d --remove-orphans
 
 podman image prune -f >/dev/null 2>&1 || true
