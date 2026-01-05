@@ -5,6 +5,7 @@
         <div class="header__new-issue-button" (click)="openNewIssueCard()" [ngClass]="isNewIssueCardOpen() ? 'header__new-issue-button--hidden' : ''">Aggiungi issue</div>   
     </div>
     <div class="component__body">
+        <app-issues-filters></app-issues-filters>
         <div class="body__issues" [ngClass]="isNewIssueCardOpen() ? 'body__issues--hidden' : ''">
             @for (issue of issues(); track $index) {
                 <app-issue-card [issue]="issue"></app-issue-card>  

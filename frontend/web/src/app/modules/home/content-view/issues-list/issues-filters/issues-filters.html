@@ -1,0 +1,37 @@
+<div class="issues-filters-component">
+    <div class="component__header">Filtra per:</div>
+    <div class="component__body">
+        <form class="body__filtersForm" [formGroup]="filtersForm" (click)="sendFilters()">
+            <div class="form__filter">
+                <label for="type">Tipo:</label>
+                <select formControlName="type" name="type"> 
+                    <option value="bug">bug</option>
+                    <option value="feature">feature</option>
+                    <option value="documentation">documentation</option>
+                    <option value="question">question</option>
+                </select>
+            </div>
+            <div class="form__filter">
+                <label for="priority">Priorità:</label>
+                <select formControlName="priority" name="priority">
+                    <option value="low">low</option>
+                    <option value="medium">medium</option>
+                    <option value="high">high</option>
+                </select>
+            </div>
+            <div class="form__filter">
+                <label for="state">Stato:</label>
+                <select formControlName="state" name="state">
+                    <option value="todo">todo</option>
+                    <option value="pending">pending</option>
+                    <option value="done">done</option><samp></samp>
+                </select>
+            </div>
+        </form>
+    </div>
+    <div class="component__footer">
+        <button class="footer__button" (click)="resetFilters()">Ripristina</button>
+        <div></div>
+        <button class="footer__button" form="filtersForm" type="submit" [disabled]="!this.filtersForm.valid">Filtra</button>
+    </div>
+</div>

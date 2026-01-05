@@ -1,6 +1,6 @@
 import { NgClass } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { IssueState } from '../issue/issue';
+import { TIssueState } from '../issue/issue';
 
 @Component({
   selector: 'app-state-label',
@@ -9,5 +9,5 @@ import { IssueState } from '../issue/issue';
   styleUrl: './state-label.css',
 })
 export class StateLabel {
-  @Input() state!: IssueState | undefined;
+  @Input() state!: TIssueState;
 }

@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators, ɵInternalFormsSharedModule, Reacti
 
 @Component({
   selector: 'app-add-comment-card',
-  imports: [NgClass, ɵInternalFormsSharedModule, ReactiveFormsModule],
+  imports: [ɵInternalFormsSharedModule, ReactiveFormsModule],
   templateUrl: './add-comment-card.html',
   styleUrl: './add-comment-card.css',
 })
