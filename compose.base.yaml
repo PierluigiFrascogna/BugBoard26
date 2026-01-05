@@ -9,40 +9,24 @@ services:
       - docs
 
   web:
-    build:
-      context: ./frontend/web
-      dockerfile: ./Dockerfile
     profiles:
       - web
       - frontend
       - fullstack
 
   bugboard:
-    image: localhost/bugboard26_bugboard:latest
-    build:
-      context: ./backend/bugboard
-      dockerfile: ./Dockerfile
-    ports:
-      - "8080:8080"
     profiles:
       - bugboard
       - backend
       - fullstack
 
   users:
-    image: localhost/bugboard26_users:latest
-    build:
-      context: ./backend/users
-      dockerfile: ./Dockerfile
     profiles:
       - users
       - backend
       - fullstack
 
   api-gateway:
-    build:
-      context: ./backend/api-gateway
-      dockerfile: ./Dockerfile
     ports:
       - "8000:8000"
     profiles:

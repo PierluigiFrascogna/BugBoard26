@@ -6,17 +6,22 @@ networks:
 
 services:
   web:
-    build:
-      target: prod
+    image: ghcr.io/pierluigifrascogna/bugboard26/web:latest
     ports:
       - "4200:80"
     networks:
       - frontend
   
   bugboard:
+    image: ghcr.io/pierluigifrascogna/bugboard26/bugboard:latest
+    ports:
+      - "8082:8080"
     networks:
       - backend
  
   users:
+    image: ghcr.io/pierluigifrascogna/bugboard26/users:latest
+    ports:
+      - "8081:8080"
     networks:
       - backend
