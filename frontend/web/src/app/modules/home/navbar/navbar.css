@@ -2,8 +2,9 @@
     height: 60px;
     width: 100vw;
 
-    display: grid;
-    grid-template-columns: auto auto 1fr auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     border-bottom: 3px solid #845EC2;
     background-color: rgb(0, 0, 0, 0.7);
@@ -12,17 +13,21 @@
 .navbar__button{
     width: fit-content;
     height: fit-content;
-
     margin: 10px;
     padding: 10px;
-
-    background: linear-gradient(90deg, #845EC2, #FF6971, #F9F871);
-    color: black;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: bold;
 }
 
 .navbar__button:hover{
-    font-size: 1.1rem;
+    transform: scale(1.15);
+    transition: all 0.3s ease;
+}
+
+.navbar__button__icon{
+    font-size: 35px;
+    background: linear-gradient(90deg, #845EC2, #FF6971, #F9F871);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    vertical-align: middle;
 }

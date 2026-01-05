@@ -1,6 +1,7 @@
 <div class="component" [ngClass]=" isVisible() ? '' : 'component--hidden'">
     <div class="component__header">
-        <div class="component__header__title" (click)="deselectIssue()"> {{ title() }}</div>    
+        <div class="component__header__undo-button material-symbols-outlined" (click)="deselectIssue()">undo</div>
+        <div class="component__header__title"> {{ title() }}</div>    
     </div>
     <div class="component__body">
         <app-issue-card-full></app-issue-card-full>

@@ -1,8 +1,7 @@
 <div class="navbar">
-    <a class="navbar__button" routerLink="/home">Home</a>
+    <a class="navbar__button" routerLink="/home"> <span class="navbar__button__icon material-symbols-outlined">home</span> </a>
     @if (isAdmin()) {
-        <a class="navbar__button" routerLink="/manage">Gestisci</a>
+        <a class="navbar__button" routerLink="/manage"> <span class="navbar__button__icon material-symbols-outlined">admin_panel_settings</span> </a>
     }
-    <div></div>
-    <a class="navbar__button" routerLink="/profile">Profilo</a>
+    <a class="navbar__button" routerLink="/profile"> <span class="navbar__button__icon material-symbols-outlined">account_circle</span> </a>
 </div>
