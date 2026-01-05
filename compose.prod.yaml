@@ -10,25 +10,13 @@ services:
       target: prod
     ports:
       - "4200:80"
-    develop:
-      watch:
-        - action: rebuild
-          path: ./frontend/web
     networks:
       - frontend
   
   bugboard:
-    develop:
-      watch:
-        - action: rebuild
-          path: ./backend/bugboard
     networks:
       - backend
  
   users:
-    develop:
-      watch:
-        - action: rebuild
-          path: ./backend/users
     networks:
       - backend
