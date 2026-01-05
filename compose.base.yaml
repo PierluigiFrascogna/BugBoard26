@@ -18,6 +18,7 @@ services:
       - fullstack
 
   bugboard:
+    image: localhost/bugboard26_bugboard:latest
     build:
       context: ./backend/bugboard
       dockerfile: ./Dockerfile
@@ -29,6 +30,7 @@ services:
       - fullstack
 
   users:
+    image: localhost/bugboard26_users:latest
     build:
       context: ./backend/users
       dockerfile: ./Dockerfile
