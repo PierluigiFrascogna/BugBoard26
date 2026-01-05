@@ -26,7 +26,7 @@ export class IssesList {
   readonly isTitleVisible = computed(() => this.title() !== '' );
   readonly isVisible = computed(() => this.issueStore.selectedIssue()===null);
 
-  readonly isViewer = computed(() => true);
+  readonly isViewer = computed(() => false);
   
   openNewIssueCard() {
     this.isNewIssueCardOpen.set(true);

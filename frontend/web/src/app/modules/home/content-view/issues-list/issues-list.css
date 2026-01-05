@@ -96,6 +96,8 @@
 .header__new-issue-button:hover {
     font-size: 1.1rem;
     box-shadow: 0 0 10px #FF6971;
+}
+
 .body__filters{
     background-color: rgb(0, 0, 0, 0.7);
     border-radius: 10px;
