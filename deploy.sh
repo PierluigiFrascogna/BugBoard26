@@ -16,6 +16,6 @@ podman compose \
     -f compose.base.yaml \
     -f compose.prod.yaml \
     --profile fullstack \
-    up -d --remove-orphans --replace
+    up -d --remove-orphans
 
 podman image prune -f >/dev/null 2>&1 || true
