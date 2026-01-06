@@ -15,6 +15,7 @@ export class AddUserCard {
     name: new FormControl('', [Validators.required, Validators.minLength(2)]),
     surname: new FormControl('', [Validators.required, Validators.minLength(2)]),
     email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.minLength(8)]),
     role: new FormControl('', [Validators.required])
   });
 
