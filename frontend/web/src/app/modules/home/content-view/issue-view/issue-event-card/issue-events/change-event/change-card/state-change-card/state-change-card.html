@@ -1,11 +1,15 @@
 <div class="state-change-card-component">
-    <span class="change-logo">✔</span>
+    <span class="change-logo"><span class="material-symbols-outlined">checklist</span></span>
     <span class="component__body">
         <div class="body__change-description">
-            {{ stateChange.author.name }} {{ stateChange.author.surname }}ha cambiato lo stato da {{ stateChange.oldState }} a {{ stateChange.newState }}.
+            {{ stateChange.author.name }} {{ stateChange.author.surname }} ha cambiato lo stato da 
+            <app-state-label [state]="stateChange.oldState" ></app-state-label> a 
+            <app-state-label [state]="stateChange.newState" ></app-state-label>.
         </div>
         <div class="body__created-at">
             {{ stateChange.createdAt | date: 'dd/MM/yyyy' }}
         </div>
     </span>
 </div>
+
+<app-state-label [state]="stateChange.oldState" ></app-state-label>
