@@ -8,15 +8,13 @@ import io.jsonwebtoken.Jws;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import it.bugboard26.bugboard.entities.Project;
 import it.bugboard26.bugboard.entities.User;
 import it.bugboard26.bugboard.enums.Role;
 import it.bugboard26.bugboard.modules.auth.JwtService;
-import it.bugboard26.bugboard.modules.issue_events.EventService;
-import it.bugboard26.bugboard.modules.issues.IssueService;
 import it.bugboard26.bugboard.modules.users.UserService;
-import it.bugboard26.bugboard.users_micro_service.UsersMicroService;
 
 import lombok.AllArgsConstructor;
 
@@ -29,15 +27,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @AllArgsConstructor
+@CrossOrigin(origins = "https://app.bugboard26.it")
 @RestController
 public class ProjectApi {
     HeaderRequestService headerRequest;
     JwtService jwtService;
     UserService userService;
-    UsersMicroService usersMicroService;
     ProjectService projectService;
-    IssueService issueService;
-    EventService eventService;
 
     @GetMapping("/projects")
     public List<ProjectResponse> getProjects() {
