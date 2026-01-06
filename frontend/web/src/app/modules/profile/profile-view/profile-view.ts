@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { User } from '../user/user';
+import { IUser } from '../user/user';
 import { FormControl, FormGroup, Validators, ɵInternalFormsSharedModule, ReactiveFormsModule } from "@angular/forms";
 import { NgClass } from "@angular/common";
 
@@ -10,7 +10,7 @@ import { NgClass } from "@angular/common";
   styleUrl: './profile-view.css',
 })
 export class ProfileView {
-  user: User = {uuid: "1234", name: "Ale", surname: "Giglio", email: "ale@fakemail.com", password: "fakepassword", role: "dev" }
+  user: IUser = {uuid: "1234", name: "Ale", surname: "Giglio", email: "ale@fakemail.com", password: "fakepassword", role: "developer" }
 
   isEditing = signal<boolean>(false);
 
