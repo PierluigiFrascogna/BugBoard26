@@ -1,8 +1,11 @@
-name: Build and Publish images to GHCR
+name: Bugboard Build&Publish to GHCR
 
 on:
   push:
     branches: ["main"]
+    paths:
+      - "backend/bugboard/**"
+      - ".github/workflows/ghcr-bugboard.yaml"
 
 permissions:
   contents: read
@@ -14,7 +17,6 @@ env:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -30,25 +32,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build & Push WEB
-        uses: docker/build-push-action@v6
-        with:
-          context: ./frontend/web
-          target: prod
-          push: true
-          tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_BASE }}/web:latest
-            ${{ env.REGISTRY }}/${{ env.IMAGE_BASE }}/web:sha-${{ github.sha }}
-
-      - name: Build & Push USERS
-        uses: docker/build-push-action@v6
-        with:
-          context: ./backend/users
-          push: true
-          tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_BASE }}/users:latest
-            ${{ env.REGISTRY }}/${{ env.IMAGE_BASE }}/users:sha-${{ github.sha }}
-
       - name: Build & Push BUGBOARD
         uses: docker/build-push-action@v6
         with:
@@ -56,4 +39,3 @@ jobs:
           push: true
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_BASE }}/bugboard:latest
-            ${{ env.REGISTRY }}/${{ env.IMAGE_BASE }}/bugboard:sha-${{ github.sha }}
