@@ -27,7 +27,6 @@ import lombok.AllArgsConstructor;
 @CrossOrigin(origins = "https://app.bugboard26.it")
 @RestController
 public class UserApi {
-
     private HeaderRequestService headerRequest;
     private JwtService jwtService;
     private UserService userService;
@@ -53,10 +52,11 @@ public class UserApi {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing or invalid Authorization header");
 
         Jws<Claims> token = jwtService.parseToken(headerRequest.extractToken());
-        if (token.getPayload().get("role", String.class) != Role.ADMIN.toString()) 
+        Role role = Role.valueOf(token.getPayload().get("role", String.class));
+        if (role != Role.ADMIN) 
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Only admins can get all users");
        
-        return usersMicroService.getAllUsers();
+        return userService.getAllUsers();
     }
 
 }

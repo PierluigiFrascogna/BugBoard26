@@ -7,14 +7,14 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UserServiceRequest {
+public class UserMicroserviceRequest {
     private String name;
     private String surname;
     private String email;
     private String password;
     private boolean isAdmin; 
 
-    public UserServiceRequest(RegistrationRequest frontendRequest) {
+    public UserMicroserviceRequest(RegistrationRequest frontendRequest) {
         this.name = frontendRequest.getName();
         this.surname = frontendRequest.getSurname();
         this.email = frontendRequest.getEmail();

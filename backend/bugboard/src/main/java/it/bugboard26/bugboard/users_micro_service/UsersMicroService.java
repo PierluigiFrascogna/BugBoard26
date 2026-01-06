@@ -51,7 +51,7 @@ public class UsersMicroService {
     }
 
     public UUID registerUser(RegistrationRequest frontendRequest) {
-        UserServiceRequest backendRequest = new UserServiceRequest(frontendRequest);
+        UserMicroserviceRequest backendRequest = new UserMicroserviceRequest(frontendRequest);
         String registrationURL = userServiceURL + "/auth/register";
         try {
             ResponseEntity<UUID> response = restTemplate.postForEntity(
@@ -102,7 +102,7 @@ public class UsersMicroService {
                         .uri(url)
                         .retrieve()
                         .body(new ParameterizedTypeReference<List<UserResponse>>() {});
+        
     }
 
-    
 }
