@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { ENVIRONMENT_TOKEN } from '../../../../environments/environment-model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, httpResource } from '@angular/common/http';
 import { INewUser, IUser } from './user';
 
 @Injectable({
@@ -12,6 +12,11 @@ export class UserApi {
 
   private readonly API_URL = this.env.urls.api;
   private readonly USERS_URL = "/users"
+
+  readonly usersResource = httpResource<IUser[]>(() => ({
+    url: `${this.API_URL}${this.USERS_URL}`,
+    method: "GET"
+  }));
 
   createUser(user: INewUser){
     return this.http.post<IUser>(

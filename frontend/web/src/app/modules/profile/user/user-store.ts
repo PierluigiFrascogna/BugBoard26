@@ -3,6 +3,12 @@ import { UserApi } from './user-api';
 import { AuthStore } from '../../../core/auth/auth-store';
 import { INewUser, IUser, TUserRole } from './user';
 
+export interface IUserState{
+  appUsers: IUser[];
+  loading: boolean; 
+  error: Error | undefined;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -42,6 +48,16 @@ export class UserStore {
       role: this.role()!
     }
   });
+
+  private readonly _state = computed<IUserState>(() => ({
+      appUsers: this.api.usersResource.hasValue() ? this.api.usersResource.value() :[] as IUser[],
+      loading: this.api.usersResource.isLoading(),
+      error: this.api.usersResource.error()
+    })); 
+  
+    readonly appUsers = computed(() => this._state().appUsers);
+    readonly loading = computed(() => this._state().loading); 
+    readonly error = computed(() => this._state().error);
   
   createUser(user: INewUser){
     this.api.createUser(user).subscribe({
