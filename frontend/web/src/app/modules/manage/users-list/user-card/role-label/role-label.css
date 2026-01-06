@@ -1,4 +1,4 @@
-.developer{
+.DEVELOPER{
     width: fit-content;
     height: fit-content;
 
@@ -11,7 +11,7 @@
     font-weight: bold;
 }
 
-.viewer{
+.VIEWER{
     width: fit-content;
     height: fit-content;
 
@@ -24,7 +24,7 @@
     font-weight: bold;
 }
 
-.admin{
+.ADMIN{
     width: fit-content;
     height: fit-content;
 
