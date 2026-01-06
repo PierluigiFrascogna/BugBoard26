@@ -7,19 +7,23 @@
         <form id="userForm" class="body__form" [formGroup]="userForm" (submit)="createUser()">
             <div class="form__field">
                 <label for="name">Nome: </label>
-                <input type="text" formControlName="name">
+                <input type="text" formControlName="name" name="name">
             </div>
             <div class="form__field">
                 <label for="surname">Cognome: </label>
-                <input type="text" formControlName="surname">
+                <input type="text" formControlName="surname" name="surname">
             </div>
             <div class="form__field">
                 <label for="email">Email: </label>
-                <input type="text" formControlName="email" >
+                <input type="text" formControlName="email" name="email">
+            </div>
+            <div class="form__field">
+                <label for="email">Password: </label>
+                <input type="password" formControlName="password" name="password">
             </div>
             <div class="form__field">
                 <label for="role">Ruolo: </label>
-                <select formControlName="role">
+                <select formControlName="role" name="role">
                     <option value="viewer">viewer</option>
                     <option value="developer">developer</option>
                     <option value="admin">admin</option>

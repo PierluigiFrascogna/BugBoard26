@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { User } from '../../../profile/user/user';
+import { IUser } from '../../../profile/user/user';
 import { RoleLabel } from "./role-label/role-label";
 
 @Component({
@@ -9,7 +9,7 @@ import { RoleLabel } from "./role-label/role-label";
   styleUrl: './user-card.css',
 })
 export class UserCard {
-  @Input() user!: User;
+  @Input() user!: IUser;
 
   deleteUser(){
     //TODO: chiamata allo userStore per eliminare l'utenza corrente

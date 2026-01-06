@@ -16,7 +16,7 @@
 
 .add-user-card-component{
     width: 30vw;
-    height: 35vh;
+    height: 40vh;
 
     display: grid;
     grid-template-rows: 1fr auto;
@@ -38,7 +38,7 @@
     height: 100%;
 
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
 }
 
 .form__field{
@@ -64,6 +64,11 @@
     font-size: 1rem;
     color: whitesmoke;
 }
+
+.form__field input::-ms-reveal{
+    filter: invert(100%);
+}
+
 
 .form__field input:focus{
     outline: none;

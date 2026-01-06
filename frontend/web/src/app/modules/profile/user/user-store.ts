@@ -1,7 +1,7 @@
 import { computed, inject, Injectable, Signal } from '@angular/core';
 import { UserApi } from './user-api';
 import { AuthStore } from '../../../core/auth/auth-store';
-import { User } from './user';
+import { INewUser, IUser, TUserRole } from './user';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +15,7 @@ export class UserStore {
   readonly surname: Signal<string | null>  = computed(() => this.auth.surname());
   readonly email: Signal<string | null> = computed(() => this.auth.email())
   readonly password: Signal<string | null> = computed(() => this.auth.password())
-  readonly role: Signal<string | null> = computed(() => this.auth.role());
+  readonly role: Signal<TUserRole | null> = computed(() => this.auth.role());
 
   private readonly isValid: Signal<boolean> = computed(() => {
     return [
@@ -28,7 +28,7 @@ export class UserStore {
     ].every((e) => e !== null);
   });
 
-  readonly object: Signal<User | null> = computed(() => {
+  readonly object: Signal<IUser | null> = computed(() => {
     if(!this.isValid()) {
       return null;
     }
@@ -43,4 +43,15 @@ export class UserStore {
     }
   });
   
+  createUser(user: INewUser){
+    this.api.createUser(user).subscribe({
+      next: (createdUser: IUser) => {
+
+      },
+      error: (err: Error) => {
+        console.error('Error creating issue event: ', err);
+      }
+    })
+  }
+
 }

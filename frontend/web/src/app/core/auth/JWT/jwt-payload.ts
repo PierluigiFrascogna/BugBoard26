@@ -1,3 +1,5 @@
+import { TUserRole } from "../../../modules/profile/user/user"
+
 export interface JWTPayload {
     sub: string
     iat: number
@@ -6,5 +8,5 @@ export interface JWTPayload {
     surname: string
     email: string
     password: string
-    role: string
+    role: TUserRole
 }

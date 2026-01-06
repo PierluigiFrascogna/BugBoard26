@@ -2,6 +2,7 @@ import { computed, inject, Injectable, signal, Signal, WritableSignal } from '@a
 import { Jwt } from './JWT/jwt';
 import { AuthApi } from './auth-api';
 import { JwtResponse } from './JWT/jwt-response';
+import { TUserRole } from '../../modules/profile/user/user';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,7 @@ export class AuthStore {
   readonly surname: Signal<string | null> = computed(() => this.jwt()?.payload().surname || null);
   readonly email: Signal<string | null> = computed(() => this.jwt()?.payload().email || null);
   readonly password: Signal<string | null> = computed(() => this.jwt()?.payload().password || null);
-  readonly role: Signal<string | null> = computed(() => this.jwt()?.payload().role || null);
+  readonly role: Signal<TUserRole | null> = computed(() => this.jwt()?.payload().role || null);
   // fino a qui
 
   readonly isAuthenticated: Signal<boolean> = computed(() => this.jwt() !== null);

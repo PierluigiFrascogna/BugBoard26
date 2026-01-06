@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { UserStore } from '../../profile/user/user-store';
-import { User } from '../../profile/user/user';
+import { IUser } from '../../profile/user/user';
 import { UserCard } from "./user-card/user-card";
 
 @Component({
@@ -18,7 +18,7 @@ export class UsersList {
       surname: "cognome1",
       email: "mail1@fake.com",
       role: "admin"
-    }as User,
+    }as IUser,
 
     {
       uuid: "user2",
@@ -26,7 +26,7 @@ export class UsersList {
       surname: "cognome2",
       email: "mail2@fake.com",
       role: "viewer",
-    }as User,
+    }as IUser,
 
 
     {
@@ -35,9 +35,9 @@ export class UsersList {
       surname: "cognome3",
       email: "mail3@fake.com",
       role: "developer",
-    }as User,
+    }as IUser,
 
-  ]as User[]
+  ]as IUser[]
 
   
 }
