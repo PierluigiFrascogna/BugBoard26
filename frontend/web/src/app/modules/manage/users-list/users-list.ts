@@ -12,7 +12,4 @@ import { UserCard } from "./user-card/user-card";
 export class UsersList {
   private readonly userStore = inject(UserStore);
   readonly users = computed(() => this.userStore.appUsers());
-  
-
-  
 }

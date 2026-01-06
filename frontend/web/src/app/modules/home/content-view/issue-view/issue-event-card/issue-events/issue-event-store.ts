@@ -20,50 +20,7 @@ export class IssueEventStore {
   private readonly api = inject(IssueEventApi);
     
   private readonly state = computed<IssueEventsState>(() => ({
-    issueEvents: this.api.issueEventsResource.hasValue() ? this.api.issueEventsResource.value() : [
-      {
-        uuid: "comment 1",
-        createdAt: new Date(), 
-        type: "COMMENT",
-        authorUuid: "user 1",
-        text: "blablablba"
-      } as Comment,
-
-      {
-        uuid: "comment 2",
-        createdAt: new Date(), 
-        type: "COMMENT",
-        authorUuid: "user 2",
-      } as Comment,
-
-      {
-        uuid: "change 1",
-        createdAt: new Date(), 
-        type: "CHANGE",
-        authorUuid: "user 1",
-        changeType: "TITLE",
-        old: "issue1",
-        new: "issue1mlmlmlml"
-      } as TitleChange,
-
-      {
-        uuid: "change 2",
-        createdAt: new Date(), 
-        type: "CHANGE",
-        authorUuid: "user 2",
-        changeType: "DESCRIPTION",
-        old: "mlmlmlmlml",
-        new: "brbrbrbrbrbr"
-      } as DescriptionChange,
-
-      {
-        uuid: "comment 3",
-        createdAt: new Date(), 
-        type: "COMMENT",
-        authorUuid: "user 3",
-      } as Comment,
-
-    ] as TIssueEvent[],
+    issueEvents: this.api.issueEventsResource.hasValue() ? this.api.issueEventsResource.value() : [] as TIssueEvent[],
     loading: this.api.issueEventsResource.isLoading(),
     error: this.api.issueEventsResource.error()
   })); 
