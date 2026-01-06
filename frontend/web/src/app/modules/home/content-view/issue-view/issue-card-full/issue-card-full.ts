@@ -41,7 +41,7 @@ export class IssueCardFull {
       title: issue.title,
       description: issue.description,
       state: issue.state,
-      priority: issue.priority ?? null
+      priority: issue.priority
     });
 
     this.issueForm.markAsPristine();

@@ -2,12 +2,12 @@
     <span class="change-logo">📢</span>
     <span class="component__body">
         <div class="body__change-description">
-            @if(priorityChange.old===undefined){
-                {{ priorityChange.authorUuid }} ha impostato la priorità {{ priorityChange.new }}.
-            }@else if (priorityChange.new===undefined) {
-                {{ priorityChange.authorUuid }} ha rimosso la priorità.
+            @if(priorityChange.oldPriority===undefined){
+                {{ priorityChange.author.name }} {{ priorityChange.author.surname }} ha impostato la priorità {{ priorityChange.newPriority }}.
+            }@else if (priorityChange.newPriority===undefined) {
+                {{ priorityChange.author.name }} ha rimosso la priorità.
             }@else{
-                {{ priorityChange.authorUuid }} ha cambiato la priorità da {{ priorityChange.old }} a {{ priorityChange.new }}.
+                {{ priorityChange.author.name }} {{ priorityChange.author.surname }} ha cambiato la priorità da {{ priorityChange.oldPriority }} a {{ priorityChange.newPriority }}.
             }        </div>
         <div class="body__created-at">
             {{ priorityChange.createdAt | date: 'dd/MM/yyyy' }}

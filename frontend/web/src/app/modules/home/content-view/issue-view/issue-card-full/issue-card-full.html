@@ -2,7 +2,7 @@
     <form id="issueForm" [formGroup]="issueForm" (submit)="sendChanges()">
         <div class="component__header">
             <div class="component__header__author">
-                @if(!isEditing()){{{ issue()?.author?.name }}  {{ issue()?.author?.surname }}}
+                @if(!isEditing()){{{ issue()?.author?.name }} {{ issue()?.author?.surname }}}
                 @else{
                     <label>Modifica titolo: </label> 
                     <input type="text" formControlName="title" class="input">
@@ -15,7 +15,6 @@
                         <option [ngValue]="'low'">low</option>
                         <option [ngValue]="'medium'">medium</option>
                         <option [ngValue]="'high'">high</option>
-                        <option [ngValue]="null">nessuna</option>
                     </select>
                 }
                 @if (!isEditing()) {<app-state-label [state]="issue()?.state"></app-state-label>}
