@@ -18,10 +18,11 @@ compose() {
     "$@"
 }
 
+compose down --remove-orphans -v || true
+
 git fetch --all --prune
 git reset --hard origin/main
 
-compose down --remove-orphans -v || true
 compose pull
 compose up -d --remove-orphans
 
