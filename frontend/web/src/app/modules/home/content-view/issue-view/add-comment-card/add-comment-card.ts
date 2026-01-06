@@ -1,24 +1,27 @@
-import { Component, computed, Input, WritableSignal } from '@angular/core';
-import { NgClass } from '@angular/common';
-import { FormControl, FormGroup, Validators, ɵInternalFormsSharedModule, ReactiveFormsModule } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Comment } from '../issue-event-card/issue-events/comment-event/comment-card/comment/comment';
+import { IssueEventStore } from '../issue-event-card/issue-events/issue-event-store';
 
 @Component({
   selector: 'app-add-comment-card',
-  imports: [ɵInternalFormsSharedModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './add-comment-card.html',
   styleUrl: './add-comment-card.css',
 })
 export class AddCommentCard {
+  private readonly issueEventsStore = inject(IssueEventStore);
+
   commentForm = new FormGroup({
-    comment: new FormControl('', [Validators.minLength(2)])
+    comment: new FormControl('', [Validators.required, Validators.minLength(2)])
   })
 
   saveComment(){
-    if(this.commentForm.controls.comment.valid){
-      console.log("you would have sent this comment: ", this.commentForm.controls.comment.value)
-      //TODO: chiamata allo store per mandare la chiamata API
+    if(!this.commentForm.valid){
+      return
     }else{
-      console.log("commento non pubblicato, non valido!");
+      const comment: Comment["text"] = this.commentForm.get("comment")!.value!;
+      this.issueEventsStore.createComment(comment);   
     }
   }
 }

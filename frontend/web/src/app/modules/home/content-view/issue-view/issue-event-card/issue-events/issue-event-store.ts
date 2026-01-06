@@ -1,4 +1,4 @@
-import { computed, inject, Injectable } from '@angular/core';
+import { afterNextRender, computed, inject, Injectable } from '@angular/core';
 import { IssueEventApi } from './issue-event-api';
 import { IssueEvent } from './issue-event';
 import { Change } from './change-event/change-card/change/change';
@@ -79,6 +79,17 @@ export class IssueEventStore {
       },
       error: (err: Error) => {
         console.error('Error creating issue event:', err);
+      }
+    })
+  }
+
+  createComment(comment: Comment["text"]){
+    this.api.createComment(comment).subscribe({
+      next: (createdComment: Comment) => {
+        //TODO: vedere cosa fare qui
+      },
+      error: (err: Error) => {
+        console.error('Error creating comment: ', err);
       }
     })
   }
