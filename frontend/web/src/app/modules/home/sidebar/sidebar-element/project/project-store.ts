@@ -16,19 +16,7 @@ export class ProjectStore {
   private api = inject(ProjectApi);
 
   private readonly _state = computed<ProjectsState>(() => ({
-    projects: this.api.projectsResource.hasValue() ? this.api.projectsResource.value() : [
-      {
-        uuid: "abcde",
-        name: "Backend",
-        creationDate: new Date(),
-      } as Project,
-
-      {
-        uuid: "fghi",
-        name: "Frontend",
-        creationDate: new Date(),
-      }as Project
-    ]as Project[],
+    projects: this.api.projectsResource.hasValue() ? this.api.projectsResource.value() : [] as Project[],
     loading: this.api.projectsResource.isLoading(),
     error: this.api.projectsResource.error()
   })); 

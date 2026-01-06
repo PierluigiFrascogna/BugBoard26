@@ -23,41 +23,7 @@ export class IssueStore {
 
   
   private readonly _state = computed<IIssueState>(() => ({
-    projectIssues: this.api.issuesResource.hasValue() ? this.api.issuesResource.value() :[
-      {
-        uuid: "issue1",
-        title: "issue n1",
-        description: "issue n1 for testing",
-        type: "bug",
-        priority: "high",
-        state: "pending", 
-        image: "",
-        author: "user1"
-      }as IIssue,
-
-      {
-      uuid: "issue2",
-        title: "issue n2",
-        description: "issue n2 for testing",
-        type: "feature",
-        priority: 'medium',
-        state: 'todo', 
-        image: "",
-        author: "user2"
-      }as IIssue,
-
-      {
-      uuid: "issue3",
-        title: "issue n3",
-        description: "issue n3 for testing",
-        type: 'documentation',
-        priority: "low",
-        state: "pending", 
-        image: "",
-        author: "user3"
-      }as IIssue,
-
-    ] as IIssue[],
+    projectIssues: this.api.issuesResource.hasValue() ? this.api.issuesResource.value() :[] as IIssue[],
     loading: this.api.issuesResource.isLoading(),
     error: this.api.issuesResource.error()
   })); 
