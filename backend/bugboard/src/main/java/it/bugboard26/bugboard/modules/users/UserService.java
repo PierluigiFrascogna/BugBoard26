@@ -15,4 +15,9 @@ public class UserService {
     public User getByUuid(UUID uuid) {
         return userRepository.findById(uuid).orElseThrow();
     }
+
+    public User registerUser(User user) {
+        return userRepository.save(user);
+    }
+
 }

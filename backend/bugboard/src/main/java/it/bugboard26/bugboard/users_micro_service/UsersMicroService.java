@@ -15,8 +15,8 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
 import it.bugboard26.bugboard.modules.auth.dtos.LoginRequest;
-import it.bugboard26.bugboard.modules.auth.dtos.RegistrationRequest;
-import it.bugboard26.bugboard.modules.auth.dtos.UserServiceRequest;
+import it.bugboard26.bugboard.modules.users.dtos.RegistrationRequest;
+import it.bugboard26.bugboard.modules.users.dtos.UserServiceRequest;
 
 // TODO: handle errors in case Users Micro-Service is down
 @Service

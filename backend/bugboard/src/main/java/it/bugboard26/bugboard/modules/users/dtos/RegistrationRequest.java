@@ -1,4 +1,4 @@
-package it.bugboard26.bugboard.modules.auth.dtos;
+package it.bugboard26.bugboard.modules.users.dtos;
 
 import it.bugboard26.bugboard.enums.Role;
 
