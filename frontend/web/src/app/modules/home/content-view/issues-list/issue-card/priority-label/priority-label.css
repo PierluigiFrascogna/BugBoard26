@@ -1,4 +1,4 @@
-.low{
+.LOW{
     width: fit-content;
     height: fit-content;
     
@@ -10,7 +10,7 @@
     font-weight: bold;
 }
 
-.medium{
+.MEDIUM{
     width: fit-content;
     height: fit-content;
     
@@ -22,7 +22,7 @@
     font-weight: bold;
 }
 
-.high{
+.HIGH{
     width: fit-content;
     height: fit-content;
     

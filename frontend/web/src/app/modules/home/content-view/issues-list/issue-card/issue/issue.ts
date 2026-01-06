@@ -1,11 +1,12 @@
+import { IUser } from "../../../../../profile/user/user";
+
 export interface INewIssue {
     title: string;
     description: string; 
     type: TIssueType;
     priority:  TIssuePriority;
     state: TIssueState;
-    image: string;
-    author: string;
+    author: IUser;
 }
 
 export interface IIssue extends INewIssue {

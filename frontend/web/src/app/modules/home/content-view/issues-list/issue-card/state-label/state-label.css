@@ -1,4 +1,4 @@
-.todo{
+.TODO{
     width: fit-content;
     height: fit-content;
 
@@ -10,7 +10,7 @@
     font-weight: bold;
 }
 
-.pending{
+.PENDING{
     width: fit-content;
     height: fit-content;
 
@@ -22,7 +22,7 @@
     font-weight: bold;
 }
 
-.done{
+.DONE{
     width: fit-content;
     height: fit-content;
 
