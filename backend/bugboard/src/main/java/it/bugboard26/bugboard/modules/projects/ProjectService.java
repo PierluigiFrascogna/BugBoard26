@@ -14,15 +14,14 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Service
 public class ProjectService {
-    
     ProjectRepository projectRepository;
 
     public Project getByUuid(UUID uuid) {
         return projectRepository.findById(uuid).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Project not found"));
     }
 
-    public List<Project> getByUserUuid(UUID userUuid) {
-        return projectRepository.findByUsersUuid(userUuid);
+    public List<Project> getAllProjects() {
+        return projectRepository.findAll();
     }
 
     public Project createProject(String projectName) {
