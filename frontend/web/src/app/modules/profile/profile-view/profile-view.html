@@ -7,23 +7,21 @@
         <form id="profileForm" class="body__form" [formGroup]="profileForm" (submit)="sendChanges()">
             <div class="form__field">
                 <label for="name">Nome: </label>
-                @if (!isEditing()){<span>{{ user.name }}</span>}
-                @else {<input type="text" formControlName="name">}
+                <span>{{ user.name }}</span>
             </div>
             <div class="form__field">
                 <label for="surname">Cognome: </label>
-                @if (!isEditing()){<span>{{ user.surname }}</span>}
-                @else {<input type="text" formControlName="surname">}
+                <span>{{ user.surname }}</span>
             </div>
             <div class="form__field">
                 <label for="email">Email: </label>
                 @if (!isEditing()){<span>{{ user.email }}</span>}
-                @else {<input type="email" formControlName="email">}
+                @else {<input type="email" formControlName="email" name="email">}
             </div>
             <div class="form__field">
                 <label for="password">Password: </label>
                 @if (!isEditing()){<span>{{ user.password }}</span>}
-                @else {<input type="password" formControlName="password">}
+                @else {<input type="password" formControlName="password" name="password">}
             </div>
             <div class="form__field">
                 <label for="role">Ruolo: </label>

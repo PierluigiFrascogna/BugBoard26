@@ -2,7 +2,7 @@ import { computed, inject, Injectable, signal, Signal, WritableSignal } from '@a
 import { Jwt } from './JWT/jwt';
 import { AuthApi } from './auth-api';
 import { JwtResponse } from './JWT/jwt-response';
-import { TUserRole } from '../../modules/profile/user/user';
+import { IUserUpdate, TUserRole } from '../../modules/profile/user/user';
 
 @Injectable({
   providedIn: 'root',
@@ -72,6 +72,20 @@ export class AuthStore {
 
   sudologin(){
     this.setJwt(new Jwt("admin"));
+  }
+
+  modifyUser(updates: IUserUpdate){
+    this.authApi.modifyUser(updates).subscribe({
+      next: (Response: JwtResponse) => {
+        const jwt = new Jwt(Response.token);
+        this.setJwt(jwt);
+      },
+      error: (err) => {
+        console.error('update failed', err);
+        this.unsetJwt();
+      }
+    });
+
   }
 
 }

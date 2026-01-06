@@ -16,7 +16,8 @@ import { AuthStore } from '../../../../../core/auth/auth-store';
 export class IssueCardFull {
   private readonly authStore = inject(AuthStore);
   private readonly issueStore = inject(IssueStore);
-  readonly isViewer: Signal<boolean> = computed(() => this.authStore.role()==="viewer");
+  //readonly isViewer: Signal<boolean> = computed(() => this.authStore.role()==="viewer");
+  readonly isViewer: Signal<boolean> = computed(() => false);
   readonly issue = computed(() => this.issueStore.selectedIssue());
   
   isEditing = signal<boolean>(false);
