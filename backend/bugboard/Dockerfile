@@ -4,7 +4,7 @@ WORKDIR /app
 # Copiamo solo il pom.xml per scaricare le dipendenze (sfrutta la cache di Docker)
 COPY pom.xml .
 # Scarica le dipendenze (senza copiare tutto il codice sorgente ancora)
-RUN mvn dependency:go-offline
+RUN mvn dependency:resolve-plugins dependency:resolve
 
 # Copiamo il codice sorgente e compiliamo
 COPY src ./src
