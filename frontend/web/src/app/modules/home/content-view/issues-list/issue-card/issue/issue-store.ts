@@ -1,9 +1,9 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { IssueApi } from './issue-api';
-import { Issue, TIssuePriority, TIssueState, TIssueType } from './issue';
+import { IIssue, INewIssue, TIssuePriority, TIssueState, TIssueType } from './issue';
 
 export interface IIssueState {
-  projectIssues: Issue[];
+  projectIssues: IIssue[];
   loading: boolean;
   error: Error | undefined;
 }
@@ -33,7 +33,7 @@ export class IssueStore {
         state: "pending", 
         image: "",
         author: "user1"
-      }as Issue,
+      }as IIssue,
 
       {
       uuid: "issue2",
@@ -44,7 +44,7 @@ export class IssueStore {
         state: 'todo', 
         image: "",
         author: "user2"
-      }as Issue,
+      }as IIssue,
 
       {
       uuid: "issue3",
@@ -55,9 +55,9 @@ export class IssueStore {
         state: "pending", 
         image: "",
         author: "user3"
-      }as Issue,
+      }as IIssue,
 
-    ] as Issue[],
+    ] as IIssue[],
     loading: this.api.issuesResource.isLoading(),
     error: this.api.issuesResource.error()
   })); 
@@ -66,11 +66,11 @@ export class IssueStore {
   readonly loading = computed(() => this._state().loading); 
   readonly error = computed(() => this._state().error);
   
-  private readonly _selectedIssue = signal<Issue | null>(null);
+  private readonly _selectedIssue = signal<IIssue | null>(null);
   readonly selectedIssue = computed(() => this._selectedIssue());
   readonly title = computed(() => this._selectedIssue()!==null ? "."+ this._selectedIssue()!.title : '' );
 
-  selectIssue(issue: Issue){
+  selectIssue(issue: IIssue){
     this._selectedIssue.set(issue);
   }
 
@@ -87,6 +87,18 @@ export class IssueStore {
     console.log("signal _selectedFilters: ", this._selectedFilters());
     console.log("signal selectedFilters: ", this.selectedFilters());
 
+  }
+
+  createIssue(issue: INewIssue) {
+    this.api.createIssue(issue).subscribe({
+      next: (newIssue) => {
+        // Update the local state with the newly created issue
+        this.api.issuesResource.reload();
+      },
+      error: (err) => {
+        console.error('Error creating issue:', err);
+      },
+    });
   }
 
 }

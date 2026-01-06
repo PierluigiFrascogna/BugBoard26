@@ -1,12 +1,15 @@
-export interface Issue {
-    uuid: string; 
-    title: string; 
+export interface INewIssue {
+    title: string;
     description: string; 
     type: TIssueType;
     priority:  TIssuePriority;
     state: TIssueState;
     image: string;
     author: string;
+}
+
+export interface IIssue extends INewIssue {
+    uuid: string;
 }
 
 export type TIssueType = "question" | "bug" | "documentation" | "feature";
