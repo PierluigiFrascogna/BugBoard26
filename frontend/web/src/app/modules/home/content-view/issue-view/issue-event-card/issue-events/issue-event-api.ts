@@ -3,6 +3,7 @@ import { HttpClient, httpResource } from '@angular/common/http';
 import { ENVIRONMENT_TOKEN } from '../../../../../../../environments/environment-model';
 import { IssueStore } from '../../../issues-list/issue-card/issue/issue-store';
 import { TIssueEvent } from './issue-event-model';
+import { Comment } from './comment-event/comment-card/comment/comment';
 
 @Injectable({
   providedIn: 'root',
@@ -25,6 +26,12 @@ export class IssueEventApi {
     return this.http.post<TIssueEvent>(
       `${this.API_URL}${this.ISSUES_URL}/${this.project.selectedIssue()?.uuid}${this.ISSUE_EVENTS_URL}`,
       issueEvent
+    );
+  }
+
+  createComment(comment: Comment["text"]){
+    return this.http.post<Comment>(
+      `${this.API_URL}${this.ISSUES_URL}/${this.project.selectedIssue()?.uuid}`, comment
     );
   }
 }
