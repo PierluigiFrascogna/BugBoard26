@@ -27,8 +27,6 @@ import it.bugboard26.bugboard.modules.issue_events.changes.dtos.response.ChangeR
 import it.bugboard26.bugboard.modules.issue_events.comments.CommentRequest;
 import it.bugboard26.bugboard.modules.issue_events.comments.CommentResponse;
 import it.bugboard26.bugboard.modules.issues.IssueService;
-import it.bugboard26.bugboard.modules.issues.dtos.IssueRequest;
-import it.bugboard26.bugboard.modules.issues.dtos.IssueResponse;
 import it.bugboard26.bugboard.modules.users.UserService;
 import it.bugboard26.bugboard.users_micro_service.UserResponse;
 import it.bugboard26.bugboard.users_micro_service.UsersMicroService;
@@ -72,28 +70,6 @@ public class ProjectApi {
         return response;
     }
 
-    @GetMapping("/projects/{uuid_project}") 
-    public List<IssueResponse> getIssuesByProject(@PathVariable UUID uuid_project) {
-        if (!headerRequest.hasAuthorization()) 
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing or invalid Authorization header");
-        
-        List<Issue> issues = issueService.getAllByProjectUuid(uuid_project);
-        
-        Set<UUID> authorIds = new HashSet<>();
-        for (Issue issue : issues) 
-            authorIds.add(issue.getAuthor().getUuid());   
-        
-        Map<UUID, UserResponse> authors = usersMicroService.getUsersByIds(authorIds);
-
-        List<IssueResponse> response = new ArrayList<>();
-        for (Issue issue : issues){
-            UserResponse author = authors.get(issue.getAuthor().getUuid());
-            response.add(IssueResponse.map(issue, author));
-        }
-            
-        return response;
-    }
-
     @GetMapping("/projects/{uuid_project}/{uuid_issue}")
     public List<IssueEventResponse> getEventsByIssue(@PathVariable UUID uuid_project, @PathVariable UUID uuid_issue) {
          if (!headerRequest.hasAuthorization()) 
@@ -114,24 +90,6 @@ public class ProjectApi {
         }
         
         return response;
-    }
-
-    @PostMapping("/projects/{uuid_project}")
-    public ResponseEntity<IssueResponse> postNewIssue(@PathVariable UUID uuid_project, @RequestBody IssueRequest issueRequest) {
-        if (!headerRequest.hasAuthorization()) 
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing or invalid Authorization header");
-
-        Jws<Claims> token = jwtService.parseToken(headerRequest.extractToken());
-        UUID uuid_user = UUID.fromString(token.getPayload().getSubject());
-        User user = userService.getByUuid(uuid_user);
-
-        if (user.getRole() == Role.VIEWER) 
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Insufficient permissions");
-
-        Issue newIssue = issueService.createIssue(issueRequest, uuid_project, user);
-        UserResponse author = new UserResponse(token);
-        IssueResponse issueResponse = IssueResponse.map(newIssue, author);
-        return new ResponseEntity<>(issueResponse, HttpStatus.CREATED);
     }
 
     @PostMapping("/projects/{uuid_project}/{uuid_issue}")
