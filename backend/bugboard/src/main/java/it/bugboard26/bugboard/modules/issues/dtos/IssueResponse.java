@@ -7,7 +7,7 @@ import it.bugboard26.bugboard.entities.Issue;
 import it.bugboard26.bugboard.enums.IssueState;
 import it.bugboard26.bugboard.enums.IssueType;
 import it.bugboard26.bugboard.enums.Priority;
-import it.bugboard26.bugboard.users_micro_service.UserResponse;
+import it.bugboard26.bugboard.modules.users.dtos.UserResponse;
 import lombok.Getter;
 
 @Getter

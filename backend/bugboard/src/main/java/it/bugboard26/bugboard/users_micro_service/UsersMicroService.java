@@ -1,22 +1,25 @@
 package it.bugboard26.bugboard.users_micro_service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpStatusCodeException;
+import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
 import it.bugboard26.bugboard.modules.auth.dtos.LoginRequest;
 import it.bugboard26.bugboard.modules.users.dtos.RegistrationRequest;
-import it.bugboard26.bugboard.modules.users.dtos.UserServiceRequest;
+import it.bugboard26.bugboard.modules.users.dtos.UserResponse;
 
 // TODO: handle errors in case Users Micro-Service is down
 @Service
@@ -24,11 +27,13 @@ public class UsersMicroService {
     //Attributes
     private String userServiceURL;
     private RestTemplate restTemplate;
+    private RestClient restClient;
 
     //Constructor
-    public UsersMicroService(@Value("${users-service.url}") String usersServiceUrl, RestTemplate restTemplate) {
+    public UsersMicroService(@Value("${users-service.url}") String usersServiceUrl, RestTemplate restTemplate, RestClient restClient) {
         this.userServiceURL = usersServiceUrl;
         this.restTemplate = restTemplate;
+        this.restClient = restClient;
     }
 
     //Methods
@@ -89,6 +94,14 @@ public class UsersMicroService {
         catch (HttpStatusCodeException e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal error: " + e.getMessage());
         }
+    }
+
+    public List<UserResponse> getAllUsers() {
+        String url = userServiceURL + "/users";
+        return restClient.get()
+                        .uri(url)
+                        .retrieve()
+                        .body(new ParameterizedTypeReference<List<UserResponse>>() {});
     }
 
     

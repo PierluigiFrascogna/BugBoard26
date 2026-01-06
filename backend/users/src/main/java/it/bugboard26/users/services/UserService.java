@@ -46,4 +46,10 @@ public class UserService {
          return response.toArray(new UserResponse[0]);
     }
 
+    public List<UserResponse> findAll() {
+        return userRepository.findAll().stream()
+        .map(user -> UserResponse.map(user))
+        .toList();
+    }
+
 }

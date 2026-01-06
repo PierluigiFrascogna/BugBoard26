@@ -6,7 +6,7 @@ import org.springframework.web.server.ResponseStatusException;
 import it.bugboard26.bugboard.entities.User;
 import it.bugboard26.bugboard.modules.auth.dtos.LoginRequest;
 import it.bugboard26.bugboard.modules.users.UserRepository;
-import it.bugboard26.bugboard.users_micro_service.UserResponse;
+import it.bugboard26.bugboard.modules.users.dtos.UserResponse;
 import it.bugboard26.bugboard.users_micro_service.UsersMicroService;
 import lombok.AllArgsConstructor;
 

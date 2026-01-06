@@ -1,6 +1,7 @@
-package it.bugboard26.bugboard.modules.users.dtos;
+package it.bugboard26.bugboard.users_micro_service;
 
 import it.bugboard26.bugboard.enums.Role;
+import it.bugboard26.bugboard.modules.users.dtos.RegistrationRequest;
 import lombok.Getter;
 import lombok.Setter;
 

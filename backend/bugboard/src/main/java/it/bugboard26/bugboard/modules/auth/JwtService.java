@@ -12,7 +12,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import it.bugboard26.bugboard.users_micro_service.UserResponse;
+import it.bugboard26.bugboard.modules.users.dtos.UserResponse;
 
 @Service
 public class JwtService {

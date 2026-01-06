@@ -1,5 +1,6 @@
 package it.bugboard26.users.controller;
 
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -17,12 +18,14 @@ import it.bugboard26.users.services.AuthService;
 import it.bugboard26.users.services.UserService;
 
 import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @AllArgsConstructor
 @RestController
 public class UserController {
     private UserService userService;
-    private AuthService authService;
 
     //TODO: implementare update user
     // @PutMapping("/users/me")
@@ -42,6 +45,12 @@ public class UserController {
     public UserResponse[] getUsersBatch(@RequestBody Set<UUID> user_ids) {
         return userService.findAllByIds(user_ids);
     }
+
+    @GetMapping("/users")
+    public List<UserResponse> getAllUsers() {
+        return userService.findAll();
+    }
+    
     
     
 }

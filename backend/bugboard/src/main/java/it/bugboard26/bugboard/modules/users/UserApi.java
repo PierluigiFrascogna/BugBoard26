@@ -1,9 +1,11 @@
 package it.bugboard26.bugboard.modules.users;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +19,7 @@ import it.bugboard26.bugboard.enums.Role;
 import it.bugboard26.bugboard.modules.auth.JwtService;
 import it.bugboard26.bugboard.modules.projects.HeaderRequestService;
 import it.bugboard26.bugboard.modules.users.dtos.RegistrationRequest;
+import it.bugboard26.bugboard.modules.users.dtos.UserResponse;
 import it.bugboard26.bugboard.users_micro_service.UsersMicroService;
 import lombok.AllArgsConstructor;
 
@@ -24,6 +27,7 @@ import lombok.AllArgsConstructor;
 @CrossOrigin(origins = "https://app.bugboard26.it")
 @RestController
 public class UserApi {
+
     private HeaderRequestService headerRequest;
     private JwtService jwtService;
     private UserService userService;
@@ -41,6 +45,18 @@ public class UserApi {
         UUID uuid_newUser = usersMicroService.registerUser(registrationRequest);
         User newUser = new User(uuid_newUser, registrationRequest.getRole());
         return userService.registerUser(newUser);
+    }
+
+    @GetMapping("/users")
+    public List<UserResponse> getAllUsers() {
+        if (!headerRequest.hasAuthorization()) 
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing or invalid Authorization header");
+
+        Jws<Claims> token = jwtService.parseToken(headerRequest.extractToken());
+        if (token.getPayload().get("role", String.class) != Role.ADMIN.toString()) 
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Only admins can get all users");
+       
+        return usersMicroService.getAllUsers();
     }
 
 }

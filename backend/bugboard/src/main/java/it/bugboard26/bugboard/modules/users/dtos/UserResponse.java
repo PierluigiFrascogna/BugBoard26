@@ -1,4 +1,4 @@
-package it.bugboard26.bugboard.users_micro_service;
+package it.bugboard26.bugboard.modules.users.dtos;
 
 import java.util.UUID;
 

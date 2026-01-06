@@ -17,7 +17,7 @@ import it.bugboard26.bugboard.entities.User;
 import it.bugboard26.bugboard.modules.issue_events.changes.dtos.request.ChangeRequest;
 import it.bugboard26.bugboard.modules.issue_events.comments.CommentRequest;
 import it.bugboard26.bugboard.modules.issues.IssueService;
-import it.bugboard26.bugboard.users_micro_service.UserResponse;
+import it.bugboard26.bugboard.modules.users.dtos.UserResponse;
 import it.bugboard26.bugboard.users_micro_service.UsersMicroService;
 import lombok.AllArgsConstructor;
 

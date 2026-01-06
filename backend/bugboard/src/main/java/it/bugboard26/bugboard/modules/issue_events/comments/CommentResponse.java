@@ -2,7 +2,7 @@ package it.bugboard26.bugboard.modules.issue_events.comments;
 
 import it.bugboard26.bugboard.entities.Comment;
 import it.bugboard26.bugboard.modules.issue_events.IssueEventResponse;
-import it.bugboard26.bugboard.users_micro_service.UserResponse;
+import it.bugboard26.bugboard.modules.users.dtos.UserResponse;
 import lombok.Getter;
 
 @Getter

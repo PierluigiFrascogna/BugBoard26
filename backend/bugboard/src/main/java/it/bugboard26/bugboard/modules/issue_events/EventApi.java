@@ -31,8 +31,7 @@ import it.bugboard26.bugboard.modules.issue_events.comments.CommentResponse;
 import it.bugboard26.bugboard.modules.issues.IssueService;
 import it.bugboard26.bugboard.modules.projects.HeaderRequestService;
 import it.bugboard26.bugboard.modules.users.UserService;
-import it.bugboard26.bugboard.users_micro_service.UserResponse;
-
+import it.bugboard26.bugboard.modules.users.dtos.UserResponse;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
