@@ -2,7 +2,7 @@
     <form id="issueForm" [formGroup]="issueForm" (submit)="sendChanges()">
         <div class="component__header">
             <div class="component__header__author">
-                @if(!isEditing()){{{ issue()?.author }}}
+                @if(!isEditing()){{{ issue()?.author?.name }}  {{ issue()?.author?.surname }}}
                 @else{
                     <label>Modifica titolo: </label> 
                     <input type="text" formControlName="title" class="input">

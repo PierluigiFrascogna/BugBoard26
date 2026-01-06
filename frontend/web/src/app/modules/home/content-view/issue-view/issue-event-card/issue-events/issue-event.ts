@@ -1,6 +1,8 @@
+import { IUser } from "../../../../../profile/user/user";
+
 export interface IssueEvent {
     uuid: string;
-    createdAt: Date; 
+    createdAt: string; 
     type: "COMMENT" | "CHANGE"; 
-    authorUuid: string
+    author: IUser
 }

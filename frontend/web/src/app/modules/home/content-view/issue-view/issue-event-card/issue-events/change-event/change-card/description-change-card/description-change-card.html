@@ -2,7 +2,7 @@
     <span class="change-logo">📜</span>
     <span class="component__body">
         <div class="body__change-description">
-            {{ descriptionChange.authorUuid }} ha cambiato la descrizione.
+            {{ descriptionChange.author.name }} {{ descriptionChange.author.surname }}  ha cambiato la descrizione.
         </div>
         <div class="body__created-at">
             {{ descriptionChange.createdAt | date: 'dd/MM/yyyy' }}

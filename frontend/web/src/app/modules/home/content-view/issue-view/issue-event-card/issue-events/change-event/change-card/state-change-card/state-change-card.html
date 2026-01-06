@@ -2,7 +2,7 @@
     <span class="change-logo">✔</span>
     <span class="component__body">
         <div class="body__change-description">
-            {{ stateChange.authorUuid }} ha cambiato lo stato da {{ stateChange.old }} a {{ stateChange.new }}.
+            {{ stateChange.author.name }} {{ stateChange.author.surname }}ha cambiato lo stato da {{ stateChange.old }} a {{ stateChange.new }}.
         </div>
         <div class="body__created-at">
             {{ stateChange.createdAt | date: 'dd/MM/yyyy' }}
