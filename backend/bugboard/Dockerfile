@@ -16,8 +16,8 @@ WORKDIR /app
 # Copia solo il file JAR generato dallo stage precedente
 COPY --from=build /app/target/*.jar app.jar
 
-# Espone la porta (8080 di default)
-EXPOSE 8080
+# Espone la porta (8082 di default)
+EXPOSE 8082
 
 # Comando di avvio vero e proprio
 ENTRYPOINT ["java", "-jar", "app.jar"]
