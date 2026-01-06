@@ -3,6 +3,7 @@ package it.bugboard26.bugboard.modules.users;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +21,7 @@ import it.bugboard26.bugboard.users_micro_service.UsersMicroService;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
+@CrossOrigin(origins = "https://app.bugboard26.it")
 @RestController
 public class UserApi {
     private HeaderRequestService headerRequest;

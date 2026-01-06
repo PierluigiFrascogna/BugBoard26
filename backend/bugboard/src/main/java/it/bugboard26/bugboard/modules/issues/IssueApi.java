@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,6 +30,7 @@ import it.bugboard26.bugboard.users_micro_service.UserResponse;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
+@CrossOrigin(origins = "https://app.bugboard26.it")
 @RequestMapping("/projects/{uuid_project}")
 @RestController
 public class IssueApi {

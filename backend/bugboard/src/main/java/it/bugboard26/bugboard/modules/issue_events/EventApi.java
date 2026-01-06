@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,6 +37,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @RequestMapping("/projects/{uuid_project}/{uuid_issue}")
+@CrossOrigin(origins = "https://app.bugboard26.it")
 @RestController
 public class EventApi {
     private HeaderRequestService headerRequest;
