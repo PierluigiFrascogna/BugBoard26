@@ -71,4 +71,15 @@ export class IssueEventStore {
   readonly issueEvents = computed(() => this.state().issueEvents);
   readonly loading = computed(() => this.state().loading); 
   readonly error = computed(() => this.state().error);
+
+  createIssueEvent(issueEvent: TIssueEvent) {
+    this.api.createIssueEvent(issueEvent).subscribe({
+      next: (createdEvent: TIssueEvent) => {
+        // Aggiorna lo stato locale aggiungendo il nuovo evento creato
+      },
+      error: (err: Error) => {
+        console.error('Error creating issue event:', err);
+      }
+    })
+  }
 }
