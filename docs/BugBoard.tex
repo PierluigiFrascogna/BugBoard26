@@ -185,7 +185,7 @@ Qui di seguito riportiamo la formalizzazione di un requisito quale la visualizza
 \end{figure}
 
 \newpage
-E qui di seguito riportiamol'inerente tabella di Cockburn:
+E qui di seguito riportiamo l'inerente tabella di Cockburn:
 
 
 % --- definizione colori ---
@@ -340,10 +340,30 @@ Il sistema è composto dai seguenti elementi:
 Per la realizzazione della \gls{piattaforma} BugBoard26, abbiamo scelto le seguenti tecnologie:
 \begin{itemize}
     \item \textbf{Frontend:} \textit{Angular.ts} per la costruzione dell'interfaccia utente, grazie alla sua modularità e facilità di integrazione con backend RESTful.
-    \item \textbf{API Gateway:} \textit{Java Spring} per il bilanciamento del carico e la gestione delle richieste tra i microservizi.    
     \item \textbf{Backend:} \textit{Java Spring} per la creazione dei microservizi, grazie alla sua robustezza.
     \item \textbf{Database:} \textit{PostgreSQL} per la gestione dei dati relazionali, grazie alla sua affidabilità e scalabilità.
 \end{itemize}
+\newpage
+
+\section{SOFTWARE DESIGN}
+\subsection{Persistenza dei dati}
+Per la parte di persistenza di dati ci siamo affidati a Supabase, non per le funzionalità di MBaaS, ma come provider di database.
+Come annunciato in precedenza, il backend è diviso in due microservizi, ognuno dei quali fornito del proprio database. Qui di seguito
+riportiamo lo schema per entrambi:
+
+\includesvg[width=0.50\linewidth]{usersDB} \\[2em]
+\includesvg[width=0.50\linewidth]{BugBoardDB}
+
+\subsection{Motivazioni delle scelte adottate?}
+
+\subsection{Strumenti di versioning}
+Lo strumento di versioning da noi utilizzato è stato GitHub. È possibile visualizzare la repo al seguente link:
+\url{https://github.com/PierluigiFrascogna/BugBoard26}
+Qui è, ovviamente, possibile visualizzare ogni possibile statistica relativa a software e contributors, in modo molto più esaustivo di 
+quanto potremmo mai offrire noi.
+
+\subsection{Qualità del codice}
+
 
 \end{document}
 
