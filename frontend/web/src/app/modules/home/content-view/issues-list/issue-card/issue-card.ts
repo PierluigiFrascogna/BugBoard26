@@ -1,5 +1,5 @@
 import { Component, inject, Input } from '@angular/core';
-import { Issue } from './issue/issue';
+import { IIssue } from './issue/issue';
 import { PriorityLabel } from "./priority-label/priority-label";
 import { TypeLabel } from "./type-label/type-label";
 import { StateLabel } from "./state-label/state-label";
@@ -12,7 +12,7 @@ import { IssueStore } from './issue/issue-store';
   styleUrl: './issue-card.css',
 })
 export class IssueCard {
-  @Input() issue!: Issue; 
+  @Input() issue!: IIssue; 
   private readonly issueStore = inject(IssueStore);
   
   selectIssue() {
