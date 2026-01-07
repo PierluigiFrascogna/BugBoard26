@@ -5,7 +5,9 @@ import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -57,6 +59,19 @@ public class UserApi {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Only admins can get all users");
        
         return userService.getAllUsers();
+    }
+
+    @DeleteMapping("/users/{uuid_user}")
+    public void deleteUser(@PathVariable UUID uuid_user) {
+        if (!headerRequest.hasAuthorization()) 
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing or invalid Authorization header");
+
+        Jws<Claims> token = jwtService.parseToken(headerRequest.extractToken());
+        Role role = Role.valueOf(token.getPayload().get("role", String.class));
+        if (role != Role.ADMIN) 
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Only admins can delete users");
+        
+        usersMicroService.deleteUser(uuid_user);
     }
 
 }

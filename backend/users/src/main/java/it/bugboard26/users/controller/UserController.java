@@ -18,7 +18,10 @@ import it.bugboard26.users.services.AuthService;
 import it.bugboard26.users.services.UserService;
 
 import lombok.AllArgsConstructor;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -50,7 +53,10 @@ public class UserController {
     public List<UserResponse> getAllUsers() {
         return userService.findAll();
     }
-    
-    
+
+    @DeleteMapping("/users/{uuid_user}")
+    public void deleteUser(@PathVariable UUID uuid_user) {
+        userService.deleteUser(uuid_user);
+    }
     
 }

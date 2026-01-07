@@ -52,4 +52,10 @@ public class UserService {
         .toList();
     }
 
+    public void deleteUser(UUID uuid_user) {
+        User user = this.findByUuid(uuid_user);
+        user.setActive(false);
+        userRepository.save(user);
+    }
+
 }

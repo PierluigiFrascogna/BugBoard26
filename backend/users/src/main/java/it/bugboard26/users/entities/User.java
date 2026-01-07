@@ -12,8 +12,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@Getter @Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
@@ -37,6 +36,9 @@ public class User {
 
     @Column(name = "is_admin")
     private boolean isAdmin;
+
+    @Column(name = "is_active")
+    private boolean isActive;
 
     public User(String name, String surname, String email, String passwordHash, boolean isAdmin) {
         this.name = name;

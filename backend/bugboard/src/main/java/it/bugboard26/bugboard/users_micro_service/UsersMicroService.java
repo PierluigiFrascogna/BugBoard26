@@ -105,4 +105,11 @@ public class UsersMicroService {
         
     }
 
+    public void deleteUser(UUID uuid_user) {
+        String url = userServiceURL + "/users/" + uuid_user.toString();
+        restClient.delete()
+                    .uri(url)
+                    .retrieve()
+                    .toBodilessEntity();
+    }
 }
