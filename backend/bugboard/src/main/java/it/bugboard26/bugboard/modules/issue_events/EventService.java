@@ -33,7 +33,7 @@ public class EventService {
     }
 
     public List<IssueEvent> getByIssueUuid(UUID uuid_issue) {
-        return eventRepository.findByIssueUuid(uuid_issue);
+        return eventRepository.findByIssueUuidOrderBy(uuid_issue);
     }
 
     public Comment saveComment(CommentRequest request, Issue issue, User author) {
