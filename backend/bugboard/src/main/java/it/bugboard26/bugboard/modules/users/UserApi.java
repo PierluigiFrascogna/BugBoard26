@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -27,6 +28,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @CrossOrigin(origins = "https://app.bugboard26.it")
+@RequestMapping("/users")
 @RestController
 public class UserApi {
     private HeaderRequestService headerRequest;
@@ -34,7 +36,7 @@ public class UserApi {
     private UserService userService;
     private UsersMicroService usersMicroService;
 
-    @PostMapping("/register")
+    @PostMapping
     public User register(@RequestBody RegistrationRequest registrationRequest) {
         if (!headerRequest.hasAuthorization()) 
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing or invalid Authorization header");
@@ -49,7 +51,7 @@ public class UserApi {
         return userService.registerUser(newUser);
     }
 
-    @GetMapping("/users")
+    @GetMapping
     public List<UserResponse> getAllUsers() {
         if (!headerRequest.hasAuthorization()) 
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing or invalid Authorization header");
@@ -62,7 +64,7 @@ public class UserApi {
         return userService.getAllUsers();
     }
 
-    @DeleteMapping("/users/{uuid_user}")
+    @DeleteMapping("/{uuid_user}")
     public void deleteUser(@PathVariable UUID uuid_user) {
         if (!headerRequest.hasAuthorization()) 
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing or invalid Authorization header");

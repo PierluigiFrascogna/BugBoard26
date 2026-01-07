@@ -25,22 +25,6 @@ public class AuthService {
         return user;
     }
 
-    public User register(RegistrationRequest frontendRequest) {
-        if(userService.existsByEmail(frontendRequest.getEmail())) 
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Email already in use");
-
-        String hashedPassword = BCrypt.hashpw(frontendRequest.getPassword(), BCrypt.gensalt());
-        User newUser = new User(
-            frontendRequest.getName(),
-            frontendRequest.getSurname(),
-            frontendRequest.getEmail(),
-            hashedPassword,
-            frontendRequest.isAdmin()
-        );
-        userService.save(newUser);
-        return newUser;
-    }
-
     public User updateUser(UpdateUserRequest updateRequest) {
         User user = userService.findByUuid(updateRequest.getUuidRequester());
 

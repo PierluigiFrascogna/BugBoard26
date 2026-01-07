@@ -54,16 +54,14 @@ public class UsersMicroService {
 
     public UUID registerUser(RegistrationRequest frontendRequest) {
         UserMicroserviceRequest backendRequest = new UserMicroserviceRequest(frontendRequest);
-        String registrationURL = userServiceURL + "/auth/register";
+        String registrationURL = userServiceURL + "/users";
         try {
-            ResponseEntity<UUID> response = restTemplate.postForEntity(
-                registrationURL,
-                backendRequest,
-                UUID.class
-            );
-            
-            UUID uuid_newUser = response.getBody();
-            return uuid_newUser;
+            return restClient.post()
+                        .uri(registrationURL)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(backendRequest)
+                        .retrieve()
+                        .body(UUID.class);            
         }
         catch (HttpClientErrorException.Conflict e) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Email already in use");

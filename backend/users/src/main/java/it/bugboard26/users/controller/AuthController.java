@@ -1,9 +1,6 @@
 package it.bugboard26.users.controller;
 
-import java.util.UUID;
-
 import it.bugboard26.users.dtos.LoginRequest;
-import it.bugboard26.users.dtos.RegistrationRequest;
 import it.bugboard26.users.dtos.UpdateUserRequest;
 import it.bugboard26.users.dtos.UserResponse;
 import it.bugboard26.users.entities.User;
@@ -27,12 +24,6 @@ public class AuthController {
     public UserResponse login(@RequestBody LoginRequest loginRequest) {
         User userLogged =  authService.login(loginRequest);
         return UserResponse.map(userLogged); 
-    }
-    
-    @PostMapping("/register")
-    public UUID register(@RequestBody RegistrationRequest registerRequest) {        
-        User newUser = authService.register(registerRequest);
-        return newUser.getUuid();
     }
 
     @PatchMapping

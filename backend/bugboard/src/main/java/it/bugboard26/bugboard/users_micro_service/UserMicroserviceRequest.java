@@ -13,6 +13,7 @@ public class UserMicroserviceRequest {
     private String email;
     private String password;
     private boolean isAdmin; 
+    private boolean isActive;
 
     public UserMicroserviceRequest(RegistrationRequest frontendRequest) {
         this.name = frontendRequest.getName();
@@ -20,5 +21,6 @@ public class UserMicroserviceRequest {
         this.email = frontendRequest.getEmail();
         this.password = frontendRequest.getPassword();
         this.isAdmin = (frontendRequest.getRole() == Role.ADMIN) ? true : false; 
+        this.isActive = true;
     }
 }

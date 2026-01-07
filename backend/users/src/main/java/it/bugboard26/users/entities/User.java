@@ -38,7 +38,7 @@ public class User {
     private boolean isAdmin;
 
     @Column(name = "is_active")
-    private boolean isActive;
+    private boolean isActive = true;
 
     public User(String name, String surname, String email, String passwordHash, boolean isAdmin) {
         this.name = name;
