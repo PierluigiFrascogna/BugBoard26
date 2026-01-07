@@ -12,16 +12,16 @@
                 <app-type-label [type]="issue()!.type"></app-type-label>
                 @if (!isEditing()) {<app-priority-label [priority]="issue()?.priority"></app-priority-label>}
                 @else{<select formControlName="priority" class="input">
-                        <option [ngValue]="'low'">low</option>
-                        <option [ngValue]="'medium'">medium</option>
-                        <option [ngValue]="'high'">high</option>
+                        <option [ngValue]="'LOW'">low</option>
+                        <option [ngValue]="'MEDIUM'">medium</option>
+                        <option [ngValue]="'HIGH'">high</option>
                     </select>
                 }
                 @if (!isEditing()) {<app-state-label [state]="issue()?.state"></app-state-label>}
                 @else {<select formControlName="state" class="input">
-                        <option [ngValue]="'todo'">todo</option>
-                        <option [ngValue]="'pending'">pending</option>
-                        <option [ngValue]="'done'">done</option>
+                        <option [ngValue]="'TODO'">todo</option>
+                        <option [ngValue]="'PENDING'">pending</option>
+                        <option [ngValue]="'DONE'">done</option>
                     </select>
                 }
             </div>
