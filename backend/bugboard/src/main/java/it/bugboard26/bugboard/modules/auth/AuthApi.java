@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.bugboard26.bugboard.modules.auth.dtos.JwtResponse;
 import it.bugboard26.bugboard.modules.auth.dtos.LoginRequest;
 
 import lombok.AllArgsConstructor;
@@ -18,7 +19,7 @@ public class AuthApi {
     private AuthService authService;
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginRequest loginRequest) {
+    public JwtResponse login(@RequestBody LoginRequest loginRequest) {
         return authService.loginUser(loginRequest);
     }
 }

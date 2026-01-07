@@ -1,16 +1,16 @@
 package it.bugboard26.bugboard.modules.auth;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import it.bugboard26.bugboard.entities.User;
+import it.bugboard26.bugboard.modules.auth.dtos.JwtResponse;
 import it.bugboard26.bugboard.modules.auth.dtos.LoginRequest;
-import it.bugboard26.bugboard.modules.users.UserRepository;
+import it.bugboard26.bugboard.modules.users.UserService;
 import it.bugboard26.bugboard.modules.users.dtos.UserResponse;
 import it.bugboard26.bugboard.users_micro_service.UsersMicroService;
+
 import lombok.AllArgsConstructor;
 
-import org.springframework.http.HttpStatus;
 
 @AllArgsConstructor
 @Service
@@ -18,12 +18,12 @@ public class AuthService {
     //Attributes
     private JwtService jwtService;
     private UsersMicroService usersMicroService;
-    private UserRepository userRepository;
+    private UserService userService;
 
     //Methods
-    public String loginUser(LoginRequest loginRequest) {
+    public JwtResponse loginUser(LoginRequest loginRequest) {
         UserResponse userResponse = usersMicroService.loginUser(loginRequest);
-        User user = userRepository.findById(userResponse.getUuid()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+        User user = userService.getByUuid(userResponse.getUuid());
         userResponse.setRole(user.getRole());
         return jwtService.generateToken(userResponse);
     }

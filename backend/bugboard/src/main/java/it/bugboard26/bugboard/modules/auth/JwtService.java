@@ -12,6 +12,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import it.bugboard26.bugboard.modules.auth.dtos.JwtResponse;
 import it.bugboard26.bugboard.modules.users.dtos.UserResponse;
 
 @Service
@@ -32,7 +33,7 @@ public class JwtService {
                 .parseSignedClaims(rawToken);
     }
 
-     public String generateToken(UserResponse user) {
+     public JwtResponse generateToken(UserResponse user) {
         String jwt = Jwts.builder()
             .subject(user.getUuid().toString())
             .claim("name", user.getName())
@@ -43,7 +44,7 @@ public class JwtService {
             .signWith(secretKey)
             .compact();
 
-        return jwt;
+        return new JwtResponse(jwt);
     }
 
 }
