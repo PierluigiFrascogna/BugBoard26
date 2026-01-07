@@ -33,7 +33,7 @@
     </div>
     <div class="component__footer">
         <div></div>
-        <button class="footer__submit-button" type="submit" form="userForm" [disabled]="!this.userForm.valid">Conferma</button>
+        <button class="footer__submit-button" type="submit" form="userForm" (click)="createUser()">Conferma</button>
         <div></div>
     </div>
 </div>
