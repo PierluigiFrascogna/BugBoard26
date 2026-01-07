@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core';
-import { IIssueState, IssueStore } from '../issue-card/issue/issue-store';
-import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { TIssuePriority, TIssueState, TIssueType } from '../issue-card/issue/issue';
+import { Component, inject } from "@angular/core";
+import { ReactiveFormsModule } from "@angular/forms";
+import { form } from "@angular/forms/signals";
+import { IssueFiltersStore } from "./issue-filters-store";
 
 @Component({
   selector: 'app-issues-filters',
@@ -10,27 +10,17 @@ import { TIssuePriority, TIssueState, TIssueType } from '../issue-card/issue/iss
   styleUrl: './issues-filters.css',
 })
 export class IssuesFilters {
-  private readonly issueStore = inject(IssueStore);
 
-  readonly filtersForm = new FormGroup({
-    type: new FormControl<TIssueType>("BUG", Validators.required),
-    priority: new FormControl<TIssuePriority>("HIGH", Validators.required),
-    state: new FormControl<TIssueState>("DONE", Validators.required)
-  })
-  
+  private readonly filtersStore = inject(IssueFiltersStore);
+
+  readonly filtersForm = form(this.filtersStore.filtersModel);
   
   resetFilters(){
-    this.filtersForm.reset
+    this.filtersStore.resetFilters();
   }
 
   sendFilters(){
-    console.log(this.filtersForm.valid)
-    if(this.filtersForm.valid){
-      console.log(this.filtersForm.getRawValue());
-      this.issueStore.setSelectedFilters(this.filtersForm.getRawValue());
-    }else{
-      return
-    }
+    this.filtersStore.setFilters(this.filtersForm().value());
   }
 
 }

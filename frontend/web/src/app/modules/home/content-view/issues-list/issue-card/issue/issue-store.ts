@@ -1,6 +1,7 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { IssueApi } from './issue-api';
-import { IIssue, INewIssue, TIssuePriority, TIssueState, TIssueType } from './issue';
+import { IIssue, INewIssue } from './issue';
+import { IssueFiltersStore } from '../../issues-filters/issue-filters-store';
 
 export interface IIssueState {
   projectIssues: IIssue[];
@@ -12,15 +13,8 @@ export interface IIssueState {
   providedIn: 'root',
 })
 export class IssueStore {
-  private readonly api  = inject(IssueApi);
-  
-  private readonly _selectedFilters = signal<IFilters>({
-    type: null,
-    priority: null,
-    state: null
-  });
-  readonly selectedFilters = computed(() => this._selectedFilters());
 
+  private readonly api = inject(IssueApi);
   
   private readonly _state = computed<IIssueState>(() => ({
     projectIssues: this.api.issuesResource.hasValue() ? this.api.issuesResource.value() :[] as IIssue[],
@@ -44,17 +38,6 @@ export class IssueStore {
     this._selectedIssue.set(null);
   }
 
-  setSelectedFilters(filter: IFilters){
-    this._selectedFilters.set({
-      type: filter.type,
-      priority: filter.priority,
-      state: filter.state,
-    })
-    console.log("signal _selectedFilters: ", this._selectedFilters());
-    console.log("signal selectedFilters: ", this.selectedFilters());
-
-  }
-
   createIssue(issue: INewIssue) {
     this.api.createIssue(issue).subscribe({
       next: (newIssue) => {
@@ -67,9 +50,3 @@ export class IssueStore {
   }
 
 }
-
-export interface IFilters {
-  type: TIssueType | null;
-  priority: TIssuePriority | null;
-  state: TIssueState | null;
-};
