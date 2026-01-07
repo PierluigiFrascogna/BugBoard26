@@ -2,7 +2,7 @@ package it.bugboard26.bugboard.modules.auth;
 
 import org.springframework.stereotype.Service;
 
-import it.bugboard26.bugboard.entities.User;
+import it.bugboard26.bugboard.enums.Role;
 import it.bugboard26.bugboard.modules.auth.dtos.JwtResponse;
 import it.bugboard26.bugboard.modules.auth.dtos.LoginRequest;
 import it.bugboard26.bugboard.modules.users.UserService;
@@ -23,8 +23,8 @@ public class AuthService {
     //Methods
     public JwtResponse loginUser(LoginRequest loginRequest) {
         UserResponse userResponse = usersMicroService.loginUser(loginRequest);
-        User user = userService.getByUuid(userResponse.getUuid());
-        userResponse.setRole(user.getRole());
+        Role role = userService.getByUuid(userResponse.getUuid()).getRole();
+        userResponse.setRole(role);
         return jwtService.generateToken(userResponse);
     }
 

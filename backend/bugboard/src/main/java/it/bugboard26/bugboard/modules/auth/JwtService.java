@@ -38,6 +38,7 @@ public class JwtService {
             .subject(user.getUuid().toString())
             .claim("name", user.getName())
             .claim("surname", user.getSurname())
+            .claim("email", user.getEmail())
             .claim("role", user.getRole().toString())
             .issuedAt(new Date())
             //.expiration(new Date(System.currentTimeMillis() + 3600000)) // 1 ora

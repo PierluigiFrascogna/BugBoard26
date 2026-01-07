@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import it.bugboard26.users.dtos.LoginRequest;
-import it.bugboard26.users.dtos.RegistrationRequest;
 import it.bugboard26.users.dtos.UpdateUserRequest;
 import it.bugboard26.users.entities.User;
 import lombok.AllArgsConstructor;

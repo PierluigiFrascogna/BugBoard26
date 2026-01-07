@@ -12,12 +12,14 @@ public class UserResponse {
     private UUID uuid;
     private String name;
     private String surname;
+    private String email;
 
-    public static UserResponse map(User user){
+    public static UserResponse map(User user) {
         UserResponse response = new UserResponse();
         response.uuid = user.getUuid();
         response.name = user.getName();
         response.surname = user.getSurname();
+        response.email = user.getEmail();
         return response;
     }
 }
