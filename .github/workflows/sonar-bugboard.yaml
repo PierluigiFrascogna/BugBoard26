@@ -5,6 +5,7 @@ on:
     branches: ["main"]
     paths:
       - "backend/bugboard/**"
+      - ".github/workflows/sonar-bugboard.yaml"
 
 jobs:
   sonar:
