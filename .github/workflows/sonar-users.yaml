@@ -9,6 +9,7 @@ on:
 
 jobs:
   sonar:
+    name: Build and analyze
     runs-on: ubuntu-latest
 
     steps:
@@ -19,7 +20,7 @@ jobs:
           distribution: temurin
           java-version: "21"
 
-      - name: Build backend
+      - name: Build
         working-directory: backend/users
         run: mvn -DskipTests compile
 
@@ -29,4 +30,3 @@ jobs:
           projectBaseDir: backend/users
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
