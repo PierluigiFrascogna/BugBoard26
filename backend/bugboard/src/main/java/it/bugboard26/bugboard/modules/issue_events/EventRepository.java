@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import it.bugboard26.bugboard.entities.IssueEvent;
 
 public interface EventRepository extends JpaRepository<IssueEvent, UUID> {
-    List<IssueEvent> findByIssueUuidOrderBy(UUID uuid_issue);
+    List<IssueEvent> findByIssueUuidOrderByCreatedAt(UUID uuid_issue);
     
 }
