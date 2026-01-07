@@ -13,9 +13,9 @@ export class IssuesFilters {
   private readonly issueStore = inject(IssueStore);
 
   readonly filtersForm = new FormGroup({
-    type : new FormControl<TIssueType>("bug", Validators.required),
-    priority : new FormControl<TIssuePriority>("high", Validators.required),
-    state : new FormControl<TIssueState>("done", Validators.required)
+    type: new FormControl<TIssueType>("BUG", Validators.required),
+    priority: new FormControl<TIssuePriority>("HIGH", Validators.required),
+    state: new FormControl<TIssueState>("DONE", Validators.required)
   })
   
   

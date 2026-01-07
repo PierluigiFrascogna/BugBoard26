@@ -13,7 +13,7 @@ export interface IIssue extends INewIssue {
     uuid: string;
 }
 
-export type TIssueType = "question" | "bug" | "documentation" | "feature";
-export type TIssuePriority = 'low' | 'medium' | 'high'; 
-export type TIssueState = 'todo' | 'pending' | 'done'; 
+export type TIssueType = "QUESTION" | "BUG" | "DOCUMENTATION" | "FEATURE";
+export type TIssuePriority = 'LOW' | 'MEDIUM' | 'HIGH'; 
+export type TIssueState = 'TODO' | 'PENDING' | 'DONE'; 
  
