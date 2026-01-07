@@ -1,14 +1,8 @@
 <div class="content-view-component scroll-component"> 
-    @defer{
-        <div class="content__element">
-            <app-issues-list></app-issues-list>
-        </div>
-        <div class="content__element">
-            <app-issue-view></app-issue-view>
-        </div>
-    }@loading {
-        <p class="loading-label">caricamento in corso</p>
-    }@error{
-        <p class="error-label">si è verificato un errore impreviso nel caricamento</p>
-    }
+    <div class="content__element">
+        <app-issues-list></app-issues-list>
+    </div>
+    <div class="content__element">
+        <app-issue-view></app-issue-view>
+    </div>
 <div>
