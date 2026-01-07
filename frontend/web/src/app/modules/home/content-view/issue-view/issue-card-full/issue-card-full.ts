@@ -58,13 +58,13 @@ export class IssueCardFull {
 
       if (control.dirty) {
         switch(key){
-          case ("title"): changes.push({newTitle: control.value});
+          case ("title"): changes.push({type:"TITLE", newTitle: control.value});
             break;
-          case ("description"): changes.push({newDescription: control.value});
+          case ("description"): changes.push({type:"DESCRIPTION", newDescription: control.value});
             break; 
-          case ("state"): changes.push({newState: control.value});
+          case ("state"): changes.push({type:"STATE", newState: control.value});
             break; 
-          case ("priority"): changes.push({newPriority: control.value}); 
+          case ("priority"): changes.push({type:"PRIORITY", newPriority: control.value}); 
         }
       }
     });
