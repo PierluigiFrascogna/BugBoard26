@@ -21,7 +21,7 @@ export class AuthApi {
   };
 
   modifyUser(update: IUserUpdate){
-    return this.http.patch<JwtResponse>(`${this.API_URL}${this.AUTH_URL}/change`, update);
+    return this.http.patch<JwtResponse>(`${this.API_URL}${this.AUTH_URL}`, update);
   }
 
 }
