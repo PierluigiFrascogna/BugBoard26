@@ -1,0 +1,31 @@
+name: Sonar Backend Bugboard
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "backend/bugboard/**"
+
+jobs:
+  sonar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Build backend
+        working-directory: backend/bugboard
+        run: mvn -DskipTests compile
+
+      - name: Sonar scan
+        uses: SonarSource/sonarqube-scan-action@v7
+        with:
+          projectBaseDir: backend/bugboard
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
