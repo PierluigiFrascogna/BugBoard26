@@ -1,12 +1,12 @@
 <div class="content-view-component scroll-component"> 
     <div class="content__element">
-        @if (isProjectSelected()) {
+        @if (isIssuesListVisible()) {
             <app-issues-list></app-issues-list>
         }
         @else{ seleziona un progetto per iniziare }
     </div>
     <div class="content__element">
-        @if (isIssueSelected()) {
+        @if (isIssueViewVisible()) {
             <app-issue-view></app-issue-view>
         }
     </div>
