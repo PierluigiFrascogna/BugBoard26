@@ -18,8 +18,4 @@ export class IssuesFilters {
     this.filtersStore.resetFilters();
   }
 
-  sendFilters(){
-    this.filtersStore.setFilters(this.filtersForm().value());
-  }
-
 }

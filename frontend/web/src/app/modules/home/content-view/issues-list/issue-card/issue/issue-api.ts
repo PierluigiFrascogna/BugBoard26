@@ -19,11 +19,16 @@ export class IssueApi {
   private readonly PROJECTS_URL = "/projects";
   private readonly ISSUES_URL = "/issues";
 
-  private readonly filters: Signal<IQueryParams> = computed(() => ({
-    type: this.filtersStore.filtersModel().type || undefined,
-    priority: this.filtersStore.filtersModel().priority || undefined,
-    state: this.filtersStore.filtersModel().state || undefined,
-  }));
+  private readonly filters: Signal<IQueryParams> = computed(() => {
+    const m = this.filtersStore.filtersModel();
+
+    const params: IQueryParams = {};
+    if (m.type !== "") params['type'] = m.type;
+    if (m.priority !== "") params['priority'] = m.priority;
+    if (m.state !== "") params['state'] = m.state;
+
+    return params;
+  });
 
   readonly issuesResource = httpResource<IIssue[]>(() => ({
     url: `${this.API_URL}${this.PROJECTS_URL}/${this.project.selectedProject()?.uuid}${this.ISSUES_URL}`,
