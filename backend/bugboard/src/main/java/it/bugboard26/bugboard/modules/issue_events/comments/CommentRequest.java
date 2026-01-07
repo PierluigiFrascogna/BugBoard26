@@ -10,10 +10,10 @@ import lombok.Getter;
 public class CommentRequest {
     private String text;
 
-    public static Comment mapToEntity(CommentRequest commentRequest, Issue issue, User author) {
+    public static Comment mapToEntity(String commentRequest, Issue issue, User author) {
         Comment commentEntity = new Comment();
         commentEntity.setType(IssueEventType.COMMENT);
-        commentEntity.setText(commentRequest.text);
+        commentEntity.setText(commentRequest);
         commentEntity.setAuthor(author);
         commentEntity.setIssue(issue);
         return commentEntity;
