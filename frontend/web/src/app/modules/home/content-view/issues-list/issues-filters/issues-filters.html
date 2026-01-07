@@ -1,7 +1,11 @@
 <div class="issues-filters-component">
-    <div class="component__header">Filtra per:</div>
+    <div class="component__header">
+        <div>Filtra per:</div>
+        <div></div>
+        <button class="header__button" (click)="resetFilters()">Ripristina</button>
+    </div>
     <div class="component__body">
-        <form class="body__filtersForm" (submit)="sendFilters()">
+        <form class="body__filtersForm">
             <div class="form__filter">
                 <label for="type">Tipo:</label>
                 <select [field]="filtersForm.type" >
@@ -31,10 +35,5 @@
                 </select>
             </div>
         </form>
-    </div>
-    <div class="component__footer">
-        <button class="footer__button" (click)="resetFilters()">Ripristina</button>
-        <div></div>
-        <button class="footer__button" form="filtersForm" type="submit">Filtra</button>
     </div>
 </div>
