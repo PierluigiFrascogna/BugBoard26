@@ -55,7 +55,7 @@ public class EventApi {
     }
 
     @PostMapping("/comment")
-    public CommentResponse postNewComment(@PathVariable UUID uuid_issue, @RequestBody String commentRequest) {
+    public CommentResponse postNewComment(@PathVariable UUID uuid_issue, @RequestBody CommentRequest commentRequest) {
         if (!headerRequest.hasAuthorization()) 
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing or invalid Authorization header");
 
