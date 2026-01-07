@@ -1,10 +1,11 @@
 <div class="issues-filters-component">
     <div class="component__header">Filtra per:</div>
     <div class="component__body">
-        <form class="body__filtersForm" [formGroup]="filtersForm" (submit)="sendFilters()">
+        <form class="body__filtersForm" (submit)="sendFilters()">
             <div class="form__filter">
                 <label for="type">Tipo:</label>
-                <select formControlName="type" name="type"> 
+                <select [field]="filtersForm.type" >
+                    <option value="">Tutti i tipi</option> 
                     <option value="BUG">bug</option>
                     <option value="FEATURE">feature</option>
                     <option value="DOCUMENTATION">documentation</option>
@@ -13,7 +14,8 @@
             </div>
             <div class="form__filter">
                 <label for="priority">Priorità:</label>
-                <select formControlName="priority" name="priority">
+                <select [field]="filtersForm.priority">
+                    <option value="">Tutti le priorità</option> 
                     <option value="LOW">low</option>
                     <option value="MEDIUM">medium</option>
                     <option value="HIGH">high</option>
@@ -21,7 +23,8 @@
             </div>
             <div class="form__filter">
                 <label for="state">Stato:</label>
-                <select formControlName="state" name="state">
+                <select [field]="filtersForm.state">
+                    <option value="">Tutti gli stati</option> 
                     <option value="TODO">todo</option>
                     <option value="PENDING">pending</option>
                     <option value="DONE">done</option><samp></samp>

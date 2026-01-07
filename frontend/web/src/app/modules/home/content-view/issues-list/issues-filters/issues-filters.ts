@@ -1,11 +1,10 @@
 import { Component, inject } from "@angular/core";
-import { ReactiveFormsModule } from "@angular/forms";
-import { form } from "@angular/forms/signals";
+import { form, Field } from "@angular/forms/signals";
 import { IssueFiltersStore } from "./issue-filters-store";
 
 @Component({
   selector: 'app-issues-filters',
-  imports: [ReactiveFormsModule],
+  imports: [Field],
   templateUrl: './issues-filters.html',
   styleUrl: './issues-filters.css',
 })

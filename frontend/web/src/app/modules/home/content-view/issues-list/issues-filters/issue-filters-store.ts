@@ -7,9 +7,9 @@ import { TIssueType, TIssuePriority, TIssueState } from "../issue-card/issue/iss
 export class IssueFiltersStore {
 
   readonly filtersModel = signal<IFilters>({
-    type: null,
-    priority: null,
-    state: null,
+    type: "",
+    priority: "",
+    state: "",
   });
 
   setFilters(filters: IFilters) {
@@ -22,17 +22,17 @@ export class IssueFiltersStore {
 
   resetFilters() {
     this.filtersModel.set({
-      type: null,
-      priority: null,
-      state: null,
+      type: "",
+      priority: "",
+      state: "",
     });
   }
 }
 
 export interface IFilters {
-  type: TIssueType | null;
-  priority: TIssuePriority | null;
-  state: TIssueState | null;
+  type: TIssueType | "";
+  priority: TIssuePriority | "";
+  state: TIssueState | "";
 };
 
 export interface IQueryParams {
