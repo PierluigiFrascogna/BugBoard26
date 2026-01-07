@@ -40,5 +40,7 @@ jobs:
         working-directory: backend/bugboard
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B -DskipTests compile org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-          -Dsonar.projectKey=pierluigifrascogna_BugBoard26_Bugboard
+        run: mvn -B -DskipTests compile org.sonarsource.scanner.maven:sonar-maven-plugin:5.4.0.6343:sonar \
+          -Dsonar.host.url=${{ vars.SONAR_HOST_URL }} \
+          -Dsonar.projectKey=pierluigifrascogna_BugBoard26_Bugboard \
+          -Dsonar.token=${SONAR_TOKEN}
