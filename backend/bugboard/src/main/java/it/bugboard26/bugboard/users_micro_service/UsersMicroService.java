@@ -9,6 +9,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
@@ -18,6 +19,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
 import it.bugboard26.bugboard.modules.auth.dtos.LoginRequest;
+import it.bugboard26.bugboard.modules.auth.dtos.UpdateUserRequest;
 import it.bugboard26.bugboard.modules.users.dtos.RegistrationRequest;
 import it.bugboard26.bugboard.modules.users.dtos.UserResponse;
 
@@ -104,6 +106,25 @@ public class UsersMicroService {
                         .body(new ParameterizedTypeReference<List<UserResponse>>() {});
         
     }
+
+    public void updateUser(UpdateUserRequest updateUserRequest) {
+        String url = userServiceURL + "/auth";
+        try{
+            restClient.patch()
+                        .uri(url)
+                        .contentType(MediaType.APPLICATION_JSON) 
+                        .body(updateUserRequest)                        
+                        .retrieve()
+                        .toBodilessEntity();           
+        } 
+        catch (HttpClientErrorException.Conflict e) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Email already in use");
+        }
+        catch (HttpStatusCodeException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal error: " + e.getMessage());  
+        }
+    }
+
 
     public void deleteUser(UUID uuid_user) {
         String url = userServiceURL + "/users/" + uuid_user.toString();
