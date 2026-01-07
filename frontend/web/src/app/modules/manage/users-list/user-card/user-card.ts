@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { IUser } from '../../../profile/user/user';
 import { RoleLabel } from "./role-label/role-label";
+import { UserStore } from '../../../profile/user/user-store';
 
 @Component({
   selector: 'app-user-card',
@@ -9,10 +10,13 @@ import { RoleLabel } from "./role-label/role-label";
   styleUrl: './user-card.css',
 })
 export class UserCard {
+
+  private readonly userStore = inject(UserStore);
+
   @Input() user!: IUser;
 
   deleteUser(){
-    //TODO: chiamata allo userStore per eliminare l'utenza corrente
+    this.userStore.deleteUser(this.user.uuid);
   }
 
 }
