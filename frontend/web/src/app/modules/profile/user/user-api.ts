@@ -20,7 +20,7 @@ export class UserApi {
 
   createUser(user: INewUser){
     return this.http.post<IUser>(
-      `${this.API_URL}/register`, user
+      `${this.API_URL}${this.USERS_URL}`, user
     );
   }
 
