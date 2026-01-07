@@ -15,5 +15,5 @@ export interface IUserUpdate{
     password?: string;
 }
 
-export type TUserRole = "viewer" | "developer" | "admin";
+export type TUserRole = "VIEWER" | "DEVELOPER" | "ADMIN";
 

@@ -11,23 +11,17 @@ import { AuthStore } from '../../../core/auth/auth-store';
   styleUrl: './profile-view.css',
 })
 export class ProfileView {
-  user: IUser = {uuid: "1234", name: "Ale", surname: "Giglio", email: "ale@fakemail.com", password: "fakepassword", role: "developer" }
   private readonly authStore = inject(AuthStore);
 
   isEditing = signal<boolean>(false);
 
   profileForm = new FormGroup({
-    email: new FormControl('', [Validators.email]),
+    email: new FormControl(this.authStore.email(), [Validators.email]),
     password: new FormControl('********', [Validators.minLength(8)])
   });
 
   activateEditMode(){
-    this.profileForm.reset({
-      email: this.user.email, 
-      password: '********',
-    });
-    this.profileForm.markAsPristine();
-    this.isEditing.set(true);
+    this.profileForm.reset();
   }
 
   deactivateEditMode(){
