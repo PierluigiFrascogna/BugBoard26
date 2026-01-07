@@ -31,7 +31,7 @@ export class IssueEventStore {
 
   sendChanges(changes: any[]){
     changes.forEach(change => {
-      this.api.sendChanges(changes).subscribe({
+      this.api.sendChanges(change).subscribe({
         next: () => {
           this.api.issueEventsResource.reload();
         },
