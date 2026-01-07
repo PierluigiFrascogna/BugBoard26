@@ -33,5 +33,15 @@ export class ProjectStore {
     this._selectedProject.set(project);
   }
 
+  createProject(name: Project['name']) {
+    this.api.createProject(name).subscribe({
+      next: (project) => {
+        this.api.projectsResource.reload();
+      },
+      error: (err) => {
+        console.error('Failed to create project', err);
+      }
+    });
+  }
 
 }

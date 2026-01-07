@@ -38,7 +38,7 @@ export class IssueEventApi {
     return this.http.post<Comment>(
       `${this.API_URL}${this.PROJECTS_URL}/${this.projectStore.selectedProject()?.uuid}/${this.issueStore.selectedIssue()?.uuid}${this.COMMENT_URL}`, 
       {
-        "text": comment
+        text: comment
       }
     );
   }
