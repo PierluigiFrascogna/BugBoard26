@@ -62,10 +62,21 @@ export class UserStore {
   createUser(user: INewUser){
     this.api.createUser(user).subscribe({
       next: (createdUser: IUser) => {
-
+        this.api.usersResource.reload();
       },
       error: (err: Error) => {
-        console.error('Error creating issue event: ', err);
+        console.error(`Error creating user: ${user}, error: ${err}`);
+      }
+    })
+  }
+
+  deleteUser(userUuid: IUser['uuid']){
+    this.api.deleteUser(userUuid).subscribe({
+      next: () => {
+        this.api.usersResource.reload();
+      },
+      error: (err: Error) => {
+        console.error(`Error deleting user: ${userUuid}, error: ${err}`);
       }
     })
   }
