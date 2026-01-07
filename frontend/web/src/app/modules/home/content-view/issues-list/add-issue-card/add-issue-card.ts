@@ -1,5 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
+import { IssueStore } from '../issue-card/issue/issue-store';
+import { IIssue, INewIssue } from '../issue-card/issue/issue';
 
 
 @Component({
@@ -10,6 +12,8 @@ import { FormControl, FormGroup, Validators, ReactiveFormsModule } from "@angula
 })
 export class AddIssueCard {
   @Output() close = new EventEmitter();
+
+  private readonly issueStore = inject(IssueStore);
   
   issueForm= new FormGroup({
     title: new FormControl('',[Validators.required, Validators.minLength(1)]),
@@ -20,7 +24,13 @@ export class AddIssueCard {
 
   createIssue() {
     if(this.issueForm.valid){
-      //TODO: aggiungere chiamata api per inserire una nuova issue
+      const newIssue = {
+        title: this.issueForm.controls.title.value!,
+        description: this.issueForm.controls.description.value!,
+        type: this.issueForm.controls.type.value!,
+        priority: this.issueForm.controls.priority.value!,
+      } as INewIssue;
+      this.issueStore.createIssue(newIssue);
     }else{
       return
     }

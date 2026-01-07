@@ -58,7 +58,6 @@ export class IssueStore {
   createIssue(issue: INewIssue) {
     this.api.createIssue(issue).subscribe({
       next: (newIssue) => {
-        // Update the local state with the newly created issue
         this.api.issuesResource.reload();
       },
       error: (err) => {

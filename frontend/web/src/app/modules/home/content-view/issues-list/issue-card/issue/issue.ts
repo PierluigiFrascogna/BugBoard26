@@ -6,11 +6,11 @@ export interface INewIssue {
     type: TIssueType;
     priority:  TIssuePriority;
     state: TIssueState;
-    author: IUser;
 }
 
 export interface IIssue extends INewIssue {
     uuid: string;
+    author: IUser;
 }
 
 export type TIssueType = "QUESTION" | "BUG" | "DOCUMENTATION" | "FEATURE";
