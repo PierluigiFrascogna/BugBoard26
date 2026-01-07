@@ -1,4 +1,4 @@
-name: Sonar Backend Bugboard
+name: Bugboard Sonar Analysis
 
 on:
   push:

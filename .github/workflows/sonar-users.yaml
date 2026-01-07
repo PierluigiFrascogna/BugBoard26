@@ -1,4 +1,4 @@
-name: Sonar Backend Users
+name: Users Sonar Analysis
 
 on:
   push:
