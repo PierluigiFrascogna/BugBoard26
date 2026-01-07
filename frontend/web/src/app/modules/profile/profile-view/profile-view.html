@@ -7,25 +7,25 @@
         <form id="profileForm" class="body__form" [formGroup]="profileForm" (submit)="sendChanges()">
             <div class="form__field">
                 <label for="name">Nome: </label>
-                <span>{{ user.name }}</span>
+                <span>{{ this.authStore.name() }}</span>
             </div>
             <div class="form__field">
                 <label for="surname">Cognome: </label>
-                <span>{{ user.surname }}</span>
+                <span>{{ this.authStore.surname() }}</span>
             </div>
             <div class="form__field">
                 <label for="email">Email: </label>
-                @if (!isEditing()){<span>{{ user.email }}</span>}
+                @if (!isEditing()){<span>{{ this.authStore.email() }}</span>}
                 @else {<input type="email" formControlName="email" name="email">}
             </div>
             <div class="form__field">
                 <label for="password">Password: </label>
-                @if (!isEditing()){<span>{{ user.password }}</span>}
+                @if (!isEditing()){<span>{{ this.authStore.password() }}</span>}
                 @else {<input type="password" formControlName="password" name="password">}
             </div>
             <div class="form__field">
                 <label for="role">Ruolo: </label>
-                <span>{{ user.role }}</span>
+                <span>{{ this.authStore.role() }}</span>
             </div>
         </form>
     </div>

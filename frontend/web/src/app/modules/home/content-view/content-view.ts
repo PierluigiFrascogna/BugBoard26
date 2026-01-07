@@ -16,6 +16,6 @@ export class ContentView {
 
   readonly title = computed(() => this.projectStore.name() + this.issueStore.title() );
 
-  isIssuesListVisible = linkedSignal(() => this.projectStore.selectedProject()!==null || this.issueStore.selectedIssue()!==null);
+  isIssuesListVisible = linkedSignal(() => this.projectStore.selectedProject()!==null && this.issueStore.selectedIssue()===null);
   isIssueViewVisible = linkedSignal(() => this.issueStore.selectedIssue()!==null);
 }

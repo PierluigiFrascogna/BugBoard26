@@ -11,7 +11,7 @@ import { AuthStore } from '../../../core/auth/auth-store';
   styleUrl: './profile-view.css',
 })
 export class ProfileView {
-  private readonly authStore = inject(AuthStore);
+  protected readonly authStore = inject(AuthStore);
 
   isEditing = signal<boolean>(false);
 
