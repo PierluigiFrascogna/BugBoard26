@@ -1,0 +1,38 @@
+.DEVELOPER{
+    width: fit-content;
+    height: fit-content;
+
+    padding-left: 5px;
+    padding-right: 5px;
+    
+    background-color: #FF6347;
+    color: black;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.VIEWER{
+    width: fit-content;
+    height: fit-content;
+
+    padding-left: 5px;
+    padding-right: 5px;
+
+    background-color: #845EC2;
+    color: black;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.ADMIN{
+    width: fit-content;
+    height: fit-content;
+
+    padding-left: 5px;
+    padding-right: 5px;
+    
+    background-color: #F9F871;
+    color: black;
+    border-radius: 20px;
+    font-weight: bold;
+}

@@ -1,7 +1,11 @@
 package it.bugboard26.bugboard.modules.issue_events;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -13,6 +17,8 @@ import it.bugboard26.bugboard.entities.User;
 import it.bugboard26.bugboard.modules.issue_events.changes.dtos.request.ChangeRequest;
 import it.bugboard26.bugboard.modules.issue_events.comments.CommentRequest;
 import it.bugboard26.bugboard.modules.issues.IssueService;
+import it.bugboard26.bugboard.modules.users.dtos.UserResponse;
+import it.bugboard26.bugboard.users_micro_service.UsersMicroService;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -20,13 +26,14 @@ import lombok.AllArgsConstructor;
 public class EventService {
     private EventRepository eventRepository;
     private IssueService issueService;
+    private UsersMicroService usersMicroService;
 
     public IssueEvent save(IssueEvent event) {
         return eventRepository.save(event);
     }
 
     public List<IssueEvent> getByIssueUuid(UUID uuid_issue) {
-        return eventRepository.findByIssueUuid(uuid_issue);
+        return eventRepository.findByIssueUuidOrderByCreatedAt(uuid_issue);
     }
 
     public Comment saveComment(CommentRequest request, Issue issue, User author) {
@@ -39,6 +46,23 @@ public class EventService {
         Issue updatedIssue = change.apply(issue);
         issueService.save(updatedIssue);
         return eventRepository.save(change);
+    }
+
+    public List<IssueEventResponse> enrichEventsWithAuthors(List<IssueEvent> events) {
+        if (events.isEmpty()) return new ArrayList<>();
+
+        Set<UUID> authorIds = events.stream()
+                .map(i -> i.getAuthor().getUuid())
+                .collect(Collectors.toSet());
+
+        Map<UUID, UserResponse> authors = usersMicroService.getUsersByIds(authorIds);
+
+        return events.stream()
+                .map(event -> {
+                    UserResponse author = authors.get(event.getAuthor().getUuid());
+                    return IssueEventResponse.map(event, author);
+                })
+                .collect(Collectors.toList());
     }
     
     

@@ -2,7 +2,7 @@ package it.bugboard26.bugboard.modules.issue_events.changes.dtos.response;
 
 import it.bugboard26.bugboard.entities.PriorityChange;
 import it.bugboard26.bugboard.enums.Priority;
-import it.bugboard26.bugboard.users_micro_service.UserResponse;
+import it.bugboard26.bugboard.modules.users.dtos.UserResponse;
 import lombok.Getter;
 
 @Getter

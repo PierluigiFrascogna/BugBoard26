@@ -1,7 +1,9 @@
+import { TIssuePriority } from "../../../../../../issues-list/issue-card/issue/issue";
 import { Change } from "./change";
 
 export interface PriorityChange extends Change{
     changeType: "PRIORITY";
-    old: "low" | "medium" | "high" | undefined,
-    new: "low" | "medium" | "high" | undefined,
+    oldPriority: TIssuePriority; 
+    newPriority: TIssuePriority;
 }
+

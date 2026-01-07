@@ -1,5 +1,10 @@
+:host{
+    display: block;
+    height: 100%;
+    min-height: 0;
+}
+
 .sidebar{
-    width: 200px;
     height: 100%;
 
     display: flex;
@@ -28,11 +33,13 @@
     flex-direction: column;
     background-color: transparent;
     
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+    min-height: 0;
 }
 
 .sidebar__border{
-    width: 0px;
+    width: 0vw;
     height: 100%;
 
     display: flex;

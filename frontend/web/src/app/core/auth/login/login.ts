@@ -25,20 +25,13 @@ export class Login {
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(6)])
+    password: new FormControl('', [Validators.required])
   });
 
   onSubmit() {
-    this.isValidEmail = this.loginForm.controls['email'].valid;
-    this.isValidPassword = this.loginForm.controls['password'].valid;
-    console.log(this.loginForm.value);
-
-    
-    this.auth.sudologin();
-    // this.auth.login(
-    //   this.loginForm.value.email || '',
-    //   this.loginForm.value.password || ''
-    // );
-    this.router.navigateByUrl('/'); // TODO: navigate to returnUrl che sta in nell'authguard
+    if(this.loginForm.valid){
+      this.auth.login(this.loginForm.controls.email.value!, this.loginForm.controls.password.value!);
+      this.router.navigateByUrl('/'); // TODO: navigate to returnUrl che sta in nell'authguard
+    }
   }
 }

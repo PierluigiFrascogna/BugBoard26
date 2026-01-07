@@ -8,7 +8,7 @@ import it.bugboard26.bugboard.entities.IssueEvent;
 import it.bugboard26.bugboard.enums.IssueEventType;
 import it.bugboard26.bugboard.modules.issue_events.changes.dtos.response.ChangeResponse;
 import it.bugboard26.bugboard.modules.issue_events.comments.CommentResponse;
-import it.bugboard26.bugboard.users_micro_service.UserResponse;
+import it.bugboard26.bugboard.modules.users.dtos.UserResponse;
 import lombok.Getter;
 
 // TODO: implement factory pattern for IssueEventResponse subclasses

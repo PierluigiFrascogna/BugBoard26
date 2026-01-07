@@ -8,20 +8,20 @@ import it.bugboard26.users.dtos.LoginRequest;
 import it.bugboard26.users.dtos.RegistrationRequest;
 import it.bugboard26.users.entities.User;
 import lombok.AllArgsConstructor;
+
 import org.mindrot.jbcrypt.BCrypt;
 
 @AllArgsConstructor
 @Service
 public class AuthService {
-
-    //Attributes 
     private UserService userService;
-    private JwtService jwtService;
 
-    //Methods
-    public String verifyAndGenerateToken(LoginRequest frontendRequest) {
-        User user = userService.verifyUser(frontendRequest.getEmail(), frontendRequest.getPassword());
-        return jwtService.generateJwt(user);
+    public User login(LoginRequest loginDTO) {
+        User user = userService.findByEmail(loginDTO.getEmail());
+        if(!BCrypt.checkpw(loginDTO.getPassword(), user.getPasswordHash())) 
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials");
+
+        return user;
     }
 
     public User register(RegistrationRequest frontendRequest) {
@@ -29,7 +29,6 @@ public class AuthService {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Email already in use");
 
         String hashedPassword = BCrypt.hashpw(frontendRequest.getPassword(), BCrypt.gensalt());
-
         User newUser = new User(
             frontendRequest.getName(),
             frontendRequest.getSurname(),
@@ -37,8 +36,8 @@ public class AuthService {
             hashedPassword,
             frontendRequest.isAdmin()
         );
-
         userService.save(newUser);
         return newUser;
     }
+
 }

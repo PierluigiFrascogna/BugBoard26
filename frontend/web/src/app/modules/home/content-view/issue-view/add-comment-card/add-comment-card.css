@@ -1,0 +1,44 @@
+.component {
+    height: fit-content;
+
+    flex: 1;
+    padding: 10px;
+
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+}
+
+.component__body {
+    height: fit-content;
+}
+
+.component__footer {
+    display: flex;
+    flex-direction: row;
+
+    margin-left: auto;
+}
+
+.comment-input {
+    height: 150px;
+    width: 100%;
+    padding: 15px 5px;
+    resize: none;
+    border-radius: 10px;
+    background-color: black;
+    color: whitesmoke;
+}
+
+.comment-button {
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: seagreen;
+    color: whitesmoke;
+}
+
+.comment-button:hover {
+    background-color: darkgreen;
+    cursor: pointer;
+}

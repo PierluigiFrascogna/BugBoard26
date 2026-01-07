@@ -1,9 +1,13 @@
+:host{
+    display: block;
+    height: fit-content;
+    min-height: 0;
+}
+
 .component{
-    width: 1200px;
+    width: 100%;
     height: fit-content;
 
-    margin-left: 10px;
-    margin-bottom: 10px;
     padding: 10px;
 
     background-color: rgba(0, 0, 0, 0.7);
@@ -29,3 +33,65 @@
     gap: 10px;
     margin-left: auto;
 }
+
+.component__body{
+    margin-bottom: 10px;
+}
+
+.component__body__description textarea{
+    width: 100%;
+    height: 100px;
+    background-color: black;
+    color: whitesmoke;
+    border-radius: 5px;
+    padding: 5px;
+    outline: none;
+    resize: none;
+}
+
+.component__footer{
+    width: 100%;
+    height: fit-content;
+
+    display: grid;
+    grid-template-columns: 1fr auto auto auto;
+}
+
+.footer__button{
+    width: fit-content;
+    height: fit-content;
+
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: dimgrey;  
+    color: whitesmoke;
+    cursor: pointer;
+}
+
+.footer__button:hover{
+    background-color: rgb(80, 80, 80);
+}
+
+.footer__button__confirm{
+    background-color: seagreen;
+}
+
+.footer__button__confirm:hover{
+    background-color: darkgreen
+}
+
+.footer__button--hidden{
+    visibility: hidden;
+    pointer-events: none;
+    cursor: default;
+}
+
+.input{
+    padding: 5px;
+    border-radius: 5px;
+    background-color: black;
+    color: whitesmoke;
+    outline: none;
+}
+

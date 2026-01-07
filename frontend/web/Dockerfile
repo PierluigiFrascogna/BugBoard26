@@ -1,7 +1,7 @@
 FROM node:22 AS base
 
 # Install Angular CLI version 21 globally
-RUN npm install -g @angular/cli@21 --verbose
+RUN npm install -g @angular/cli@21
 
 # Set the working directory
 WORKDIR /BugBoard26/frontend/web
@@ -13,7 +13,7 @@ FROM base AS deps
 COPY package*.json .
 
 # Install project dependencies
-RUN npm install --verbose
+RUN npm install
 
 # Copy the local working directory to the container working directory
 COPY . .
@@ -30,6 +30,9 @@ FROM docker.io/library/nginx:alpine AS prod
 
 # Copy the built application from the build stage to the Nginx HTML directory
 COPY --from=build /BugBoard26/frontend/web/dist/BugBoard26/browser /usr/share/nginx/html
+
+# Copy custom Nginx configuration
+COPY --from=deps /BugBoard26/frontend/web/nginx/default.conf /etc/nginx/conf.d/default.conf
 
 # Expose port 80
 EXPOSE 80

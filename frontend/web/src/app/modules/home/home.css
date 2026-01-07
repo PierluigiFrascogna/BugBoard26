@@ -1,15 +1,33 @@
-.main-view{
-    height: calc(100vh - 60px);
-    width: 100%;
-    
-    
-    display: flex;
-    flex-direction: row;
+:host{
+    display: block;
+    height: 100vh;
+    overflow: hidden;
 }
 
-.project-view{
-    flex: 1;
-    padding: 20px;
-    background: transparent;
-    color: white;
+.home{
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100%;
+}
+
+.main-view{
+    --sidebar-width: 200px;
+
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+
+    display: grid;
+    grid-template-columns: var(--sidebar-width) 1fr;
+    
+    transition: grid-template-columns 0.3 ease;
+}
+
+.main-view.closed{
+    --sidebar-width: 0px;
+}
+
+app-sidebar, app-content-view{
+    height: 100%;
+    min-height: 0%;
 }

@@ -1,0 +1,39 @@
+<div class="component__header">
+    aggiungi una nuova utenza alla piattaforma
+</div>
+
+<div class="add-user-card-component">
+    <div class="component__body">
+        <form id="userForm" class="body__form" [formGroup]="userForm" (submit)="createUser()">
+            <div class="form__field">
+                <label for="name">Nome: </label>
+                <input type="text" formControlName="name" name="name">
+            </div>
+            <div class="form__field">
+                <label for="surname">Cognome: </label>
+                <input type="text" formControlName="surname" name="surname">
+            </div>
+            <div class="form__field">
+                <label for="email">Email: </label>
+                <input type="text" formControlName="email" name="email">
+            </div>
+            <div class="form__field">
+                <label for="email">Password: </label>
+                <input type="password" formControlName="password" name="password">
+            </div>
+            <div class="form__field">
+                <label for="role">Ruolo: </label>
+                <select formControlName="role" name="role">
+                    <option value="viewer">viewer</option>
+                    <option value="developer">developer</option>
+                    <option value="admin">admin</option>
+                </select>
+            </div>
+        </form>
+    </div>
+    <div class="component__footer">
+        <div></div>
+        <button class="footer__submit-button" type="submit" form="userForm" [disabled]="!this.userForm.valid">Conferma</button>
+        <div></div>
+    </div>
+</div>

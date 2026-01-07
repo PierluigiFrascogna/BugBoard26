@@ -1,4 +1,4 @@
-<div class="sidebar" [ngClass]="isOpen() ? 'sidebar--open' : 'sidebar--closed'" >
+<div class="sidebar" [ngClass]="isOpen() ? 'sidebar--open' : 'sidebar--closed'">
     <div class="sidebar__content">
         @for (project of projects(); track $index){
             <app-sidebar-element [project]="project"></app-sidebar-element>

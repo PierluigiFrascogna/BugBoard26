@@ -1,7 +1,7 @@
 package it.bugboard26.bugboard.modules.auth;
 
 import java.nio.charset.StandardCharsets;
-import java.util.UUID;
+import java.util.Date;
 
 import javax.crypto.SecretKey;
 
@@ -12,6 +12,8 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import it.bugboard26.bugboard.modules.auth.dtos.JwtResponse;
+import it.bugboard26.bugboard.modules.users.dtos.UserResponse;
 
 @Service
 public class JwtService {
@@ -23,29 +25,26 @@ public class JwtService {
         this.secretKey = Keys.hmacShaKeyFor(jwtSecretKey.getBytes(StandardCharsets.UTF_8));
     }
 
-    //Methods for extracting info from OUR jwt token
-    public UUID getUUID(Jws<Claims> token) {
-        return UUID.fromString(token.getPayload().getSubject());
-    }
-
-    public String getName(Jws<Claims> token) {
-        return token.getPayload().get("name", String.class);
-    }
-
-    public String getSurname(Jws<Claims> token) {
-        return token.getPayload().get("surname", String.class);
-    }
-
-    // Methods for generic jwt token
-    public Claims getPayload(Jws<Claims> token) {
-        return token.getPayload();
-    }
-
+    //Methods
     public Jws<Claims> parseToken(String rawToken) {
         return Jwts.parser()
                 .verifyWith(secretKey)
                 .build()
                 .parseSignedClaims(rawToken);
+    }
+
+     public JwtResponse generateToken(UserResponse user) {
+        String jwt = Jwts.builder()
+            .subject(user.getUuid().toString())
+            .claim("name", user.getName())
+            .claim("surname", user.getSurname())
+            .claim("role", user.getRole().toString())
+            .issuedAt(new Date())
+            //.expiration(new Date(System.currentTimeMillis() + 3600000)) // 1 ora
+            .signWith(secretKey)
+            .compact();
+
+        return new JwtResponse(jwt);
     }
 
 }

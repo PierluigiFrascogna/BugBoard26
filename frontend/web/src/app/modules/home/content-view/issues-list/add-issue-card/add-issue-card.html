@@ -1,0 +1,36 @@
+<div class="add-issue-card-component">
+    <div class="component__body">
+        <form id="issueForm" class="body__form" [formGroup]="issueForm" (submit)="createIssue()">
+            <div class="form__field">
+                <label for="name">Titolo: </label>
+                <input type="text" formControlName="title">
+            </div>
+            <div class="form__field">
+                <label for="surname">Descrizione: </label>
+                <textarea type="text" formControlName="description"></textarea>
+            </div>
+            <div class="form__field">
+                <label for="type">Tipo: </label>
+                <select formControlName="type">
+                    <option value="bug">bug</option>
+                    <option value="feature">feature</option>
+                    <option value="question">question</option>
+                    <option value="documentation">documentation</option>
+                </select>
+            </div>
+            <div class="form__field">
+                <label for="priority">Priorità: </label>
+                <select formControlName="priority">
+                    <option value="low">low</option>
+                    <option value="medium">medium</option>
+                    <option value="high">high</option>
+                </select>
+            </div>
+        </form>
+    </div>
+    <div class="component__footer">
+        <button class="footer__button" (click)="closeNewIssueCard()">Annulla</button>
+        <div></div>
+        <button class="footer__button" type="submit" form="issueForm">Aggiungi</button>
+    </div>
+</div>

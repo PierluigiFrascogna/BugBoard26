@@ -1,0 +1,33 @@
+.manage-page{
+    height: 100vh;
+    width: 100vw;
+
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+.manage-page__body{
+    width: 100%;
+    height: 100%;
+    
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.body__new-user-area{
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    
+    justify-content: center;
+    align-items: center;
+}
+
+.body__user-list-area{
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    
+    justify-content: center;
+    align-items: center;
+}
+
+

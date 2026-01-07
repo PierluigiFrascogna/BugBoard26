@@ -1,4 +1,4 @@
-import { computed, inject, Injectable } from '@angular/core';
+import { afterNextRender, computed, inject, Injectable } from '@angular/core';
 import { IssueEventApi } from './issue-event-api';
 import { IssueEvent } from './issue-event';
 import { Change } from './change-event/change-card/change/change';
@@ -20,50 +20,7 @@ export class IssueEventStore {
   private readonly api = inject(IssueEventApi);
     
   private readonly state = computed<IssueEventsState>(() => ({
-    issueEvents: this.api.issueEventsResource.hasValue() ? this.api.issueEventsResource.value() : [
-      {
-        uuid: "comment 1",
-        createdAt: new Date(), 
-        type: "COMMENT",
-        authorUuid: "user 1",
-        text: "blablablba"
-      } as Comment,
-
-      {
-        uuid: "comment 2",
-        createdAt: new Date(), 
-        type: "COMMENT",
-        authorUuid: "user 2",
-      } as Comment,
-
-      {
-        uuid: "change 1",
-        createdAt: new Date(), 
-        type: "CHANGE",
-        authorUuid: "user 1",
-        changeType: "TITLE",
-        old: "issue1",
-        new: "issue1mlmlmlml"
-      } as TitleChange,
-
-      {
-        uuid: "change 2",
-        createdAt: new Date(), 
-        type: "CHANGE",
-        authorUuid: "user 2",
-        changeType: "DESCRIPTION",
-        old: "mlmlmlmlml",
-        new: "brbrbrbrbrbr"
-      } as DescriptionChange,
-
-      {
-        uuid: "comment 3",
-        createdAt: new Date(), 
-        type: "COMMENT",
-        authorUuid: "user 3",
-      } as Comment,
-
-    ] as TIssueEvent[],
+    issueEvents: this.api.issueEventsResource.hasValue() ? this.api.issueEventsResource.value() : [] as TIssueEvent[],
     loading: this.api.issueEventsResource.isLoading(),
     error: this.api.issueEventsResource.error()
   })); 
@@ -71,4 +28,28 @@ export class IssueEventStore {
   readonly issueEvents = computed(() => this.state().issueEvents);
   readonly loading = computed(() => this.state().loading); 
   readonly error = computed(() => this.state().error);
+
+  sendChanges(changes: any[]){
+    changes.forEach(change => {
+      this.api.sendChanges(changes).subscribe({
+        next: () => {
+          this.api.issueEventsResource.reload();
+        },
+        error: (err: Error) => {
+          console.error('Error sending changes', err);
+        }
+      })
+    })
+  }
+
+  createComment(comment: Comment["text"]){
+    this.api.createComment(comment).subscribe({
+      next: (createdComment: Comment) => {
+        //TODO: vedere cosa fare qui
+      },
+      error: (err: Error) => {
+        console.error('Error creating comment: ', err);
+      }
+    })
+  }
 }

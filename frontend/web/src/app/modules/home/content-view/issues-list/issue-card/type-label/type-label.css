@@ -1,4 +1,4 @@
-.question{
+.QUESTION{
     width: fit-content;
     height: fit-content;
 
@@ -10,7 +10,7 @@
     font-weight: bold;
 }
 
-.bug{
+.BUG{
     width: fit-content;
     height: fit-content;
 
@@ -22,7 +22,7 @@
     font-weight: bold;
 }
 
-.documentation{
+.DOCUMENTATION{
     width: fit-content;
     height: fit-content;
 
@@ -34,7 +34,7 @@
     font-weight: bold;
 }
 
-.feature{
+.FEATURE{
     width: fit-content;
     height: fit-content;
 

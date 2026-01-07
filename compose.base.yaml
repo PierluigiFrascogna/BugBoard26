@@ -1,4 +1,4 @@
-name: BugBoard26
+name: bugboard26
 
 services:
   docs:
@@ -9,44 +9,25 @@ services:
       - docs
 
   web:
-    build:
-      context: ./frontend/web
-      dockerfile: ./Dockerfile
     profiles:
       - web
       - frontend
       - fullstack
 
   bugboard:
-    image: bugboard26-bugboard
-    build:
-      context: ./backend/bugboard
-      dockerfile: ./Dockerfile
-    ports:
-      - "8080:8080"
     profiles:
       - bugboard
       - backend
       - fullstack
 
   users:
-    image: bugboard26-users
-    build:
-      context: ./backend/users
-      dockerfile: ./Dockerfile
     profiles:
       - users
       - backend
       - fullstack
 
   api-gateway:
-    image: bugboard26-gateway
-    build:
-      context: ./backend/api-gateway
-      dockerfile: ./Dockerfile
     ports:
       - "8000:8000"
     profiles:
       - api-gateway
-      - backend
-      - fullstack
