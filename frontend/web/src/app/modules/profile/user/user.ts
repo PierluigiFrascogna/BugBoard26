@@ -1,13 +1,16 @@
-export interface INewUser{
-    name: string; 
-    surname: string; 
+export interface IUserBase {
+    name: string;
+    surname: string;
     email: string;
-    password: string; 
     role: TUserRole;
 }
 
-export interface IUser extends INewUser{
-    uuid: string | null;  
+export interface INewUser extends IUserBase {
+    password: string;
+}
+
+export interface IUser extends IUserBase {
+    uuid: string;
 }
 
 export interface IUserUpdate{

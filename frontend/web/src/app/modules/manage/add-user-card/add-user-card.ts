@@ -1,8 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
 import { UserStore } from '../../profile/user/user-store';
-import { IUser, TUserRole } from '../../profile/user/user';
-import { TemplateBindingParseResult } from '@angular/compiler';
+import { INewUser, TUserRole } from '../../profile/user/user';
 
 @Component({
   selector: 'app-add-user-card',
@@ -32,7 +31,7 @@ export class AddUserCard {
         email: this.userForm.get("email")!.value,
         password: this.userForm.get("password")!.value,
         role: this.userForm.get("role")!.value
-      } as IUser;
+      } as INewUser;
 
       this.userStore.createUser(user);
       console.log(user);
