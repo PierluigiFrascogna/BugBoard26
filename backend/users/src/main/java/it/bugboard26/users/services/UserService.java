@@ -49,7 +49,7 @@ public class UserService {
     }
 
     public List<UserResponse> findAll() {
-        return userRepository.findAll().stream()
+        return userRepository.findAllByIsActiveTrue().stream()
         .map(user -> UserResponse.map(user))
         .toList();
     }

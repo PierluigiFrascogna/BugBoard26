@@ -16,9 +16,9 @@ import org.mindrot.jbcrypt.BCrypt;
 public class AuthService {
     private UserService userService;
 
-    public User login(LoginRequest loginDTO) {
-        User user = userService.findByEmail(loginDTO.getEmail());
-        if(!BCrypt.checkpw(loginDTO.getPassword(), user.getPasswordHash())) 
+    public User login(LoginRequest loginRequest) {
+        User user = userService.findByEmail(loginRequest.getEmail());
+        if(!BCrypt.checkpw(loginRequest.getPassword(), user.getPasswordHash()) || !user.isActive()) 
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials");
 
         return user;
