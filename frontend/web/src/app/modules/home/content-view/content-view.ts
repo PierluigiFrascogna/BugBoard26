@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, linkedSignal } from '@angular/core';
 import { IssesList } from "./issues-list/issues-list";
 import { ProjectStore } from '../sidebar/sidebar-element/project/project-store';
 import { IssueStore } from './issues-list/issue-card/issue/issue-store';
@@ -15,4 +15,7 @@ export class ContentView {
   private readonly issueStore = inject(IssueStore);
 
   readonly title = computed(() => this.projectStore.name() + this.issueStore.title() );
+
+  isProjectSelected = linkedSignal(() => this.projectStore.selectedProject()!==null);
+  isIssueSelected = linkedSignal(() => this.issueStore.selectedIssue()!==null);
 }

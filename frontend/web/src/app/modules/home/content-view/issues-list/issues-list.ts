@@ -14,19 +14,16 @@ import { AuthStore } from '../../../../core/auth/auth-store';
   styleUrl: './issues-list.css',
 })
 export class IssesList {
+  private readonly authStore = inject(AuthStore)
   private readonly issueStore = inject(IssueStore); 
   private readonly projectStore = inject(ProjectStore);
-  private readonly authStore = inject(AuthStore);
   
   readonly isNewIssueCardOpen = signal<boolean>(false);
   
   readonly title = computed(() => this.projectStore.name());
   readonly issues = computed(() => this.issueStore.projectIssues());
 
-  readonly isTitleVisible = computed(() => this.title() !== '' );
-  readonly isVisible = computed(() => this.issueStore.selectedIssue()===null);
-
-  readonly isViewer = computed(() => false);
+  readonly isViewer = computed(() => this.authStore.role()==="viewer");
   
   openNewIssueCard() {
     this.isNewIssueCardOpen.set(true);
@@ -35,7 +32,4 @@ export class IssesList {
   closeNewIssueCard() {
     this.isNewIssueCardOpen.set(false);
   }
-
-  
-
 }

@@ -10,6 +10,5 @@ import { AuthStore } from '../../../core/auth/auth-store';
 })
 export class Navbar {
   private readonly authStore = inject(AuthStore)
-  //readonly isAdmin = computed(() => this.authStore.role()==="admin");
-  readonly isAdmin = computed(() => true);
+  readonly isAdmin = computed(() => this.authStore.role()==="admin");
 }

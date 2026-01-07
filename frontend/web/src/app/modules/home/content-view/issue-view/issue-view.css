@@ -12,10 +12,6 @@
     flex-direction: column;
 }
 
-.component--hidden{
-    display: none;
-}
-
 .component__header{
     width: fit-content;
     height: fit-content;

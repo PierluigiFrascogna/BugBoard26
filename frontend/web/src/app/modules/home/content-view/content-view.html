@@ -1,8 +1,13 @@
 <div class="content-view-component scroll-component"> 
     <div class="content__element">
-        <app-issues-list></app-issues-list>
+        @if (isProjectSelected()) {
+            <app-issues-list></app-issues-list>
+        }
+        @else{ seleziona un progetto per iniziare }
     </div>
     <div class="content__element">
-        <app-issue-view></app-issue-view>
+        @if (isIssueSelected()) {
+            <app-issue-view></app-issue-view>
+        }
     </div>
 <div>

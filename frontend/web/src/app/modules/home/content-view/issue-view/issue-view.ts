@@ -3,7 +3,6 @@ import { ProjectStore } from '../../sidebar/sidebar-element/project/project-stor
 import { IssueStore } from '../issues-list/issue-card/issue/issue-store';
 import { IssueEventStore } from './issue-event-card/issue-events/issue-event-store';
 import { IssueEventCard } from "./issue-event-card/issue-event-card";
-import { NgClass } from '@angular/common';
 import { IssueCardFull } from "./issue-card-full/issue-card-full";
 import { TIssueEvent } from './issue-event-card/issue-events/issue-event-model';
 import { AddCommentCard } from "./add-comment-card/add-comment-card";
@@ -11,7 +10,7 @@ import { AuthStore } from '../../../../core/auth/auth-store';
 
 @Component({
   selector: 'app-issue-view',
-  imports: [IssueEventCard, NgClass, IssueCardFull, AddCommentCard],
+  imports: [IssueEventCard, IssueCardFull, AddCommentCard],
   templateUrl: './issue-view.html',
   styleUrl: './issue-view.css',
 })
@@ -24,9 +23,7 @@ export class IssueView {
 
   readonly title: Signal<string> = computed(() => this.projectStore.name()+this.issueStore.title());
   readonly issueEvents: Signal<TIssueEvent[]> = computed(() => this.issueEventStore.issueEvents());
-  readonly isVisible: Signal<boolean> = computed(() => this.issueStore.selectedIssue()!==null);
-  //readonly isViewer: Signal<boolean> = computed(() => this.authStore.role()==="viewer");
-  readonly isViewer = computed(() => false);
+  readonly isViewer: Signal<boolean> = computed(() => this.authStore.role()==="viewer");
 
   deselectIssue(){
     this.issueStore.deselectIssue();
