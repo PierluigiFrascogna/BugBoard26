@@ -3,6 +3,7 @@ import { Jwt } from './JWT/jwt';
 import { AuthApi } from './auth-api';
 import { JwtResponse } from './JWT/jwt-response';
 import { IUserUpdate, TUserRole } from '../../modules/profile/user/user';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +11,7 @@ import { IUserUpdate, TUserRole } from '../../modules/profile/user/user';
 export class AuthStore {
 
   private readonly authApi = inject(AuthApi);
+  private readonly router = inject(Router);
 
   private readonly jwt: WritableSignal<Jwt | null> = signal(null);
 
@@ -20,7 +22,6 @@ export class AuthStore {
   readonly name: Signal<string | null> = computed(() => this.jwt()?.payload().name || null);
   readonly surname: Signal<string | null> = computed(() => this.jwt()?.payload().surname || null);
   readonly email: Signal<string | null> = computed(() => this.jwt()?.payload().email || null);
-  readonly password: Signal<string | null> = computed(() => this.jwt()?.payload().password || null);
   readonly role: Signal<TUserRole | null> = computed(() => this.jwt()?.payload().role || null);
   // fino a qui
 
@@ -43,6 +44,11 @@ export class AuthStore {
   unsetJwt() {
     this.deleteTokenFromStorage();
     this.jwt.set(null);
+  }
+
+  logout() {
+    this.unsetJwt();
+    this.router.navigateByUrl('');
   }
 
   private saveTokenToStorage(token: Jwt) {
@@ -73,12 +79,10 @@ export class AuthStore {
   modifyUser(updates: IUserUpdate){
     this.authApi.modifyUser(updates).subscribe({
       next: (Response: JwtResponse) => {
-        const jwt = new Jwt(Response.token);
-        this.setJwt(jwt);
+        this.logout();
       },
       error: (err) => {
         console.error('update failed', err);
-        this.unsetJwt();
       }
     });
 
