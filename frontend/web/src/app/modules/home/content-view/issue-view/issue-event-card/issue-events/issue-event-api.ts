@@ -19,23 +19,24 @@ export class IssueEventApi {
   private readonly ISSUES_URL = "/issues";
   private readonly PROJECTS_URL = "/projects";
   private readonly ISSUE_EVENTS_URL = "/events";
-  private readonly COMMENTS_URL = "/comment";
+  private readonly COMMENT_URL = "/comment";
+  private readonly CHANGE_URL = "/change";
 
   readonly issueEventsResource = httpResource<TIssueEvent[]>(() => ({
     url: `${this.API_URL}${this.PROJECTS_URL}/${this.projectStore.selectedProject()?.uuid}/${this.issueStore.selectedIssue()?.uuid}${this.ISSUE_EVENTS_URL}`,
     method: 'GET',
   }));
 
-  createIssueEvent(issueEvent: TIssueEvent) {
-    return this.http.post<TIssueEvent>(
-      `${this.API_URL}${this.ISSUES_URL}/${this.issueStore.selectedIssue()?.uuid}${this.ISSUE_EVENTS_URL}`,
-      issueEvent
-    );
+  sendChanges(change: any){
+    return this.http.patch(
+      `${this.API_URL}${this.PROJECTS_URL}/${this.projectStore.selectedProject()?.uuid}/${this.issueStore.selectedIssue()?.uuid}${this.CHANGE_URL}`,
+      change
+    )
   }
 
   createComment(comment: Comment["text"]){
     return this.http.post<Comment>(
-      `${this.API_URL}${this.PROJECTS_URL}/${this.projectStore.selectedProject()?.uuid}/${this.issueStore.selectedIssue()?.uuid}${this.COMMENTS_URL}`, 
+      `${this.API_URL}${this.PROJECTS_URL}/${this.projectStore.selectedProject()?.uuid}/${this.issueStore.selectedIssue()?.uuid}${this.COMMENT_URL}`, 
       {
         "text": comment
       }

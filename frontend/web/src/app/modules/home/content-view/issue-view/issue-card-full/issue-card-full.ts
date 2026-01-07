@@ -6,6 +6,8 @@ import { PriorityLabel } from "../../issues-list/issue-card/priority-label/prior
 import { StateLabel } from "../../issues-list/issue-card/state-label/state-label";
 import { NgClass } from "@angular/common";
 import { AuthStore } from '../../../../../core/auth/auth-store';
+import { TIssuePriority, TIssueState } from '../../issues-list/issue-card/issue/issue';
+import { IssueEventStore } from '../issue-event-card/issue-events/issue-event-store';
 
 @Component({
   selector: 'app-issue-card-full',
@@ -16,16 +18,17 @@ import { AuthStore } from '../../../../../core/auth/auth-store';
 export class IssueCardFull {
   private readonly authStore = inject(AuthStore);
   private readonly issueStore = inject(IssueStore);
+  private readonly issueEventStore = inject(IssueEventStore);
   //readonly isViewer: Signal<boolean> = computed(() => this.authStore.role()==="viewer");
   readonly isViewer: Signal<boolean> = computed(() => false);
   readonly issue = computed(() => this.issueStore.selectedIssue());
   
   isEditing = signal<boolean>(false);
   issueForm = new FormGroup({
-    title: new FormControl('', [Validators.minLength(2)]),
-    description: new FormControl('', [Validators.minLength(2)]),
-    state: new FormControl('', [Validators.minLength(6)]),
-    priority: new FormControl('', [Validators.minLength(6)])
+    title: new FormControl(this.issue()!.title, [Validators.minLength(2)]),
+    description: new FormControl(this.issue()!.description, [Validators.minLength(2)]),
+    state: new FormControl<TIssueState>(this.issue()!.state),
+    priority: new FormControl<TIssuePriority>(this.issue()!.priority)
   })
   
   deactivateEditMode() {
@@ -33,51 +36,41 @@ export class IssueCardFull {
   }
   
   activateEditMode() {
-    const issue = this.issue();
-
-    if (!issue) return;
-
-    this.issueForm.setValue({
-      title: issue.title,
-      description: issue.description,
-      state: issue.state,
-      priority: issue.priority
-    });
-
-    this.issueForm.markAsPristine();
+    this.issueForm.reset();
     this.isEditing.set(true);
   }
   
   sendChanges(){
-    if (this.issueForm.invalid) return;
-
-    const payload = this.getChangedValues();
-
-    if (Object.keys(payload).length === 0) {
-      this.isEditing.set(false);
+    if (this.issueForm.invalid){
       return;
+    } else {
+      const changes = this.getChangedValues();
+      this.issueEventStore.sendChanges(changes);
     }
-
-    this.isEditing.set(false);
-    console.log(`you would have sent the following changes: `,{...payload})
-    //TODO: aggiungere l'effettiva logica per l'inivio della chiamata API
   }
 
   getChangedValues(){
-    const changed: any = {};
+    const changes: any[] = [];
 
     Object.keys(this.issueForm.controls).forEach(key => {
       const control = this.issueForm.get(key);
 
       if (!control || !control.dirty) return;
 
-      // evita invio se valore uguale all'originale
       if (control.dirty) {
-        changed[key] = control.value;
+        switch(key){
+          case ("title"): changes.push({newTitle: control.value});
+            break;
+          case ("description"): changes.push({newDescription: control.value});
+            break; 
+          case ("state"): changes.push({newState: control.value});
+            break; 
+          case ("priority"): changes.push({newPriority: control.value}); 
+        }
       }
     });
 
-    return changed;
+    return changes;
   }
   
 }

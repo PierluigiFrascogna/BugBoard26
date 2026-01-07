@@ -29,14 +29,16 @@ export class IssueEventStore {
   readonly loading = computed(() => this.state().loading); 
   readonly error = computed(() => this.state().error);
 
-  createIssueEvent(issueEvent: TIssueEvent) {
-    this.api.createIssueEvent(issueEvent).subscribe({
-      next: (createdEvent: TIssueEvent) => {
-        // Aggiorna lo stato locale aggiungendo il nuovo evento creato
-      },
-      error: (err: Error) => {
-        console.error('Error creating issue event:', err);
-      }
+  sendChanges(changes: any[]){
+    changes.forEach(change => {
+      this.api.sendChanges(changes).subscribe({
+        next: () => {
+          this.api.issueEventsResource.reload();
+        },
+        error: (err: Error) => {
+          console.error('Error sending changes', err);
+        }
+      })
     })
   }
 
