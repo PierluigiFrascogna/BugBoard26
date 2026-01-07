@@ -318,8 +318,6 @@ Il sistema è composto dai seguenti elementi:
             \item Creazione/modifica progetti e issue
             \item Gestione profili utente (solo per admin)
         \end{itemize}
-
-        \item \textbf{API Gateway:} punto di accesso unico per il client web che smista le richieste ai vari microservizi.
         
         \item \textbf{Backend:} microservizi che gestiscono le funzionalità principali della \gls{piattaforma}.
          \begin{itemize}[label=-]
@@ -351,19 +349,28 @@ Per la parte di persistenza di dati ci siamo affidati a Supabase, non per le fun
 Come annunciato in precedenza, il backend è diviso in due microservizi, ognuno dei quali fornito del proprio database. Qui di seguito
 riportiamo lo schema per entrambi:
 
-\includesvg[width=0.50\linewidth]{usersDB} \\[2em]
-\includesvg[width=0.50\linewidth]{BugBoardDB}
+\includegraphics[width=1\linewidth]{usersDB}
+Questo è il database dello UsersService. La sua funzione principale è quella di contenere per intero i dati delle varie utenze. Separare
+le informazioni delle utenze dalle informazioni proprie e caratteristiche di BugBoard26 ci permette una certa scalabilità oltre a impostare
+BugBoard26 verso quella che potrebbe diventare una famiglia di servizi in un futuro ipotetico.
 
-\subsection{Motivazioni delle scelte adottate?}
+\includegraphics[width=1\linewidth]{bugBoardDB}
+Questo è il database del BugBoardService, cuore pulsante della \gls{piattaforma}. È qui che sono conservate tutte le informazioni riguardanti
+progetti, \gls{issue} e interazioni degli utenti con queste. Questo possiede un sottoinsieme delle informazioni degli utenti, al fine di semplificare
+le operazioni intra-database e per permettere il suo corretto funzionamento anche nel caso di down del database dello UsersService.
 
 \subsection{Strumenti di versioning}
-Lo strumento di versioning da noi utilizzato è stato GitHub. È possibile visualizzare la repo al seguente link:
-\url{https://github.com/PierluigiFrascogna/BugBoard26}
-Qui è, ovviamente, possibile visualizzare ogni possibile statistica relativa a software e contributors, in modo molto più esaustivo di 
+Lo strumento di versioning da noi utilizzato è stato GitHub, scelta facile e dettata dalla sua diffusione e semplicità d'uso. È possibile 
+visualizzare la repo di BugBoard26 al seguente link: \\
+\url{https://github.com/PierluigiFrascogna/BugBoard26} \\
+Ovviamente, qui è anche possibile visualizzare ogni possibile statistica relativa a software e contributors, in modo molto più esaustivo di 
 quanto potremmo mai offrire noi.
 
 \subsection{Qualità del codice}
-
+Per la generazione di report sulla qualità del codice la nostra scelta è ricaduta su SonarQube. Questa scelta è stata dettata dalla sua
+estensività, semplicità d'uso e la profonda integrazione con GitHub. Qui di seguito riportiamo il report sulla qualità del codice
+inerente al backend: 
+\includegraphics[width=1\linewidth]{sonarqubeReport}
 
 \end{document}
 
