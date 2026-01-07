@@ -19,6 +19,7 @@ export class IssueEventApi {
   private readonly ISSUES_URL = "/issues";
   private readonly PROJECTS_URL = "/projects";
   private readonly ISSUE_EVENTS_URL = "/events";
+  private readonly COMMENTS_URL = "/comment";
 
   readonly issueEventsResource = httpResource<TIssueEvent[]>(() => ({
     url: `${this.API_URL}${this.PROJECTS_URL}/${this.projectStore.selectedProject()?.uuid}/${this.issueStore.selectedIssue()?.uuid}${this.ISSUE_EVENTS_URL}`,
@@ -34,7 +35,7 @@ export class IssueEventApi {
 
   createComment(comment: Comment["text"]){
     return this.http.post<Comment>(
-      `${this.API_URL}${this.ISSUES_URL}/${this.issueStore.selectedIssue()?.uuid}`, comment
+      `${this.API_URL}${this.ISSUES_URL}/${this.issueStore.selectedIssue()?.uuid}/${this.issueStore.selectedIssue()?.uuid}${this.COMMENTS_URL}`, comment
     );
   }
 }
