@@ -23,11 +23,6 @@ jobs:
         working-directory: backend/users
         run: mvn -DskipTests compile
 
-      - name: Debug Sonar env
-        run: |
-          echo "HOST = '${SONAR_HOST_URL}'"
-          echo "TOKEN SET = ${{ secrets.SONAR_TOKEN != '' }}"
-
       - name: Sonar scan
         uses: SonarSource/sonarqube-scan-action@v7
         with:
