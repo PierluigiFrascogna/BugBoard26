@@ -35,7 +35,10 @@ export class IssueEventApi {
 
   createComment(comment: Comment["text"]){
     return this.http.post<Comment>(
-      `${this.API_URL}${this.PROJECTS_URL}/${this.projectStore.selectedProject()?.uuid}/${this.issueStore.selectedIssue()?.uuid}${this.COMMENTS_URL}`, comment
+      `${this.API_URL}${this.PROJECTS_URL}/${this.projectStore.selectedProject()?.uuid}/${this.issueStore.selectedIssue()?.uuid}${this.COMMENTS_URL}`, 
+      {
+        "text": comment
+      }
     );
   }
 }
