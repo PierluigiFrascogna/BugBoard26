@@ -70,10 +70,6 @@ export class AuthStore {
     });
   }
 
-  sudologin(){
-    this.setJwt(new Jwt("admin"));
-  }
-
   modifyUser(updates: IUserUpdate){
     this.authApi.modifyUser(updates).subscribe({
       next: (Response: JwtResponse) => {
