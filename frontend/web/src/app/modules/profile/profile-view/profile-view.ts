@@ -21,6 +21,7 @@ export class ProfileView {
   });
 
   activateEditMode(){
+    this.isEditing.set(true);
     this.profileForm.reset();
   }
 
@@ -34,7 +35,7 @@ export class ProfileView {
       updates.email=this.profileForm!.controls.email.value!;
     
     if(!this.profileForm.controls.password.pristine && this.profileForm.controls.password.valid)
-      updates.password=this.profileForm!.controls.email.value!;
+      updates.password=this.profileForm!.controls.password.value!;
 
     this.authStore.modifyUser(updates);
   }
