@@ -11,6 +11,8 @@ services:
       file: "compose.base.yaml"
       service: web
     build:
+      context: ./frontend/web/
+      dockerfile: Dockerfile
       target: localdev
     volumes:
       - .:/BugBoard26
