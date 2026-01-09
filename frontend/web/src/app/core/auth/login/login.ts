@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AuthStore } from '../auth-store';
 
 
@@ -15,7 +15,7 @@ import { AuthStore } from '../auth-store';
 })
 export class Login {
 
-  private router = inject(Router);
+  private route = inject(ActivatedRoute);
   private auth = inject(AuthStore);
 
   isValidEmail: boolean = true;
@@ -30,8 +30,11 @@ export class Login {
 
   onSubmit() {
     if(this.loginForm.valid){
-      this.auth.login(this.loginForm.controls.email.value!, this.loginForm.controls.password.value!);
-      this.router.navigateByUrl('/'); // TODO: navigate to returnUrl che sta in nell'authguard
+      this.auth.login(
+        this.loginForm.controls.email.value!,
+        this.loginForm.controls.password.value!,
+        this.route.snapshot.queryParamMap.get('returnUrl') || '/'
+      );
     }
   }
 }

@@ -60,7 +60,7 @@ export class AuthStore {
   }
 
 
-  login(email: string, password: string) {
+  login(email: string, password: string, returnUrl: string) {
     if (!email || !password) {
       throw new Error('Email and password must be provided');
     }
@@ -68,6 +68,7 @@ export class AuthStore {
       next: (response: JwtResponse) => {
         const jwt = new Jwt(response.token);
         this.setJwt(jwt);
+        this.router.navigateByUrl(returnUrl || '/');
       },
       error: (err) => {
         console.error('Login failed', err);

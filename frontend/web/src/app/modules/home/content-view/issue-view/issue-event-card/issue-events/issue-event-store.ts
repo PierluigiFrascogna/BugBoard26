@@ -1,10 +1,6 @@
-import { afterNextRender, computed, inject, Injectable } from '@angular/core';
+import { computed, inject, Injectable } from '@angular/core';
 import { IssueEventApi } from './issue-event-api';
-import { IssueEvent } from './issue-event';
-import { Change } from './change-event/change-card/change/change';
 import { Comment } from './comment-event/comment-card/comment/comment';
-import { TitleChange } from './change-event/change-card/change/title-change';
-import { DescriptionChange } from './change-event/change-card/change/description-change';
 import { TIssueEvent } from './issue-event-model';
 
 export interface IssueEventsState {
@@ -45,7 +41,7 @@ export class IssueEventStore {
   createComment(comment: Comment["text"]){
     this.api.createComment(comment).subscribe({
       next: (createdComment: Comment) => {
-        //TODO: vedere cosa fare qui
+        this.api.issueEventsResource.reload();
       },
       error: (err: Error) => {
         console.error('Error creating comment: ', err);
