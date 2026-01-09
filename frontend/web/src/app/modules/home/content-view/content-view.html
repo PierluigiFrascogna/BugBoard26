@@ -2,6 +2,11 @@
     <div class="content__element">
         @if (isIssuesListVisible()) {
             <app-issues-list></app-issues-list>
+        } @else {
+            <div class="content__element--no-project-selected">
+                <img src="/images/Logomark.svg" alt="logomark">
+                <p>Seleziona un progetto</p>
+            </div>
         }
     </div>
     <div class="content__element">

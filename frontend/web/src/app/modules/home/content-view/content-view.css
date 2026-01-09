@@ -16,7 +16,25 @@
     scrollbar-color: rgba(255, 255, 255, 0.5) transparent;
 }
 
+.content__element--no-project-selected{
+    width: fit-content;
+    margin: auto;
+}
+
+.content__element--no-project-selected img {
+    width: 75%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.content__element--no-project-selected p {
+    font-size: 30px;
+    font-weight: bold;
+}
+
 .component__element{
     height: 100%;
     min-height: 0;
 }
+
+

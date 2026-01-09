@@ -10,6 +10,16 @@
     background-color: rgb(0, 0, 0, 0.7);
 }
 
+.navbar__element {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.navbar__icons {
+    justify-content: center;
+}
+
 .navbar__button{
     width: fit-content;
     height: fit-content;
