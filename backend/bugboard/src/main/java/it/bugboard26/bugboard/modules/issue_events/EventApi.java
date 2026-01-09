@@ -48,7 +48,7 @@ public class EventApi {
     @GetMapping("/events")
     public List<IssueEventResponse> getEventsByIssue(@PathVariable UUID uuid_issue) {
          if (!headerRequest.hasAuthorization()) 
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing or invalid Authorization header");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Missing or invalid Authorization header");
 
         List<IssueEvent> events = eventService.getByIssueUuid(uuid_issue);
         return eventService.enrichEventsWithAuthors(events);
@@ -57,7 +57,7 @@ public class EventApi {
     @PostMapping("/comment")
     public CommentResponse postNewComment(@PathVariable UUID uuid_issue, @RequestBody CommentRequest commentRequest) {
         if (!headerRequest.hasAuthorization()) 
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing or invalid Authorization header");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Missing or invalid Authorization header");
 
         Jws<Claims> token = jwtService.parseToken(headerRequest.extractToken());
         UUID uuid_user = UUID.fromString(token.getPayload().getSubject());
@@ -77,7 +77,7 @@ public class EventApi {
     @PatchMapping("/change")
     public ChangeResponse updateIssue(@PathVariable UUID uuid_issue, @RequestBody ChangeRequest changeRequest) {
         if (!headerRequest.hasAuthorization()) 
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing or invalid Authorization header");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Missing or invalid Authorization header");
 
         Jws<Claims> token = jwtService.parseToken(headerRequest.extractToken());
         UUID uuid_user = UUID.fromString(token.getPayload().getSubject());

@@ -38,7 +38,7 @@ public class AuthApi {
     @PatchMapping
     public void updateUser(@RequestBody UpdateUserRequest updateRequest) {
         if (!headerRequest.hasAuthorization()) 
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing or invalid Authorization header");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Missing or invalid Authorization header");
         
         Jws<Claims> token = jwtService.parseToken(headerRequest.extractToken());
         UUID uuidRequester = UUID.fromString(token.getPayload().getSubject());  

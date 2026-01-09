@@ -46,7 +46,7 @@ public class IssueApi {
             @RequestParam(required = false) String state) {
 
         if (!headerRequest.hasAuthorization()) 
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing or invalid Authorization header");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Missing or invalid Authorization header");
 
         List<Issue> issues = issueService.getIssuesByProject(uuid_project, type, priority, state);
         return issueService.enrichIssuesWithAuthors(issues);
@@ -55,7 +55,7 @@ public class IssueApi {
     @PostMapping("/issues")
     public IssueResponse postNewIssue(@PathVariable UUID uuid_project, @RequestBody IssueRequest issueRequest) {
         if (!headerRequest.hasAuthorization()) 
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing or invalid Authorization header");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Missing or invalid Authorization header");
 
         Jws<Claims> token = jwtService.parseToken(headerRequest.extractToken());
         UUID uuid_user = UUID.fromString(token.getPayload().getSubject());

@@ -39,7 +39,7 @@ public class UserApi {
     @PostMapping
     public User register(@RequestBody RegistrationRequest registrationRequest) {
         if (!headerRequest.hasAuthorization()) 
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing or invalid Authorization header");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Missing or invalid Authorization header");
         
         Jws<Claims> token = jwtService.parseToken(headerRequest.extractToken());
         Role role = Role.valueOf(token.getPayload().get("role", String.class));
@@ -54,7 +54,7 @@ public class UserApi {
     @GetMapping
     public List<UserResponse> getAllUsers() {
         if (!headerRequest.hasAuthorization()) 
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing or invalid Authorization header");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Missing or invalid Authorization header");
 
         Jws<Claims> token = jwtService.parseToken(headerRequest.extractToken());
         Role role = Role.valueOf(token.getPayload().get("role", String.class));
@@ -67,7 +67,7 @@ public class UserApi {
     @DeleteMapping("/{uuid_user}")
     public void deleteUser(@PathVariable UUID uuid_user) {
         if (!headerRequest.hasAuthorization()) 
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing or invalid Authorization header");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Missing or invalid Authorization header");
 
         Jws<Claims> token = jwtService.parseToken(headerRequest.extractToken());
         Role role = Role.valueOf(token.getPayload().get("role", String.class));

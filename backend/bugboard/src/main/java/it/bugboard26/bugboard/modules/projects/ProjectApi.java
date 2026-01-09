@@ -38,7 +38,7 @@ public class ProjectApi {
     @GetMapping("/projects")
     public List<ProjectResponse> getProjects() {
         if (!headerRequest.hasAuthorization()) 
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing or invalid Authorization header");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Missing or invalid Authorization header");
 
         List<Project> projects = projectService.getAllProjects();
         List<ProjectResponse> projectsResponse = new ArrayList<>();
@@ -52,7 +52,7 @@ public class ProjectApi {
     @PostMapping("/projects")
     public ResponseEntity<ProjectResponse> createNewProject(@RequestBody Map<String, String> body) {
         if (!headerRequest.hasAuthorization()) 
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing or invalid Authorization header");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Missing or invalid Authorization header");
 
         Jws<Claims> token = jwtService.parseToken(headerRequest.extractToken());
         UUID uuid_user = UUID.fromString(token.getPayload().getSubject());
