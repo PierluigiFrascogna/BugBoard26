@@ -152,8 +152,8 @@ Ora esamineremo alcune personas che rispecchiano alcuni dei tipi di utilizzatori
             \end{itemize}
         \end{minipage}                                                                                                                                                                                                                  \\
         \hline
-        \textbf{Bio:}                                                                                                                                                                                                                                   \\
-        Sono un developer di Izdebki, dopo essermi laureato all'università di Cracovia mi sono trasferito a Napoli per lavoro e per amore. Sono grande amatore della filosofia “work smarter not harder” che cerco di applicare in ogni modo possibile. \\
+        \textbf{Bio:}
+        Sono un software engineer di Nantes ma ho vissuto buona parte della mia vita a Roma. Sono una persona risolutiva ed estremamente orientata al pratico e questo si riflette nel mio modo di lavorare                                                                                                                                                                                                                                   \\
         \hline
     \end{tabular}
 \end{table}
@@ -371,6 +371,182 @@ Per la generazione di report sulla qualità del codice la nostra scelta è ricad
 estensività, semplicità d'uso e la profonda integrazione con GitHub. Qui di seguito riportiamo il report sulla qualità del codice
 inerente al backend: 
 \includegraphics[width=1\linewidth]{sonarqubeReport}
+\newpage
+
+\section{TESTING}
+\subsection{Test Plan}
+La funzionalità che abbiamo deciso di testare è quella inerente alle \gls{issue} in quanto considerata da noi fondamentale 
+per la \gls{piattaforma} stessa. Nello specifico testeremo i metodi
+"IssueResponse postNewIssue(UUID uuid\_project, IssueRequest issueRequest)" della classe IssueAPI e 
+"List<IssueResponse> getIssuesByProject(UUID uuid\_project, string type, string priority, string state)" della classe IssueService. 
+La metodologia utilizzata per testare entrambi i metodi è quella black-box, nello specifico R-WECT, in quanto giusto compromesso tra mole
+di test ed esaustività degli stessi. Ora illustremo le informazioni relative al testing di ognuno dei metodi.
+
+\subsubsection{\texttt{IssueResponse postNewIssue(UUID uuid\_project, IssueRequest issueRequest)}}
+Questo metodo, come si può intuire dal nome, si occupa di creare nuove issue e racchiuderele nel corretto formato JSON da spedire al 
+frontend. Al fine del testing sono state individuate le seguenti classi di equivalenza (al fine di una maggiore chiarezza, le classi di 
+equivalenza per parametri diversi di uno stesso metodo saranno in ordine crescente):
+
+
+ \begin{table}[H]
+    \centering
+    \caption{Classi di equivalenza per il parametro UUID uuid\_project}
+    \begin{tabularx}{\linewidth}{|X|X|X|}
+        \hline
+        \textbf{Classi di equivalenza}  & \textbf{Descrizione}                                                                      &\textbf{Valido}    \\
+        \hline
+        CE1                             & uuid valido, ossia conforme allo standard UUID e presente all'interno del database        & SI                \\
+        \hline
+        CE2                             & uuid non valido, ossia non conforme allo standard UUID                                    & NO                \\
+        \hline
+        CE3                             & uuid valido, ossia conforme allo standard UUID ma non presente all'interno del database   & NO                \\
+        \hline
+    \end{tabularx}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \caption{Classi di equivalenza per il parametro issueRequest}
+    \begin{tabularx}{\linewidth}{|X|X|X|}
+        \hline
+        \textbf{Classi di equivalenza}  & \textbf{Descrizione}                                                                              &\textbf{Valido}    \\
+        \hline
+        CE4                             & un oggetto di tipo issueRequest valido, ossia correttamente allocabile a partire da un JSON       & SI                \\
+        \hline
+        CE5                             & un oggetto di tipo issueRequest non valido, ossia impossibile da allocare a partire da un JSON    & NO                \\
+        \hline
+    \end{tabularx}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \caption{Oracolo per test del metodo IssueResponse postNewIssue(UUID uuid\_project, IssueRequest issueRequest)}
+    \begin{tabularx}{\linewidth}{|X|X|X|}
+        \hline
+        \textbf{Caso di test} & \textbf{Classe di equivalenza} & \textbf{Esito atteso}                  \\
+        \hline
+        TC1                   & CE1, CE4                      & Successo: IssueResponse corretta, con tutti i dati della issue creata   \\
+        \hline
+        TC2                   & CE2, CE4                      & Errore: 400     \\
+        \hline
+        TC3                   & CE3, CE4                      & Errore: 404     \\
+        \hline
+        TC4                   & CE1, CE5                      & Errore: 400     \\
+        \hline
+    \end{tabularx}
+\end{table}
+
+\subsubsection{\texttt{List<IssueResponse> getIssuesByProject(UUID uuid\_project, string type, string priority, string state)}}
+Questo metodo, come si può intuire dal nome, si occupa di creare nuove istanze della classe Issue.
+
+
+\begin{table}[H]
+    \centering
+    \caption{Classi di equivalenza per il parametro uuid\_project}
+    \begin{tabularx}{\linewidth}{|X|X|X|}
+        \hline
+        \textbf{Classi di equivalenza}  & \textbf{Descrizione}                                                                     &\textbf{Valido}    \\
+        \hline
+        CE1                            & uuid valido, ossia conforme allo standard UUID e presente all'interno del database        & SI                \\
+        \hline
+        CE2                            & uuid non valido, ossia non conforme allo standard UUID                                    & NO                \\
+        \hline
+        CE3                            & uuid valido, ossia conforme allo standard UUID ma non presente all'interno del database   & NO                \\
+        \hline
+    \end{tabularx}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \caption{Classi di equivalenza per il parametro type}
+    \begin{tabularx}{\linewidth}{|X|X|X|}
+        \hline
+        \textbf{Classi di equivalenza}  & \textbf{Descrizione}                                      &\textbf{Valido}    \\
+        \hline
+        CE\_BUG                             & stringa "BUG"                                         & SI                \\
+        \hline
+        CE\_FEATURE                         & stringa "FEATURE"                                     & SI                \\
+        \hline
+        CE\_DOCUMENTATION                   & stringa "DOCUMENTATION"                               & SI                \\
+        \hline
+        CE\_QUESTION                        & stringa "QUESTION"                                    & SI                \\
+        \hline
+        CE\_TOTHERS                         & tutte le altre combinazioni di stringhe possibili     & NO                \\
+        \hline
+        CE\_TNULL                           & "null"                                                & SI                \\
+        \hline
+    \end{tabularx}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \caption{Classi di equivalenza per il parametro priority}
+    \begin{tabularx}{\linewidth}{|X|X|X|}
+        \hline
+        \textbf{Classi di equivalenza}  & \textbf{Descrizione}                                      &\textbf{Valido}    \\
+        \hline
+        CE\_LOW                             & stringa "LOW"                                         & SI                \\
+        \hline
+        CE\_MEDIUM                          & stringa "MEDIUM"                                      & SI                \\
+        \hline
+        CE\_HIGH                            & stringa "HIGH"                                        & SI                \\
+        \hline
+        CE\_POTHERS                         & tutte le altre combinazioni di stringhe possibili     & NO                \\
+        \hline
+        CE\_PNULL                           & "null"                                                & SI                \\
+        \hline
+    \end{tabularx}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \caption{Classi di equivalenza per il parametro state}
+    \begin{tabularx}{\linewidth}{|X|X|X|}
+        \hline
+        \textbf{Classi di equivalenza}  & \textbf{Descrizione}                                      &\textbf{Valido}    \\
+        \hline
+        CE\_TODO                            & stringa "TODO"                                        & SI                \\
+        \hline
+        CE\_PENDING                         & stringa "PENDING"                                     & SI                \\
+        \hline
+        CE\_DONE                            & stringa "DONE"                                        & SI                \\
+        \hline
+        CE\_SOTHERS                         & tutte le altre combinazioni di stringhe possibili     & NO                \\
+        \hline
+        CE\_SNULL                           & "null"                                                & SI                \\
+        \hline
+    \end{tabularx}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \caption{Oracolo per test del metodo List<IssueResponse> getIssuesByProject(UUID uuid\_project, string type, string priority, string state)}
+    \begin{tabularx}{\linewidth}{|X|X|X|}
+        \hline
+        \textbf{Caso di test}   & \textbf{Classe di equivalenza}                & \textbf{Esito atteso}                  \\
+        \hline
+        TC1                     &CE1, CE\_BUG, CE\_LOW, CE\_TODO                & Successo: Lista di IssueResponse corretta, con tutte le issue che rispettano i filtri   \\
+        \hline
+        TC2                     &CE1, CE\_QUESTION, CE\_MEDIUM, CE\_PENDING     & Successo: Lista di IssueResponse corretta, con tutte le issue che rispettano i filtri   \\
+        \hline
+        TC3                     &CE1, CE\_FEATURE, CE\_HIGH, CE\_DONE           & Successo: Lista di IssueResponse corretta, con tutte le issue che rispettano i filtri   \\
+        \hline
+        TC4                     &CE1, CE\_DOCUMENTATION, CE\_PNULL, CE\_SNULL   & Successo: Lista di IssueResponse corretta, con tutte le issue che rispettano i filtri   \\
+        \hline
+        TC5                     &CE1, CE\_TNULL, CE\_PNULL, CE\_SNULL           & Successo: Lista di IssueResponse corretta, con tutte le issue che rispettano i filtri   \\
+        \hline
+        TC6                     &CE2, CE\_TNULL, CE\_PNULL, CE\_SNULL           & Errore: 400     \\
+        \hline
+        TC7                     &CE3, CE\_BUG, CE\_LOW, CE\_PENDING             & Errore: 404     \\
+        \hline
+        TC8                     &CE1, CE\_TOTHERS, CE\_LOW, CE\_SNULL           & Errore: 400     \\
+        \hline
+        TC9                     &CE1, CE\_BUG, CE\_POTHERS, CE\_SNULL           & Errore: 400     \\
+        \hline
+        TC10                    &CE1, CE\_BUG, CE\_LOW, CE\_SOTHERS             & Errore: 400     \\
+        \hline
+    \end{tabularx}
+\end{table}
 
 \end{document}
 
