@@ -8,12 +8,15 @@ import it.bugboard26.bugboard.entities.User;
 import it.bugboard26.bugboard.enums.IssueState;
 import it.bugboard26.bugboard.enums.IssueType;
 import it.bugboard26.bugboard.enums.Priority;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
 public class IssueRequest {
+    @NotBlank
     private String title;
+    @NotBlank
     private String description;
     private IssueType type;
     private Priority priority;

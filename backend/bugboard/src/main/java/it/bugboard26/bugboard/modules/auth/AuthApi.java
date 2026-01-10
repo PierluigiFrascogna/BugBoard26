@@ -13,11 +13,11 @@ import org.springframework.web.server.ResponseStatusException;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
+import it.bugboard26.bugboard.microservices.users.UsersMicroservice;
 import it.bugboard26.bugboard.modules.auth.dtos.JwtResponse;
 import it.bugboard26.bugboard.modules.auth.dtos.LoginRequest;
 import it.bugboard26.bugboard.modules.auth.dtos.UpdateUserRequest;
 import it.bugboard26.bugboard.modules.projects.HeaderRequestService;
-import it.bugboard26.bugboard.users_micro_service.UsersMicroService;
 import lombok.AllArgsConstructor;
     
 @AllArgsConstructor
@@ -28,7 +28,7 @@ public class AuthApi {
     private HeaderRequestService headerRequest;
     private JwtService jwtService; 
     private AuthService authService;
-    private UsersMicroService usersMicroService;
+    private UsersMicroservice usersMicroService;
 
     @PostMapping("/login")
     public JwtResponse login(@RequestBody LoginRequest loginRequest) {

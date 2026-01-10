@@ -1,7 +1,5 @@
-package it.bugboard26.users.services;
+package it.bugboard26.users.modules.users;
 
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -12,9 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import lombok.AllArgsConstructor;
-import it.bugboard26.users.dtos.RegistrationRequest;
-import it.bugboard26.users.dtos.UserResponse;
 import it.bugboard26.users.entities.User;
+import it.bugboard26.users.modules.auth.dtos.UserResponse;
+import it.bugboard26.users.modules.users.dtos.RegistrationRequest;
 import it.bugboard26.users.repositories.UserRepository;
 
 @AllArgsConstructor
@@ -38,14 +36,10 @@ public class UserService {
         return userRepository.existsByEmail(email);
     }
 
-    public UserResponse[] findAllByIds(Set<UUID> user_ids) {
-         List<User> users = userRepository.findAllById(user_ids);
-         
-         List<UserResponse> response = new ArrayList<>();
-         for (User user : users) 
-            response.add(UserResponse.map(user));
-         
-         return response.toArray(new UserResponse[0]);
+    public List<UserResponse> findAllByIds(Set<UUID> user_ids) {
+        return userRepository.findAllById(user_ids).stream()
+        .map(user -> UserResponse.map(user))
+        .toList();
     }
 
     public List<UserResponse> findAll() {

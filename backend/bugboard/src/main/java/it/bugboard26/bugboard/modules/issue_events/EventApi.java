@@ -26,12 +26,14 @@ import it.bugboard26.bugboard.enums.Role;
 import it.bugboard26.bugboard.modules.auth.JwtService;
 import it.bugboard26.bugboard.modules.issue_events.changes.dtos.request.ChangeRequest;
 import it.bugboard26.bugboard.modules.issue_events.changes.dtos.response.ChangeResponse;
-import it.bugboard26.bugboard.modules.issue_events.comments.CommentRequest;
-import it.bugboard26.bugboard.modules.issue_events.comments.CommentResponse;
+import it.bugboard26.bugboard.modules.issue_events.comments.dtos.CommentRequest;
+import it.bugboard26.bugboard.modules.issue_events.comments.dtos.CommentResponse;
+import it.bugboard26.bugboard.modules.issue_events.dtos.IssueEventResponse;
 import it.bugboard26.bugboard.modules.issues.IssueService;
 import it.bugboard26.bugboard.modules.projects.HeaderRequestService;
 import it.bugboard26.bugboard.modules.users.UserService;
 import it.bugboard26.bugboard.modules.users.dtos.UserResponse;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -55,7 +57,7 @@ public class EventApi {
     }
 
     @PostMapping("/comment")
-    public CommentResponse postNewComment(@PathVariable UUID uuid_issue, @RequestBody CommentRequest commentRequest) {
+    public CommentResponse postNewComment(@PathVariable UUID uuid_issue, @RequestBody @Valid CommentRequest commentRequest) {
         if (!headerRequest.hasAuthorization()) 
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Missing or invalid Authorization header");
 

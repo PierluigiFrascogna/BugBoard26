@@ -3,12 +3,11 @@ package it.bugboard26.bugboard.modules.auth;
 import org.springframework.stereotype.Service;
 
 import it.bugboard26.bugboard.enums.Role;
+import it.bugboard26.bugboard.microservices.users.UsersMicroservice;
 import it.bugboard26.bugboard.modules.auth.dtos.JwtResponse;
 import it.bugboard26.bugboard.modules.auth.dtos.LoginRequest;
 import it.bugboard26.bugboard.modules.users.UserService;
 import it.bugboard26.bugboard.modules.users.dtos.UserResponse;
-import it.bugboard26.bugboard.users_micro_service.UsersMicroService;
-
 import lombok.AllArgsConstructor;
 
 
@@ -17,7 +16,7 @@ import lombok.AllArgsConstructor;
 public class AuthService {
     //Attributes
     private JwtService jwtService;
-    private UsersMicroService usersMicroService;
+    private UsersMicroservice usersMicroService;
     private UserService userService;
 
     //Methods

@@ -1,4 +1,4 @@
-package it.bugboard26.users.controller;
+package it.bugboard26.users.modules.users;
 
 import java.util.List;
 import java.util.Set;
@@ -9,11 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import it.bugboard26.users.dtos.RegistrationRequest;
-import it.bugboard26.users.dtos.UserResponse;
 import it.bugboard26.users.entities.User;
-import it.bugboard26.users.services.UserService;
-
+import it.bugboard26.users.modules.auth.dtos.UserResponse;
+import it.bugboard26.users.modules.users.dtos.RegistrationRequest;
 import lombok.AllArgsConstructor;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,7 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @AllArgsConstructor
 @RequestMapping("/users")
 @RestController
-public class UserController {
+public class UserApi {
     private UserService userService;
 
     @GetMapping
@@ -33,7 +31,7 @@ public class UserController {
     }
 
     @PostMapping("/batch")
-    public UserResponse[] getUsersBatch(@RequestBody Set<UUID> user_ids) {
+    public List<UserResponse> getUsersBatch(@RequestBody Set<UUID> user_ids) {
         return userService.findAllByIds(user_ids);
     }
 

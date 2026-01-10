@@ -19,11 +19,12 @@ import io.jsonwebtoken.Jws;
 
 import it.bugboard26.bugboard.entities.User;
 import it.bugboard26.bugboard.enums.Role;
+import it.bugboard26.bugboard.microservices.users.UsersMicroservice;
 import it.bugboard26.bugboard.modules.auth.JwtService;
 import it.bugboard26.bugboard.modules.projects.HeaderRequestService;
 import it.bugboard26.bugboard.modules.users.dtos.RegistrationRequest;
 import it.bugboard26.bugboard.modules.users.dtos.UserResponse;
-import it.bugboard26.bugboard.users_micro_service.UsersMicroService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -34,10 +35,10 @@ public class UserApi {
     private HeaderRequestService headerRequest;
     private JwtService jwtService;
     private UserService userService;
-    private UsersMicroService usersMicroService;
+    private UsersMicroservice usersMicroService;
 
     @PostMapping
-    public User register(@RequestBody RegistrationRequest registrationRequest) {
+    public User register(@RequestBody @Valid RegistrationRequest registrationRequest) {
         if (!headerRequest.hasAuthorization()) 
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Missing or invalid Authorization header");
         

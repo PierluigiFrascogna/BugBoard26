@@ -6,21 +6,23 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.http.HttpStatus;
 
 import it.bugboard26.bugboard.entities.User;
 import it.bugboard26.bugboard.enums.Role;
+import it.bugboard26.bugboard.microservices.users.UsersMicroservice;
 import it.bugboard26.bugboard.modules.users.dtos.UserResponse;
-import it.bugboard26.bugboard.users_micro_service.UsersMicroService;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Service
 public class UserService {
-    private UsersMicroService usersMicroService;
+    private UsersMicroservice usersMicroService;
     private UserRepository userRepository;
 
     public User getByUuid(UUID uuid) {
-        return userRepository.findById(uuid).orElseThrow();
+        return userRepository.findById(uuid).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
     }
 
     public List<UserResponse> getAllUsers() {

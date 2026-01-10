@@ -14,11 +14,12 @@ import it.bugboard26.bugboard.entities.Comment;
 import it.bugboard26.bugboard.entities.Issue;
 import it.bugboard26.bugboard.entities.IssueEvent;
 import it.bugboard26.bugboard.entities.User;
+import it.bugboard26.bugboard.microservices.users.UsersMicroservice;
 import it.bugboard26.bugboard.modules.issue_events.changes.dtos.request.ChangeRequest;
-import it.bugboard26.bugboard.modules.issue_events.comments.CommentRequest;
+import it.bugboard26.bugboard.modules.issue_events.comments.dtos.CommentRequest;
+import it.bugboard26.bugboard.modules.issue_events.dtos.IssueEventResponse;
 import it.bugboard26.bugboard.modules.issues.IssueService;
 import it.bugboard26.bugboard.modules.users.dtos.UserResponse;
-import it.bugboard26.bugboard.users_micro_service.UsersMicroService;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -26,7 +27,7 @@ import lombok.AllArgsConstructor;
 public class EventService {
     private EventRepository eventRepository;
     private IssueService issueService;
-    private UsersMicroService usersMicroService;
+    private UsersMicroservice usersMicroService;
 
     public IssueEvent save(IssueEvent event) {
         return eventRepository.save(event);

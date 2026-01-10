@@ -1,4 +1,4 @@
-package it.bugboard26.bugboard.users_micro_service;
+package it.bugboard26.bugboard.microservices.users.dtos;
 
 import it.bugboard26.bugboard.enums.Role;
 import it.bugboard26.bugboard.modules.users.dtos.RegistrationRequest;

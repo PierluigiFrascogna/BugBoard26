@@ -1,12 +1,13 @@
-package it.bugboard26.users.services;
+package it.bugboard26.users.modules.auth;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import it.bugboard26.users.dtos.LoginRequest;
-import it.bugboard26.users.dtos.UpdateUserRequest;
 import it.bugboard26.users.entities.User;
+import it.bugboard26.users.modules.auth.dtos.LoginRequest;
+import it.bugboard26.users.modules.auth.dtos.UpdateUserRequest;
+import it.bugboard26.users.modules.users.UserService;
 import lombok.AllArgsConstructor;
 
 import org.mindrot.jbcrypt.BCrypt;

@@ -1,4 +1,4 @@
-package it.bugboard26.bugboard.modules.issue_events;
+package it.bugboard26.bugboard.modules.issue_events.dtos;
 
 import java.time.LocalDateTime;
 
@@ -7,7 +7,7 @@ import it.bugboard26.bugboard.entities.Comment;
 import it.bugboard26.bugboard.entities.IssueEvent;
 import it.bugboard26.bugboard.enums.IssueEventType;
 import it.bugboard26.bugboard.modules.issue_events.changes.dtos.response.ChangeResponse;
-import it.bugboard26.bugboard.modules.issue_events.comments.CommentResponse;
+import it.bugboard26.bugboard.modules.issue_events.comments.dtos.CommentResponse;
 import it.bugboard26.bugboard.modules.users.dtos.UserResponse;
 import lombok.Getter;
 

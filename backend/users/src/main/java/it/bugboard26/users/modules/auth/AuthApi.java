@@ -1,10 +1,9 @@
-package it.bugboard26.users.controller;
+package it.bugboard26.users.modules.auth;
 
-import it.bugboard26.users.dtos.LoginRequest;
-import it.bugboard26.users.dtos.UpdateUserRequest;
-import it.bugboard26.users.dtos.UserResponse;
 import it.bugboard26.users.entities.User;
-import it.bugboard26.users.services.AuthService;
+import it.bugboard26.users.modules.auth.dtos.LoginRequest;
+import it.bugboard26.users.modules.auth.dtos.UpdateUserRequest;
+import it.bugboard26.users.modules.auth.dtos.UserResponse;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -17,7 +16,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/auth")
-public class AuthController {
+public class AuthApi {
     private AuthService authService;
 
     @PostMapping("/login")
