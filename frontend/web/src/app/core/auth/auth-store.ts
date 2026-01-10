@@ -48,7 +48,7 @@ export class AuthStore {
 
   logout() {
     this.unsetJwt();
-    this.router.navigateByUrl('');
+    this.router.navigateByUrl('/');
   }
 
   private saveTokenToStorage(token: Jwt) {
