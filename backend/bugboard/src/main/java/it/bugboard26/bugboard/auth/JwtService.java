@@ -1,4 +1,4 @@
-package it.bugboard26.bugboard.modules.auth;
+package it.bugboard26.bugboard.auth;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
@@ -26,7 +26,7 @@ public class JwtService {
     }
 
     //Methods
-    public Jws<Claims> parseToken(String rawToken) {
+    public Jws<Claims> validateAndParseToken(String rawToken) {
         return Jwts.parser()
                 .verifyWith(secretKey)
                 .build()

@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
 import org.springframework.http.HttpStatus;
 
 import it.bugboard26.bugboard.entities.User;
@@ -18,21 +19,20 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Service
 public class UserService {
-    private UsersMicroservice usersMicroService;
+    private UsersMicroservice usersMicroservice;
     private UserRepository userRepository;
+
+    public User registerUser(User user) {
+        return userRepository.save(user);
+    }
 
     public User getByUuid(UUID uuid) {
         return userRepository.findById(uuid).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
     }
 
     public List<UserResponse> getAllUsers() {
-        List<UserResponse> users = usersMicroService.getAllUsers();
+        List<UserResponse> users = usersMicroservice.getAllUsers();
         return this.enrichUsersWithRoles(users);
-    }
-
-    
-    public User registerUser(User user) {
-        return userRepository.save(user);
     }
 
     private List<UserResponse> enrichUsersWithRoles(List<UserResponse> users) {
@@ -54,5 +54,5 @@ public class UserService {
 
         return users;
     }
-
+    
 }

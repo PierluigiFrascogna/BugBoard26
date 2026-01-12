@@ -11,8 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-import it.bugboard26.bugboard.modules.auth.JwtService;
-import it.bugboard26.bugboard.modules.projects.HeaderRequestService;
+import it.bugboard26.bugboard.auth.JwtService;
 import it.bugboard26.bugboard.modules.users.UserService;
 
 @ExtendWith(MockitoExtension.class)
@@ -20,9 +19,6 @@ class IssueApiTest {
 
     @InjectMocks
     private IssueApi issueApi;
-
-    @Mock
-    private HeaderRequestService headerRequest;
 
     @Mock
     private JwtService jwtService;
@@ -35,9 +31,6 @@ class IssueApiTest {
 
     @Test
     void getIssuesByProject_TC6() {
-
-        when(headerRequest.hasAuthorization()).thenReturn(false);
-
         ResponseStatusException exception = assertThrows(ResponseStatusException.class, () -> {
             issueApi.getIssuesByProject(null, null, null, null);
         });

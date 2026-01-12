@@ -1,4 +1,4 @@
-package it.bugboard26.bugboard;
+package it.bugboard26.bugboard.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

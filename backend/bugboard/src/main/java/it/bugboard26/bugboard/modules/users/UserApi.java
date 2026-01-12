@@ -14,14 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-
+import it.bugboard26.bugboard.auth.Jwt;
 import it.bugboard26.bugboard.entities.User;
 import it.bugboard26.bugboard.enums.Role;
 import it.bugboard26.bugboard.microservices.users.UsersMicroservice;
-import it.bugboard26.bugboard.modules.auth.JwtService;
-import it.bugboard26.bugboard.modules.projects.HeaderRequestService;
 import it.bugboard26.bugboard.modules.users.dtos.RegistrationRequest;
 import it.bugboard26.bugboard.modules.users.dtos.UserResponse;
 import jakarta.validation.Valid;
@@ -32,19 +28,13 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/users")
 @RestController
 public class UserApi {
-    private HeaderRequestService headerRequest;
-    private JwtService jwtService;
+    private Jwt jwtUser;
     private UserService userService;
     private UsersMicroservice usersMicroService;
 
     @PostMapping
     public User register(@RequestBody @Valid RegistrationRequest registrationRequest) {
-        if (!headerRequest.hasAuthorization()) 
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Missing or invalid Authorization header");
-        
-        Jws<Claims> token = jwtService.parseToken(headerRequest.extractToken());
-        Role role = Role.valueOf(token.getPayload().get("role", String.class));
-        if (role != Role.ADMIN) 
+        if (jwtUser.getRole() != Role.ADMIN) 
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Only admins can register new users");
         
         UUID uuid_newUser = usersMicroService.registerUser(registrationRequest);
@@ -54,12 +44,7 @@ public class UserApi {
 
     @GetMapping
     public List<UserResponse> getAllUsers() {
-        if (!headerRequest.hasAuthorization()) 
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Missing or invalid Authorization header");
-
-        Jws<Claims> token = jwtService.parseToken(headerRequest.extractToken());
-        Role role = Role.valueOf(token.getPayload().get("role", String.class));
-        if (role != Role.ADMIN) 
+        if (jwtUser.getRole() != Role.ADMIN) 
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Only admins can get all users");
        
         return userService.getAllUsers();
@@ -67,12 +52,7 @@ public class UserApi {
 
     @DeleteMapping("/{uuid_user}")
     public void deleteUser(@PathVariable UUID uuid_user) {
-        if (!headerRequest.hasAuthorization()) 
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Missing or invalid Authorization header");
-
-        Jws<Claims> token = jwtService.parseToken(headerRequest.extractToken());
-        Role role = Role.valueOf(token.getPayload().get("role", String.class));
-        if (role != Role.ADMIN) 
+        if (jwtUser.getRole() != Role.ADMIN) 
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Only admins can delete users");
         
         usersMicroService.deleteUser(uuid_user);
