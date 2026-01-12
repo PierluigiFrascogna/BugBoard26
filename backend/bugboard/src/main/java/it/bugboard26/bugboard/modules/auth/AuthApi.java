@@ -2,7 +2,6 @@ package it.bugboard26.bugboard.modules.auth;
 
 import java.util.UUID;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +16,6 @@ import it.bugboard26.bugboard.modules.auth.dtos.UpdateUserRequest;
 import lombok.AllArgsConstructor;
     
 @AllArgsConstructor
-@CrossOrigin(origins = "https://app.bugboard26.it")
 @RequestMapping("/auth")
 @RestController
 public class AuthApi {

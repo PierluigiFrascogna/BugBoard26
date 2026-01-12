@@ -4,7 +4,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import it.bugboard26.bugboard.auth.Jwt;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @AllArgsConstructor
-@CrossOrigin(origins = "https://app.bugboard26.it")
 @RestController
 public class ProjectApi {
     private Jwt jwtUser;

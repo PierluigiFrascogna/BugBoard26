@@ -21,6 +21,11 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        // Lascia passare le richieste OPTIONS senza controllare il JWT
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            return true; 
+        }
+        
         String header = request.getHeader("Authorization");
         if (header == null || !header.toLowerCase().startsWith("bearer ")) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Missing or invalid Authorization header");
