@@ -21,7 +21,6 @@ import it.bugboard26.bugboard.modules.auth.dtos.LoginRequest;
 import it.bugboard26.bugboard.modules.auth.dtos.UpdateUserRequest;
 import it.bugboard26.bugboard.modules.users.dtos.RegistrationRequest;
 import it.bugboard26.bugboard.modules.users.dtos.UserResponse;
-import jakarta.validation.Valid;
 
 // TODO: handle errors in case Users Micro-Service is down
 @Service
