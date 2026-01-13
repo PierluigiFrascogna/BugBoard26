@@ -36,7 +36,8 @@ public class IssueApi {
             @PathVariable UUID uuid_project,
             @RequestParam(required = false) String type,
             @RequestParam(required = false) String priority,
-            @RequestParam(required = false) String state) {
+            @RequestParam(required = false) String state
+        ) {
 
         List<Issue> issues = issueService.getIssuesByProject(uuid_project, type, priority, state);
         return issueService.enrichIssuesWithAuthors(issues);
