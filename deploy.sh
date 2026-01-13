@@ -1,5 +1,7 @@
 #!/bin/bash
 
+date +"[%Y-%m-%d %H:%M:%S] Starting deployment..."
+
 set -euo pipefail
 
 cd "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -27,3 +29,5 @@ compose pull
 compose up -d --remove-orphans
 
 podman image prune -f >/dev/null 2>&1 || true
+
+date +"[%Y-%m-%d %H:%M:%S] Deployment finished."
