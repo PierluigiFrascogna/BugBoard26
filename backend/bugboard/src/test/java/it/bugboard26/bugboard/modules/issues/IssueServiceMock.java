@@ -82,18 +82,18 @@ public class IssueServiceMock {
     public List<Issue> getIssuesByProject(String type, String priority, String state) {
         return issueList.stream().filter(
             issue -> 
-                type.equals(issue.getType().toString()) &&
-                priority.equals(issue.getPriority().toString()) &&
-                state.equals(issue.getState().toString())
+                (type == null || type.equals(issue.getType().toString())) &&
+                (priority == null || priority.equals(issue.getPriority().toString())) &&
+                (state == null || state.equals(issue.getState().toString()))
         ).toList();
     }
 
     public List<IssueResponse> enrichIssuesWithAuthors(String type, String priority, String state) {
         return issueResponseList.stream().filter(
             issue -> 
-                type.equals(issue.getType().toString()) &&
-                priority.equals(issue.getPriority().toString()) &&
-                state.equals(issue.getState().toString())
+                (type == null || type.equals(issue.getType().toString())) &&
+                (priority == null || priority.equals(issue.getPriority().toString())) &&
+                (state == null || state.equals(issue.getState().toString()))
         ).toList();
     }
 }

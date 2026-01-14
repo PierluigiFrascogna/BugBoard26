@@ -19,8 +19,10 @@ import it.bugboard26.bugboard.entities.User;
 import it.bugboard26.bugboard.enums.Role;
 import it.bugboard26.bugboard.modules.issues.dtos.IssueRequest;
 import it.bugboard26.bugboard.modules.issues.dtos.IssueResponse;
+import it.bugboard26.bugboard.modules.projects.ProjectService;
 import it.bugboard26.bugboard.modules.users.UserService;
 import it.bugboard26.bugboard.modules.users.dtos.UserResponse;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -30,21 +32,22 @@ public class IssueApi {
     private Jwt jwtUser;
     private IssueService issueService;
     private UserService userService;
+    private ProjectService projectService;
 
     @GetMapping("/issues")
     public List<IssueResponse> getIssuesByProject(
-            @PathVariable UUID uuid_project,
-            @RequestParam(required = false) String type,
-            @RequestParam(required = false) String priority,
-            @RequestParam(required = false) String state
-        ) {
-
+        @PathVariable UUID uuid_project,
+        @RequestParam(required = false) String type,
+        @RequestParam(required = false) String priority,
+        @RequestParam(required = false) String state
+    ) {
+        projectService.getByUuid(uuid_project); // Verify project exists
         List<Issue> issues = issueService.getIssuesByProject(uuid_project, type, priority, state);
         return issueService.enrichIssuesWithAuthors(issues);
     }
 
     @PostMapping("/issues")
-    public IssueResponse postNewIssue(@PathVariable UUID uuid_project, @RequestBody IssueRequest issueRequest) {
+    public IssueResponse postNewIssue(@PathVariable UUID uuid_project, @RequestBody @Valid IssueRequest issueRequest) {
         if (jwtUser.getRole() == Role.VIEWER) 
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Insufficient permissions");
         

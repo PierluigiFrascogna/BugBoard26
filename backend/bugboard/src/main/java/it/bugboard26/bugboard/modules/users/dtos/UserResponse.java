@@ -8,9 +8,11 @@ import it.bugboard26.bugboard.enums.Role;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @NoArgsConstructor
 @Getter @Setter
+@ToString
 public class UserResponse {
     private UUID uuid;
     private String name;

@@ -9,8 +9,10 @@ import it.bugboard26.bugboard.enums.IssueType;
 import it.bugboard26.bugboard.enums.Priority;
 import it.bugboard26.bugboard.modules.users.dtos.UserResponse;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@ToString
 public class IssueResponse {
     private UUID uuid;
     private String title;
