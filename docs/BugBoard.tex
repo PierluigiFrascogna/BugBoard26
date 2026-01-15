@@ -376,14 +376,16 @@ inerente al backend:
 \section{TESTING}
 \subsection{Test Plan}
 La funzionalità che abbiamo deciso di testare è quella inerente alle \gls{issue} in quanto considerata da noi fondamentale 
-per la \gls{piattaforma} stessa. Nello specifico testeremo i metodi
-"IssueResponse postNewIssue(UUID uuid\_project, IssueRequest issueRequest)" della classe IssueAPI e 
-"List<IssueResponse> getIssuesByProject(UUID uuid\_project, string type, string priority, string state)" della classe IssueService. 
+per la \gls{piattaforma} stessa.\\Nello specifico testeremo i metodi:
+\begin{itemize}
+    \item \texttt{IssueResponse postNewIssue(UUID uuid\_project, IssueRequest issueRequest)} della classe IssueAPI;
+    \item \texttt{List<IssueResponse> getIssuesByProject(UUID uuid\_project, String type, String priority, String state)} della classe IssueService.
+\end{itemize}
 La metodologia utilizzata per testare entrambi i metodi è quella black-box, nello specifico R-WECT, in quanto giusto compromesso tra mole
-di test ed esaustività degli stessi. Ora illustremo le informazioni relative al testing di ognuno dei metodi.
+di test ed esaustività degli stessi. Ora illustreremo le informazioni relative al testing di ognuno dei metodi.
 
 \subsubsection{\texttt{IssueResponse postNewIssue(UUID uuid\_project, IssueRequest issueRequest)}}
-Questo metodo, come si può intuire dal nome, si occupa di creare nuove issue e racchiuderele nel corretto formato JSON da spedire al 
+Questo metodo, come si può intuire dal nome, si occupa di creare nuove issue e racchiuderle nel corretto formato JSON da spedire al 
 frontend. Al fine del testing sono state individuate le seguenti classi di equivalenza (al fine di una maggiore chiarezza, le classi di 
 equivalenza per parametri diversi di uno stesso metodo saranno in ordine crescente):
 
@@ -425,13 +427,13 @@ equivalenza per parametri diversi di uno stesso metodo saranno in ordine crescen
         \hline
         \textbf{Caso di test} & \textbf{Classe di equivalenza} & \textbf{Esito atteso}                  \\
         \hline
-        TC1                   & CE1, CE4                      & Successo: IssueResponse corretta, con tutti i dati della issue creata   \\
+        TC\_InvalidProjectUUID           & CE2, CE4                      & Errore: 400     \\
         \hline
-        TC2                   & CE2, CE4                      & Errore: 400     \\
+        TC\_NotFoundProjectUUID          & CE3, CE4                      & Errore: 404     \\
         \hline
-        TC3                   & CE3, CE4                      & Errore: 404     \\
+        TC\_InvalidIssueRequest          & CE1, CE5                      & Errore: 400     \\
         \hline
-        TC4                   & CE1, CE5                      & Errore: 400     \\
+        TC1                             & CE1, CE4                      & Successo: IssueResponse corretta, con tutti i dati della issue creata   \\
         \hline
     \end{tabularx}
 \end{table}
@@ -520,30 +522,30 @@ Questo metodo, come si può intuire dal nome, si occupa di creare nuove istanze 
 
 \begin{table}[H]
     \centering
-    \caption{Oracolo per test del metodo List<IssueResponse> getIssuesByProject(UUID uuid\_project, string type, string priority, string state)}
+    \caption{Oracolo per test del metodo \texttt{List<IssueResponse> getIssuesByProject(UUID uuid\_project, string type, string priority, string state)}}
     \begin{tabularx}{\linewidth}{|X|X|X|}
         \hline
-        \textbf{Caso di test}   & \textbf{Classe di equivalenza}                & \textbf{Esito atteso}                  \\
+        \textbf{Caso di test} & \textbf{Classe di equivalenza} & \textbf{Esito atteso} \\
         \hline
-        TC1                     &CE1, CE\_BUG, CE\_LOW, CE\_TODO                & Successo: Lista di IssueResponse corretta, con tutte le issue che rispettano i filtri   \\
+        TC\_InvalidProjectUUID & CE2, CE\_TNULL, CE\_PNULL, CE\_SNULL & Errore: 400 \\
         \hline
-        TC2                     &CE1, CE\_QUESTION, CE\_MEDIUM, CE\_PENDING     & Successo: Lista di IssueResponse corretta, con tutte le issue che rispettano i filtri   \\
+        TC\_NotFoundProjectUUID & CE3, CE\_BUG, CE\_LOW, CE\_PENDING & Errore: 404 \\
         \hline
-        TC3                     &CE1, CE\_FEATURE, CE\_HIGH, CE\_DONE           & Successo: Lista di IssueResponse corretta, con tutte le issue che rispettano i filtri   \\
+        TC\_InvalidType & CE1, CE\_TOTHERS, CE\_LOW, CE\_SNULL & Errore: 400 \\
         \hline
-        TC4                     &CE1, CE\_DOCUMENTATION, CE\_PNULL, CE\_SNULL   & Successo: Lista di IssueResponse corretta, con tutte le issue che rispettano i filtri   \\
+        TC\_InvalidPriority & CE1, CE\_BUG, CE\_POTHERS, CE\_SNULL & Errore: 400 \\
         \hline
-        TC5                     &CE1, CE\_TNULL, CE\_PNULL, CE\_SNULL           & Successo: Lista di IssueResponse corretta, con tutte le issue che rispettano i filtri   \\
+        TC\_InvalidState & CE1, CE\_BUG, CE\_LOW, CE\_SOTHERS & Errore: 400 \\
         \hline
-        TC6                     &CE2, CE\_TNULL, CE\_PNULL, CE\_SNULL           & Errore: 400     \\
+        TC1 & CE1, CE\_BUG, CE\_LOW, CE\_TODO & Successo: Lista di IssueResponse corretta, con tutte le issue che rispettano i filtri \\
         \hline
-        TC7                     &CE3, CE\_BUG, CE\_LOW, CE\_PENDING             & Errore: 404     \\
+        TC2 & CE1, CE\_QUESTION, CE\_MEDIUM, CE\_PENDING & Successo: Lista di IssueResponse corretta, con tutte le issue che rispettano i filtri \\
         \hline
-        TC8                     &CE1, CE\_TOTHERS, CE\_LOW, CE\_SNULL           & Errore: 400     \\
+        TC3 & CE1, CE\_FEATURE, CE\_HIGH, CE\_DONE & Successo: Lista di IssueResponse corretta, con tutte le issue che rispettano i filtri \\
         \hline
-        TC9                     &CE1, CE\_BUG, CE\_POTHERS, CE\_SNULL           & Errore: 400     \\
+        TC4 & CE1, CE\_DOCUMENTATION, CE\_PNULL, CE\_SNULL & Successo: Lista di IssueResponse corretta, con tutte le issue che rispettano i filtri \\
         \hline
-        TC10                    &CE1, CE\_BUG, CE\_LOW, CE\_SOTHERS             & Errore: 400     \\
+        TC5 & CE1, CE\_TNULL, CE\_PNULL, CE\_SNULL & Successo: Lista di IssueResponse corretta, con tutte le issue che rispettano i filtri \\
         \hline
     \end{tabularx}
 \end{table}
