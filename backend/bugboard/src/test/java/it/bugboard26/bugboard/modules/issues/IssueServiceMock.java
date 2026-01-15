@@ -27,7 +27,6 @@ public class IssueServiceMock {
             IssueType.BUG,
             Priority.LOW, 
             IssueState.TODO,
-            null, 
             new User(), 
             new Project(), 
             new HashSet<>()
@@ -40,7 +39,6 @@ public class IssueServiceMock {
             IssueType.QUESTION, 
             Priority.MEDIUM, 
             IssueState.PENDING, 
-            null, 
             new User(), 
             new Project(), 
             new HashSet<>()
@@ -53,7 +51,6 @@ public class IssueServiceMock {
             IssueType.FEATURE, 
             Priority.HIGH, 
             IssueState.DONE, 
-            null, 
             new User(), 
             new Project(), 
             new HashSet<>()
@@ -67,7 +64,6 @@ public class IssueServiceMock {
             IssueType.DOCUMENTATION, 
             Priority.LOW,
             IssueState.TODO, 
-            null, 
             new User(), 
             new Project(), 
             new HashSet<>()
