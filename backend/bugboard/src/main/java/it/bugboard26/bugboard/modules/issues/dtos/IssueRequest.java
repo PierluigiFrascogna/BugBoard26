@@ -20,8 +20,6 @@ public class IssueRequest {
     private String description;
     private IssueType type;
     private Priority priority;
-    private String imageUrl;
-
 
     public static Issue mapToEntity(IssueRequest issueRequest, User author, Project project) {
         Issue issue = new Issue();
@@ -31,7 +29,6 @@ public class IssueRequest {
         issue.setType(issueRequest.type);
         issue.setPriority(issueRequest.priority);
         issue.setState(IssueState.TODO);
-        issue.setImageUrl(issueRequest.imageUrl);
         issue.setAuthor(author);
         issue.setProject(project);
         return issue;

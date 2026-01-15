@@ -21,7 +21,6 @@ public class IssueResponse {
     private IssueType type;
     private Priority priority;
     private IssueState state;
-    private String imageUrl;
     private UserResponse author;
 
 
@@ -34,7 +33,6 @@ public class IssueResponse {
         response.type = issue.getType();
         response.priority = issue.getPriority();
         response.state = issue.getState();
-        response.imageUrl = issue.getImageUrl();
         response.author = author;
         return response;
     }

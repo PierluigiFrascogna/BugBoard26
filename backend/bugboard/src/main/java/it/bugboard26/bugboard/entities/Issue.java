@@ -63,9 +63,6 @@ public class Issue {
     @Column(name = "state")
     private IssueState state;
 
-    @Column(name = "image_url")
-    private String imageUrl;
-    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_uuid")
     private User author;
