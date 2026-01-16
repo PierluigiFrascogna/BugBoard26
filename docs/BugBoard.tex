@@ -196,7 +196,6 @@ E qui di seguito riportiamo l'inerente tabella di Cockburn:
 \definecolor{yellow1}{HTML}{FFC75F}
 \definecolor{yellow2}{HTML}{FFF8C6}
 
-
 \begin{table}[H]
     \centering
     % Colonna sinistra: 'm' per allineamento verticale centrato
@@ -354,7 +353,7 @@ Questo è il database dello UsersService. La sua funzione principale è quella d
 le informazioni delle utenze dalle informazioni proprie e caratteristiche di BugBoard26 ci permette una certa scalabilità oltre a impostare
 BugBoard26 verso quella che potrebbe diventare una famiglia di servizi in un futuro ipotetico.
 
-\includegraphics[width=1\linewidth]{bugBoardDB}
+\includegraphics[width=1\linewidth]{bugboardDB}
 Questo è il database del BugBoardService, cuore pulsante della \gls{piattaforma}. È qui che sono conservate tutte le informazioni riguardanti
 progetti, \gls{issue} e interazioni degli utenti con queste. Questo possiede un sottoinsieme delle informazioni degli utenti, al fine di semplificare
 le operazioni intra-database e per permettere il suo corretto funzionamento anche nel caso di down del database dello UsersService.
@@ -373,18 +372,21 @@ inerente al backend:
 \includegraphics[width=1\linewidth]{sonarqubeReport}
 \newpage
 
+\definecolor{success}{HTML}{93F880}
+\definecolor{danger}{HTML}{FF8b8b}
+
 \section{TESTING}
 \subsection{Test Plan}
 La funzionalità che abbiamo deciso di testare è quella inerente alle \gls{issue} in quanto considerata da noi fondamentale 
 per la \gls{piattaforma} stessa.\\Nello specifico testeremo i metodi:
 \begin{itemize}
-    \item \texttt{IssueResponse postNewIssue(UUID uuid\_project, IssueRequest issueRequest)} della classe IssueAPI;
-    \item \texttt{List<IssueResponse> getIssuesByProject(UUID uuid\_project, String type, String priority, String state)} della classe IssueService.
+    \item \texttt{ResponseEntity<IssueResponse> postNewIssue(UUID uuid\_project, IssueRequest issueRequest)} della classe IssueAPI;
+    \item \texttt{ResponseEntity<List<IssueResponse>> getIssuesByProject(UUID uuid\_project, String type, String priority, String state)} della classe IssueService.
 \end{itemize}
 La metodologia utilizzata per testare entrambi i metodi è quella black-box, nello specifico R-WECT, in quanto giusto compromesso tra mole
 di test ed esaustività degli stessi. Ora illustreremo le informazioni relative al testing di ognuno dei metodi.
 
-\subsubsection{\texttt{IssueResponse postNewIssue(UUID uuid\_project, IssueRequest issueRequest)}}
+\subsubsection{\texttt{ResponseEntity<IssueResponse> postNewIssue(UUID uuid\_project, IssueRequest issueRequest)}}
 Questo metodo, come si può intuire dal nome, si occupa di creare nuove issue e racchiuderle nel corretto formato JSON da spedire al 
 frontend. Al fine del testing sono state individuate le seguenti classi di equivalenza (al fine di una maggiore chiarezza, le classi di 
 equivalenza per parametri diversi di uno stesso metodo saranno in ordine crescente):
@@ -422,23 +424,27 @@ equivalenza per parametri diversi di uno stesso metodo saranno in ordine crescen
 
 \begin{table}[H]
     \centering
-    \caption{Oracolo per test del metodo IssueResponse postNewIssue(UUID uuid\_project, IssueRequest issueRequest)}
+    \caption{Oracolo per test del metodo ResponseEntity<IssueResponse> postNewIssue(UUID uuid\_project, IssueRequest issueRequest)}
     \begin{tabularx}{\linewidth}{|X|X|X|}
         \hline
         \textbf{Caso di test} & \textbf{Classe di equivalenza} & \textbf{Esito atteso}                  \\
         \hline
-        TC\_InvalidProjectUUID           & CE2, CE4                      & Errore: 400     \\
+        \rowcolor{danger}
+        TC\_InvalidProjectUUID           & CE2, CE4                      & Codice 400: Bad Request     \\
         \hline
-        TC\_NotFoundProjectUUID          & CE3, CE4                      & Errore: 404     \\
+        \rowcolor{danger}
+        TC\_NotFoundProjectUUID          & CE3, CE4                      & Codice 404: Not Found     \\
         \hline
-        TC\_InvalidIssueRequest          & CE1, CE5                      & Errore: 400     \\
+        \rowcolor{danger}
+        TC\_InvalidIssueRequest          & CE1, CE5                      & Codice 400: Bad Request     \\
         \hline
-        TC1                             & CE1, CE4                      & Successo: IssueResponse corretta, con tutti i dati della issue creata   \\
+        \rowcolor{success}
+        TC1                             & CE1, CE4                       & Codice 201: Created \& IssueResponse corretta, con tutti i dati della issue creata   \\
         \hline
     \end{tabularx}
 \end{table}
 
-\subsubsection{\texttt{List<IssueResponse> getIssuesByProject(UUID uuid\_project, string type, string priority, string state)}}
+\subsubsection{\texttt{ResponseEntity<List<IssueResponse>> getIssuesByProject(UUID uuid\_project, string type, string priority, string state)}}
 Questo metodo, come si può intuire dal nome, si occupa di creare nuove istanze della classe Issue.
 
 
@@ -522,30 +528,40 @@ Questo metodo, come si può intuire dal nome, si occupa di creare nuove istanze 
 
 \begin{table}[H]
     \centering
-    \caption{Oracolo per test del metodo \texttt{List<IssueResponse> getIssuesByProject(UUID uuid\_project, string type, string priority, string state)}}
+    \caption{Oracolo per test del metodo \texttt{ResponseEntity<List<IssueResponse>> getIssuesByProject(UUID uuid\_project, string type, string priority, string state)}}
     \begin{tabularx}{\linewidth}{|X|X|X|}
         \hline
         \textbf{Caso di test} & \textbf{Classe di equivalenza} & \textbf{Esito atteso} \\
         \hline
-        TC\_InvalidProjectUUID & CE2, CE\_TNULL, CE\_PNULL, CE\_SNULL & Errore: 400 \\
+        \rowcolor{danger}
+        TC\_InvalidProjectUUID & CE2, CE\_TNULL, CE\_PNULL, CE\_SNULL & Codice 400: Bad Request \\
         \hline
-        TC\_NotFoundProjectUUID & CE3, CE\_BUG, CE\_LOW, CE\_PENDING & Errore: 404 \\
+        \rowcolor{danger}
+        TC\_NotFoundProjectUUID & CE3, CE\_BUG, CE\_LOW, CE\_PENDING & Codice 404: Not Found \\
         \hline
-        TC\_InvalidType & CE1, CE\_TOTHERS, CE\_LOW, CE\_SNULL & Errore: 400 \\
+        \rowcolor{danger}
+        TC\_InvalidType & CE1, CE\_TOTHERS, CE\_LOW, CE\_SNULL & Codice 400: Bad Request \\
         \hline
-        TC\_InvalidPriority & CE1, CE\_BUG, CE\_POTHERS, CE\_SNULL & Errore: 400 \\
+        \rowcolor{danger}
+        TC\_InvalidPriority & CE1, CE\_BUG, CE\_POTHERS, CE\_SNULL & Codice 400: Bad Request \\
         \hline
-        TC\_InvalidState & CE1, CE\_BUG, CE\_LOW, CE\_SOTHERS & Errore: 400 \\
+        \rowcolor{danger}
+        TC\_InvalidState & CE1, CE\_BUG, CE\_LOW, CE\_SOTHERS & Codice 400: Bad Request \\
         \hline
-        TC1 & CE1, CE\_BUG, CE\_LOW, CE\_TODO & Successo: Lista di IssueResponse corretta, con tutte le issue che rispettano i filtri \\
+        \rowcolor{success}
+        TC1 & CE1, CE\_BUG, CE\_LOW, CE\_TODO & Codice 200: Ok \& Lista di IssueResponse corretta, con tutte le issue che rispettano i filtri \\
         \hline
-        TC2 & CE1, CE\_QUESTION, CE\_MEDIUM, CE\_PENDING & Successo: Lista di IssueResponse corretta, con tutte le issue che rispettano i filtri \\
+        \rowcolor{success}
+        TC2 & CE1, CE\_QUESTION, CE\_MEDIUM, CE\_PENDING & Codice 200: Ok \& Lista di IssueResponse corretta, con tutte le issue che rispettano i filtri \\
         \hline
-        TC3 & CE1, CE\_FEATURE, CE\_HIGH, CE\_DONE & Successo: Lista di IssueResponse corretta, con tutte le issue che rispettano i filtri \\
+        \rowcolor{success}
+        TC3 & CE1, CE\_FEATURE, CE\_HIGH, CE\_DONE & Codice 200: Ok \& Lista di IssueResponse corretta, con tutte le issue che rispettano i filtri \\
         \hline
-        TC4 & CE1, CE\_DOCUMENTATION, CE\_PNULL, CE\_SNULL & Successo: Lista di IssueResponse corretta, con tutte le issue che rispettano i filtri \\
+        \rowcolor{success}
+        TC4 & CE1, CE\_DOCUMENTATION, CE\_PNULL, CE\_SNULL & Codice 200: Ok \& Lista di IssueResponse corretta, con tutte le issue che rispettano i filtri \\
         \hline
-        TC5 & CE1, CE\_TNULL, CE\_PNULL, CE\_SNULL & Successo: Lista di IssueResponse corretta, con tutte le issue che rispettano i filtri \\
+        \rowcolor{success}
+        TC5 & CE1, CE\_TNULL, CE\_PNULL, CE\_SNULL & Codice 200: Ok \& Lista di IssueResponse corretta, con tutte le issue che rispettano i filtri \\
         \hline
     \end{tabularx}
 \end{table}
