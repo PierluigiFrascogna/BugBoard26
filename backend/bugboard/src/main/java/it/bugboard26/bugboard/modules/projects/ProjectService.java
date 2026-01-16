@@ -2,22 +2,21 @@ package it.bugboard26.bugboard.modules.projects;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
-
-import it.bugboard26.bugboard.entities.Project;
 import lombok.AllArgsConstructor;
+
+import org.springframework.stereotype.Service;
+import it.bugboard26.bugboard.entities.Project;
 
 @AllArgsConstructor
 @Service
 public class ProjectService {
     ProjectRepository projectRepository;
 
-    public Project getByUuid(UUID uuid) {
-        return projectRepository.findById(uuid).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Project not found"));
+    public Optional<Project> getByUuid(UUID uuid) {
+        return projectRepository.findById(uuid);
     }
 
     public List<Project> getAllProjects() {

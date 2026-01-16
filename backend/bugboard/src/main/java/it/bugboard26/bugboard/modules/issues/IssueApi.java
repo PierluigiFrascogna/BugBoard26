@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import it.bugboard26.bugboard.auth.Jwt;
 import it.bugboard26.bugboard.entities.Issue;
+import it.bugboard26.bugboard.entities.Project;
 import it.bugboard26.bugboard.entities.User;
 import it.bugboard26.bugboard.enums.Role;
 import it.bugboard26.bugboard.modules.issues.dtos.IssueRequest;
@@ -35,25 +37,32 @@ public class IssueApi {
     private ProjectService projectService;
 
     @GetMapping("/issues")
-    public List<IssueResponse> getIssuesByProject(
+    public ResponseEntity<List<IssueResponse>> getIssuesByProject(
         @PathVariable UUID uuid_project,
         @RequestParam(required = false) String type,
         @RequestParam(required = false) String priority,
         @RequestParam(required = false) String state
     ) {
-        projectService.getByUuid(uuid_project); // Verify project exists
-        List<Issue> issues = issueService.getIssuesByProject(uuid_project, type, priority, state);
-        return issueService.enrichIssuesWithAuthors(issues);
+        Project project = projectService.getByUuid(uuid_project).orElseThrow(
+            () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Project not found")
+        );
+
+        List<Issue> issues = issueService.getIssuesByProject(project, type, priority, state);
+        return ResponseEntity.ok(issueService.enrichIssuesWithAuthors(issues));
     }
 
     @PostMapping("/issues")
-    public IssueResponse postNewIssue(@PathVariable UUID uuid_project, @RequestBody @Valid IssueRequest issueRequest) {
+    public ResponseEntity<IssueResponse> postNewIssue(@PathVariable UUID uuid_project, @RequestBody @Valid IssueRequest issueRequest) {
         if (jwtUser.getRole() == Role.VIEWER) 
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Insufficient permissions");
         
+        Project project = projectService.getByUuid(uuid_project).orElseThrow(
+            () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Project not found")
+        );
         User user = userService.getByUuid(jwtUser.getUserUuid());
-        Issue newIssue = issueService.createIssue(issueRequest, uuid_project, user);
+        
+        Issue newIssue = issueService.createIssue(issueRequest, user, project);
         IssueResponse issueResponse = IssueResponse.map(newIssue, new UserResponse(jwtUser.getToken()));
-        return issueResponse;
+        return ResponseEntity.status(HttpStatus.CREATED).body(issueResponse);
     }
 }

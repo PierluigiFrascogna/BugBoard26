@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import it.bugboard26.bugboard.auth.Jwt;
@@ -33,12 +34,12 @@ public class ProjectApi {
     }
     
     @PostMapping("/projects")
-    public ProjectResponse createNewProject(@RequestBody ProjectRequest projectRequest) {
+    public ResponseEntity<ProjectResponse> createNewProject(@RequestBody ProjectRequest projectRequest) {
         if(jwtUser.getRole() != Role.ADMIN)
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Insufficient permissions");
 
         Project newProject = projectService.createProject(projectRequest.getName());
-        return ProjectResponse.map(newProject);
+        return ResponseEntity.status(HttpStatus.CREATED).body(ProjectResponse.map(newProject));
     }
     
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,17 +48,19 @@ public class EventApi {
     }
 
     @PostMapping("/comment")
-    public CommentResponse postNewComment(@PathVariable UUID uuid_issue, @RequestBody @Valid CommentRequest commentRequest) {
+    public ResponseEntity<CommentResponse> postNewComment(@PathVariable UUID uuid_issue, @RequestBody @Valid CommentRequest commentRequest) {
         if(jwtUser.getRole() == Role.VIEWER)
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Insufficient permissions");
 
-        Issue issue = issueService.getByUuid(uuid_issue);
+        Issue issue = issueService.getByUuid(uuid_issue).orElseThrow(
+            () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Issue not found")
+        );
         User user = userService.getByUuid(jwtUser.getUserUuid());
         Comment newComment = eventService.saveComment(commentRequest, issue, user);
 
         UserResponse author = new UserResponse(jwtUser.getToken());
         CommentResponse commentResponse = CommentResponse.map(newComment, author);
-        return commentResponse;
+        return ResponseEntity.status(HttpStatus.CREATED).body(commentResponse);
     }
 
     @PatchMapping("/change")
@@ -65,7 +68,9 @@ public class EventApi {
         if(jwtUser.getRole() == Role.VIEWER)
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Insufficient permissions");
 
-        Issue issue = issueService.getByUuid(uuid_issue);
+        Issue issue = issueService.getByUuid(uuid_issue).orElseThrow(
+            () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Issue not found")
+        );
         User user = userService.getByUuid(jwtUser.getUserUuid());
         Change change = eventService.saveChange(changeRequest, issue, user);
 

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,13 +32,14 @@ public class UserApi {
     private UsersMicroservice usersMicroService;
 
     @PostMapping
-    public User register(@RequestBody @Valid RegistrationRequest registrationRequest) {
+    public ResponseEntity<Void> register(@RequestBody @Valid RegistrationRequest registrationRequest) {
         if (jwtUser.getRole() != Role.ADMIN) 
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Only admins can register new users");
         
         UUID uuid_newUser = usersMicroService.registerUser(registrationRequest);
         User newUser = new User(uuid_newUser, registrationRequest.getRole());
-        return userService.registerUser(newUser);
+        userService.registerUser(newUser);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping
@@ -49,11 +51,12 @@ public class UserApi {
     }
 
     @DeleteMapping("/{uuid_user}")
-    public void deleteUser(@PathVariable UUID uuid_user) {
+    public ResponseEntity<Void> deleteUser(@PathVariable UUID uuid_user) {
         if (jwtUser.getRole() != Role.ADMIN) 
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Only admins can delete users");
         
         usersMicroService.deleteUser(uuid_user);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
 }

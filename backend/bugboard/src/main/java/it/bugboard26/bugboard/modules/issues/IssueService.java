@@ -3,22 +3,19 @@ package it.bugboard26.bugboard.modules.issues;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
-
 import it.bugboard26.bugboard.entities.Issue;
 import it.bugboard26.bugboard.entities.Project;
 import it.bugboard26.bugboard.entities.User;
 import it.bugboard26.bugboard.microservices.users.UsersMicroservice;
 import it.bugboard26.bugboard.modules.issues.dtos.IssueRequest;
 import it.bugboard26.bugboard.modules.issues.dtos.IssueResponse;
-import it.bugboard26.bugboard.modules.projects.ProjectRepository;
 import it.bugboard26.bugboard.modules.users.dtos.UserResponse;
 import lombok.AllArgsConstructor;
 
@@ -27,14 +24,13 @@ import lombok.AllArgsConstructor;
 public class IssueService {
     private UsersMicroservice usersMicroService;
     private IssueRepository issueRepository;
-    private ProjectRepository projectRepository;
     
-    public Issue getByUuid(UUID issueUuid) {
-        return issueRepository.findById(issueUuid).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Issue not found"));
+    public Optional<Issue> getByUuid(UUID issueUuid) {
+        return issueRepository.findById(issueUuid);
     }
 
-    public List<Issue> getIssuesByProject(UUID uuid_project, String type, String priority, String status) { 
-        Specification<Issue> spec = Specification.where(IssueSpecification.hasProjectUuid(uuid_project));
+    public List<Issue> getIssuesByProject(Project project, String type, String priority, String status) { 
+        Specification<Issue> spec = Specification.where(IssueSpecification.hasProjectUuid(project.getUuid()));
         spec = spec.and(IssueSpecification.hasType(type))
                    .and(IssueSpecification.hasStatus(status))
                    .and(IssueSpecification.hasPriority(priority));
@@ -42,10 +38,7 @@ public class IssueService {
         return issueRepository.findAll(spec);
     }
     
-    public Issue createIssue(IssueRequest request, UUID projectUuid, User author) {
-        Project project = projectRepository.findById(projectUuid)
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Project not found"));
-    
+    public Issue createIssue(IssueRequest request, User author, Project project) {    
         Issue newIssue = IssueRequest.mapToEntity(request, author, project);
         return issueRepository.save(newIssue);
     }
