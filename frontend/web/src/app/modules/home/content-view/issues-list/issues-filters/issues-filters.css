@@ -68,6 +68,7 @@
     cursor: pointer;
     color: black;
     font-weight: bold;
+    transition: font-size 0.2s ease;
 }
 
 .header__button:hover{

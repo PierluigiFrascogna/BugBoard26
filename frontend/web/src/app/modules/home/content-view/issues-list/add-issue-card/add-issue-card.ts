@@ -31,6 +31,7 @@ export class AddIssueCard {
         priority: this.issueForm.controls.priority.value!,
       } as INewIssue;
       this.issueStore.createIssue(newIssue);
+      this.closeNewIssueCard();
     }else{
       return
     }
